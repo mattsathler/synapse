@@ -1,0 +1,38 @@
+@use '../../styles/colors' as *;
+
+.sidebar {
+    width: 72px;
+    height: 100vh;
+    transition: width 0.3s ease;
+    box-shadow: 4px 0px 4px #aeaeae;
+    color: $color-secondary;
+
+    .sidebar-item {
+        transition: 0.2s;
+        &:hover {
+            background-color: $color-secondary !important;
+
+            span {
+                color: $color-primary !important;
+            }
+        }
+    }
+}
+
+.sidebar.open {
+    width: 260px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    background-color: $color-secondary !important;
+
+    span {
+        color: $color-primary !important;
+        background-color: $color-secondary;
+    }
+}

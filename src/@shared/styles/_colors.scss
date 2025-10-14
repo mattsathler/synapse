@@ -1,0 +1,19 @@
+// ==========================
+// CORE COLOR PALETTE
+// ==========================
+
+$color-primary: #4C8A96;
+$color-secondary: #FFFFFF;
+$color-placeholder: #747474;
+$color-gray: #F1F1F1;
+$color-error: #BE4B46;
+$color-success: #4F8D64;
+
+$colors: (
+    "primary": $color-primary,
+    "secondary": $color-secondary,
+    "placeholder": $color-placeholder,
+    "gray": $color-gray,
+    "error": $color-error,
+    "success": $color-success
+);

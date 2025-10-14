@@ -1,0 +1,17 @@
+<div class="w-screen h-screen login d-flex justify-center items-center">
+    <div class="d-flex flex-col items-center justify-center max-w-320 gap">
+        <div class="d-flex flex-col items-center gap">
+            <div class="d-flex flex-col items-center">
+                <img src="/assets/images/logo.png" alt="logo">
+                <h1 class="text-bold text-size-24">Synapse</h1>
+                <h2 class="text-uppercase text-light text-size-16 text-primary">Saúde Digital Integrada</h2>
+            </div>
+
+            <input type="text" name="email" id="email" placeholder="E-mail">
+            <input type="password" name="password" id="pass" placeholder="Senha">
+            <button class="primary">Entrar</button>
+            <a href="#" class="text-primary text-size-14">Esqueci minha senha</a>
+            <p class="text-error" *ngIf="hasError">E-mail ou senha incorretos</p>
+        </div>
+    </div>
+</div>

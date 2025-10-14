@@ -1,0 +1,26 @@
+<div class="d-flex gap items-center justify-between card">
+    <div class="d-flex gap items-center">
+        <avatar class="max-w-48 hide-mobile" [image]="patient?.image ?? '/assets/images/avatar.png'"
+            alt="profile-picture">
+        </avatar>
+        <p class="text-placeholder text-bold hide-mobile">
+            {{patient?.registration}}
+        </p>
+        <p class="text-placeholder">
+            {{patient?.full_name}}
+        </p>
+    </div>
+    <div class="d-flex flex-row gap">
+        <button class="circle text-primary w-32 h-32 cursor-pointer">
+            <span class="material-symbols-outlined ">
+                calendar_add_on
+            </span>
+        </button>
+        <button class="circle text-primary w-32 h-32 cursor-pointer">
+            <span class="material-symbols-outlined text-placeholder w-32 cursor-pointer">
+                edit
+            </span>
+        </button>
+
+    </div>
+</div>

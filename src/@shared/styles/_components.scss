@@ -1,0 +1,81 @@
+@use 'colors' as *;
+@use "sass:color";
+
+input {
+    background-color: $color-secondary;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-indent: 16px
+}
+
+button.primary {
+    background-color: $color-primary;
+    color: $color-secondary;
+    border: none;
+    padding: 12px;
+    min-width: 36px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        background-color: color.adjust($color-primary, $lightness: 10%);
+    }
+
+    &:disabled {
+        background-color: color.adjust($color-primary, $lightness: -20%);
+        cursor: not-allowed;
+    }
+
+    &:active {
+        background-color: color.adjust($color-primary, $lightness: -15%);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px;
+    background-color: $color-secondary;
+}
+
+button.circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 0;
+}
+
+button.circle:active {
+    transform: scale(0.9);
+}
+
+button.circle:hover {
+    box-shadow: 0px 0px 2px $color-placeholder;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        padding: 16px;
+    }
+}

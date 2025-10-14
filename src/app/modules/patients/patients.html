@@ -1,0 +1,9 @@
+<div class="page">
+    <page-header [title]="'Pacientes'">
+        <button class="primary h-full">Novo paciente</button>
+    </page-header>
+    <div class="d-flex flex-col gap">
+        <input type="text" placeholder="Pesquisar paciente">
+        <patient class="w-full" *ngFor="let patient of patients" [patient]="patient"></patient>
+    </div>
+</div>
