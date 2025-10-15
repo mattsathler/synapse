@@ -19,23 +19,53 @@ interface TimeSlot {
 })
 export class Agenda implements OnInit, AfterViewInit {
   @ViewChildren('slotRef') slotElements!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChildren('agendaRef') agendaRefs!: QueryList<ElementRef>;
+
+  public needleTops: number[] = [];
 
   public timeSlots: TimeSlot[] = [];
   public tasks: ITask[] = [];
   public needleTop: number = 0;
   public happening: ITask[] = [];
+
+  public selectedEmployees: { name: string, tasks: ITask[] }[] = [];
   private slotHeight: number = 0;
 
   constructor(private service: AgendaService) {
     this.tasks = this.service.getMockedAgenda();
+
+    this.selectedEmployees = [
+      {
+        name: "Thalles Gonçalves",
+        tasks: this.service.getMockedAgenda()
+      },
+      {
+        name: "Sara",
+        tasks: this.service.getMockedAgenda()
+      },
+      {
+        name: "Gabriela Alves",
+        tasks: this.service.getMockedAgenda()
+      },
+      {
+        name: "Gabriela Alves",
+        tasks: this.service.getMockedAgenda()
+      },
+      {
+        name: "Gabriela Alves",
+        tasks: this.service.getMockedAgenda()
+      },
+      {
+        name: "Gabriela Alves",
+        tasks: this.service.getMockedAgenda()
+      }
+    ]
   }
 
   updateNeedle() {
     const now = new Date();
     const minutesSinceMidnight = now.getHours() * 60 + now.getMinutes();
     this.needleTop = (minutesSinceMidnight / 60) * this.slotHeight;
-
-    console.log(this.needleTop)
   }
 
   ngOnInit() {
@@ -46,8 +76,6 @@ export class Agenda implements OnInit, AfterViewInit {
 
       return { start, end };
     });
-
-    this.updateHappening();
   }
 
   ngAfterViewInit() {
@@ -68,12 +96,10 @@ export class Agenda implements OnInit, AfterViewInit {
 
       }
       this.resolveOverlaps();
-
-
-
       this.updateNeedle();
+      this.updateNeedles();
 
-      const agendaContainer = document.querySelector('.agenda-container');
+      const agendaContainer = document.querySelector('.needle');
       if (agendaContainer) {
         agendaContainer.scrollTo({
           top: this.needleTop - agendaContainer.clientHeight / 2,
@@ -83,7 +109,6 @@ export class Agenda implements OnInit, AfterViewInit {
 
       setInterval(() => {
         this.updateNeedle();
-        this.updateHappening();
       }, 1);
     });
   }
@@ -135,12 +160,29 @@ export class Agenda implements OnInit, AfterViewInit {
     return slots * this.slotHeight;
   }
 
-  private updateHappening(): void {
-    const now = Date.now();
-    this.happening = this.tasks.filter(task => {
-      const startTime = new Date(task.start).getTime();
-      const endTime = new Date(task.end).getTime();
-      return startTime <= now && endTime >= now;
+  public onScroll(event: Event) {
+    const scrolledElement = event.target as HTMLElement;
+    const scrollTop = scrolledElement.scrollTop;
+
+    this.agendaRefs.forEach(ref => {
+      const el = ref.nativeElement as HTMLElement;
+      if (el !== scrolledElement) {
+        el.scrollTop = scrollTop;
+      }
+    });
+  }
+
+  updateNeedles() {
+    const now = new Date();
+    const totalMinutes = now.getHours() * 60 + now.getMinutes();
+    const top = (totalMinutes / 5) * this.slotHeight;
+
+    // Atualiza as agulhas e rola cada agenda para a posição
+    this.needleTops = this.selectedEmployees.map(_ => top);
+
+    this.agendaRefs.forEach((ref, i) => {
+      const el = ref.nativeElement as HTMLElement;
+      el.scrollTop = this.needleTops[i]; // rola para a posição da agulha
     });
   }
 }

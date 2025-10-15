@@ -381,8 +381,12 @@ $max-width-scale: (
     overflow: hidden;
 }
 
-.scroll {
+.scroll-y {
     overflow-y: auto;
+}
+
+.scroll-x {
+    overflow-x: auto;
 }
 
 .z-index-top {
