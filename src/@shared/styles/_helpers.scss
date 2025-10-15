@@ -385,6 +385,10 @@ $max-width-scale: (
     overflow-y: auto;
 }
 
+.z-index-top {
+    z-index: 9999;
+}
+
 @each $key, $value in $space-scale {
     .gap-#{$key} {
         grid-row-gap: $value;

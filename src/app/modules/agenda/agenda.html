@@ -26,12 +26,12 @@
                 <div #slotRef class="border-placeholder d-flex items-center py-16" *ngFor="let time of timeSlots">
                     <span class="text-placeholder">{{ time.start | date:'HH:mm' }}</span>
                 </div>
-                <div class="pos-absolute left w-full h-2 bg-error" [style.top.px]="needleTop"></div>
                 <div class="pos-absolute tasks-container h-full ml-56">
                     <task *ngFor="let task of tasks" class="pos-absolute hidden" [task]="task" [style.top.px]="task.top"
                         [style.height.px]="task.height" [style.left.%]="task.left" [style.width.%]="task.width">
                     </task>
                 </div>
+                <div class="pos-absolute left w-full h-2 bg-error z-index-top" [style.top.px]="needleTop"></div>
             </div>
         </div>
     </div>
