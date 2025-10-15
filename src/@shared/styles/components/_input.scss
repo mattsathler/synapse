@@ -1,0 +1,11 @@
+@use '../colors' as *;
+@use "sass:color";
+
+input {
+    background-color: $color-secondary;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-indent: 16px
+}

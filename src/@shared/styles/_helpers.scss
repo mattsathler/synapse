@@ -6,6 +6,8 @@
 
 $space-scale: (
     0: 0px,
+    1: 1px,
+    2: 2px,
     4: 4px,
     8: 8px,
     12: 12px,
@@ -15,6 +17,7 @@ $space-scale: (
     32: 32px,
     40: 40px,
     48: 48px,
+    56: 56px,
     64: 64px,
     screen-sm: 640px,
     screen-md: 768px,
@@ -60,6 +63,12 @@ $max-width-scale: (
 }
 
 @each $key, $value in $space-scale {
+    .max-h-#{$key} {
+        max-height: $value !important;
+    }
+}
+
+@each $key, $value in $space-scale {
     .min-w-#{$key} {
         min-width: $value !important;
     }
@@ -88,6 +97,12 @@ $max-width-scale: (
 @each $name, $value in $colors {
     .text-#{$name} {
         color: $value !important;
+    }
+}
+
+@each $name, $value in $colors {
+    .border-#{$name} {
+        border-bottom: 1px solid $value
     }
 }
 
@@ -298,6 +313,22 @@ $max-width-scale: (
     position: sticky !important;
 }
 
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.top {
+    top: 0;
+}
+
+.bottom {
+    bottom: 0;
+}
+
 // ==========================
 // OUTROS ÚTEIS
 // ==========================
@@ -348,6 +379,10 @@ $max-width-scale: (
 
 .hidden {
     overflow: hidden;
+}
+
+.scroll {
+    overflow-y: auto;
 }
 
 @each $key, $value in $space-scale {

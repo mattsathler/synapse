@@ -2,6 +2,37 @@
     <page-header [title]="'Agenda'">
         <button class="primary h-full">Novo agendamento</button>
     </page-header>
-    <div class="d-flex flex-col gap">
+
+    <div class="d-flex flex-col gap hidden">
+        <div class="d-flex w-full items-center justify-between gap">
+            <div class="d-flex">
+                <button class="secondary">Todos</button>
+            </div>
+            <div class="d-flex">
+                <input class="datepicker" type="date" value="2017-06-01" />
+            </div>
+        </div>
+
+        <div class="card w-full h-full d-flex flex-col gap scroll">
+            <h2 class="text-placeholder">Acontecendo agora,</h2>
+            <div class="d-flex flex-col pos-relative gap-8">
+                <task *ngFor="let task of happening" class="h-56" [task]="task">
+                </task>
+            </div>
+        </div>
+        <div class="agenda-container card w-full h-full d-flex flex-col gap scroll">
+            <h3 class="text-placeholder">Agenda completa,</h3>
+            <div class="d-flex flex-col pos-relative">
+                <div #slotRef class="border-placeholder d-flex items-center py-16" *ngFor="let time of timeSlots">
+                    <span class="text-placeholder">{{ time.start | date:'HH:mm' }}</span>
+                </div>
+                <div class="pos-absolute left w-full h-2 bg-error" [style.top.px]="needleTop"></div>
+                <div class="pos-absolute tasks-container h-full ml-56">
+                    <task *ngFor="let task of tasks" class="pos-absolute hidden" [task]="task" [style.top.px]="task.top"
+                        [style.height.px]="task.height" [style.left.%]="task.left" [style.width.%]="task.width">
+                    </task>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
