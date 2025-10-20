@@ -1,3 +1,5 @@
-<div class="avatar bg-secondary rounded-full bg-primary w-full">
-    <img class="w-full" [src]=image [alt]=alt>
+<div class="avatar rounded-full w-full h-full text-center hidden bg-secondary hidden">
+    <img class="w-full" [src]=image [alt]=alt *ngIf="image">
+    <span *ngIf="!image && name" class="text-primary">{{ name[0] }}{{ name.split(' ')[1]?.[0]
+        }}</span>
 </div>

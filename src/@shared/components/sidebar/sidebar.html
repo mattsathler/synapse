@@ -1,7 +1,7 @@
 <div class="sidebar bg-primary" (mouseenter)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)"
     [class.open]="isOpen">
     <div class="w-full d-flex flex-col items-center p-16 gap hidden" [ngClass]="{'p-24': isOpen}">
-        <avatar [image]="'/assets/images/avatar.png'" [alt]="'profile-picture'"></avatar>
+        <avatar class="max-w-128" [image]="'/assets/images/avatar.png'" [alt]="'profile-picture'"></avatar>
         <p *ngIf="isOpen" class="text-secondary text-nowrap">Bem vindo, <span class="text-bold">Dr. Thiago</span></p>
         <div class="d-flex flex-col gap-8 w-full hidden">
             <div *ngFor="let menu of sidebarItems"
@@ -15,8 +15,7 @@
                         {{menu.label}}
                     </span>
                 </div>
-                <span class="text-secondary p-4 text-nowrap hide-mobile text-size-12"
-                    *ngIf="isOpen && menu.badge">
+                <span class="text-secondary p-4 text-nowrap hide-mobile text-size-12" *ngIf="isOpen && menu.badge">
                     {{menu.badge}}
                 </span>
             </div>

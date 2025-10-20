@@ -5,6 +5,8 @@ import { Task } from './task/task';
 import { CommonModule } from '@angular/common';
 import { AgendaService } from './agenda-service';
 import { Separator } from '../../../@shared/components/separator/separator';
+import { Avatar } from '../../../@shared/components/avatar/avatar';
+import { Employee } from '../../../@shared/types/Employee';
 
 interface TimeSlot {
   start: Date;
@@ -13,59 +15,26 @@ interface TimeSlot {
 
 @Component({
   selector: 'app-agenda',
-  imports: [CommonModule, Header, Task, Separator],
+  imports: [CommonModule, Header, Task, Separator, Avatar],
   templateUrl: './agenda.html',
   styleUrl: './agenda.scss'
 })
 export class Agenda implements OnInit, AfterViewInit {
-  @ViewChildren('slotRef') slotElements!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChildren('slotRef') slotRefs!: QueryList<ElementRef>;
   @ViewChildren('agendaRef') agendaRefs!: QueryList<ElementRef>;
-
-  public needleTops: number[] = [];
 
   public timeSlots: TimeSlot[] = [];
   public tasks: ITask[] = [];
   public needleTop: number = 0;
   public happening: ITask[] = [];
 
-  public selectedEmployees: { name: string, tasks: ITask[] }[] = [];
+  public employees: Employee[] = [];
+  public selectedEmployees: Employee[] = [];
+
   private slotHeight: number = 0;
 
   constructor(private service: AgendaService) {
-    this.tasks = this.service.getMockedAgenda();
-
-    this.selectedEmployees = [
-      {
-        name: "Thalles Gonçalves",
-        tasks: this.service.getMockedAgenda()
-      },
-      {
-        name: "Sara",
-        tasks: this.service.getMockedAgenda()
-      },
-      {
-        name: "Gabriela Alves",
-        tasks: this.service.getMockedAgenda()
-      },
-      {
-        name: "Gabriela Alves",
-        tasks: this.service.getMockedAgenda()
-      },
-      {
-        name: "Gabriela Alves",
-        tasks: this.service.getMockedAgenda()
-      },
-      {
-        name: "Gabriela Alves",
-        tasks: this.service.getMockedAgenda()
-      }
-    ]
-  }
-
-  updateNeedle() {
-    const now = new Date();
-    const minutesSinceMidnight = now.getHours() * 60 + now.getMinutes();
-    this.needleTop = (minutesSinceMidnight / 60) * this.slotHeight;
+    this.employees = this.service.getMockedEmployees();
   }
 
   ngOnInit() {
@@ -79,44 +48,36 @@ export class Agenda implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    const firstSlot = this.slotRefs.first?.nativeElement;
+    this.slotHeight = firstSlot.offsetHeight + 0.5;
+
     setTimeout(() => {
-      const firstSlot = this.slotElements.first?.nativeElement;
-      if (firstSlot) {
-        this.slotHeight = firstSlot.offsetHeight;
-        this.tasks = this.tasks.map(task => {
-          const startHour = task.start.getHours() + task.start.getMinutes() / 60;
-          const endHour = task.end.getHours() + task.end.getMinutes() / 60;
-          const durationHours = endHour - startHour;
-
-          const top = startHour * this.slotHeight - 2;
-          const height = durationHours * this.slotHeight;
-
-          return { ...task, top, height };
-        });
-
-      }
-      this.resolveOverlaps();
-      this.updateNeedle();
-      this.updateNeedles();
-
-      const agendaContainer = document.querySelector('.needle');
-      if (agendaContainer) {
-        agendaContainer.scrollTo({
-          top: this.needleTop - agendaContainer.clientHeight / 2,
-          behavior: 'smooth'
-        });
-      }
-
       setInterval(() => {
-        this.updateNeedle();
+        this.updateNeedlePosition();
       }, 1);
     });
   }
 
-  resolveOverlaps() {
+  public adjustTasks(): void {
+    this.selectedEmployees.forEach(employee => {
+      employee.tasks = employee.tasks.map(task => {
+        const startHour = task.start.getHours() + task.start.getMinutes() / 60;
+        const endHour = task.end.getHours() + task.end.getMinutes() / 60;
+        const durationHours = endHour - startHour;
+
+        const top = (startHour * this.slotHeight) - 2;
+        const height = durationHours * this.slotHeight;
+
+        return { ...task, top, height };
+      });
+      this.resolveOverlaps(employee.tasks);
+    });
+  }
+
+  private resolveOverlaps(tasks: ITask[]) {
     const overlaps: ITask[][] = [];
 
-    this.tasks.forEach(task => {
+    tasks.forEach(task => {
       let groupFound = false;
       for (const group of overlaps) {
         if (group.some(t => this.isOverlapping(t, task))) {
@@ -129,18 +90,21 @@ export class Agenda implements OnInit, AfterViewInit {
     });
 
     overlaps.forEach(group => {
-      const width = 100 / group.length;
-
-
+      const width = 100 / group.length; // porcentagem por tarefa
       group.forEach((task, index) => {
-        task.width = String(width);
-        task.left = String((index * width));
+        task.width = `${width}%`;
+        task.left = `${(index * width)}%`;
       });
     });
   }
 
-  private isOverlapping(a: ITask, b: ITask) {
-    return a.start < b.end && b.start < a.end;
+
+  // exemplo simples de checagem de overlap
+  private isOverlapping(a: ITask, b: ITask): boolean {
+    if (!(a.top && b.top && b.height && a.height)) {
+      return false
+    };
+    return a.top < b.top + b.height && b.top < a.top + a.height;
   }
 
   private getMinutesSinceMidnight(date: Date): number {
@@ -172,17 +136,43 @@ export class Agenda implements OnInit, AfterViewInit {
     });
   }
 
-  updateNeedles() {
+  public toggleEmployee(id?: string): void {
+    if (id) {
+      const index = this.selectedEmployees.findIndex(emp => emp.id === id);
+      if (index > -1) {
+        this.selectedEmployees.splice(index, 1);
+      } else {
+        const employee = this.employees.find(emp => emp.id === id);
+        if (employee) {
+          this.selectedEmployees.push(employee);
+        }
+      }
+    } else {
+      if (this.selectedEmployees.length === this.employees.length) {
+        this.selectedEmployees = [];
+      } else {
+        this.selectedEmployees = [...this.employees];
+      }
+    }
+    this.updateNeedlePosition();
+    this.adjustTasks();
+  }
+
+
+  updateNeedlePosition() {
+    const slots = this.slotRefs.toArray();
+    if (slots.length === 0) return;
+
+    const firstSlot = slots[0].nativeElement;
+    const slotHeight = firstSlot.offsetHeight;
+
     const now = new Date();
-    const totalMinutes = now.getHours() * 60 + now.getMinutes();
-    const top = (totalMinutes / 5) * this.slotHeight;
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
 
-    // Atualiza as agulhas e rola cada agenda para a posição
-    this.needleTops = this.selectedEmployees.map(_ => top);
+    const fullHoursOffset = currentHour * slotHeight;
+    const minuteOffset = (currentMinute / 60) * slotHeight;
 
-    this.agendaRefs.forEach((ref, i) => {
-      const el = ref.nativeElement as HTMLElement;
-      el.scrollTop = this.needleTops[i]; // rola para a posição da agulha
-    });
+    this.needleTop = fullHoursOffset + minuteOffset + 8;
   }
 }

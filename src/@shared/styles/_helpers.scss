@@ -19,6 +19,8 @@ $space-scale: (
     48: 48px,
     56: 56px,
     64: 64px,
+    68: 68px,
+    72: 72px,
     screen-sm: 640px,
     screen-md: 768px,
     screen-lg: 1024px,
@@ -82,6 +84,22 @@ $max-width-scale: (
     .h-#{$key} {
         height: $value !important;
     }
+}
+
+.max-h-50-p {
+    max-height: 50%;
+}
+
+.max-w-50-p {
+    max-width: 50%;
+}
+
+.w-auto {
+    width: auto !important;
+}
+
+.h-auto {
+    height: auto !important;
 }
 
 // ==========================
@@ -379,6 +397,10 @@ $max-width-scale: (
 
 .hidden {
     overflow: hidden;
+}
+
+.scroll {
+    overflow: scroll;
 }
 
 .scroll-y {
