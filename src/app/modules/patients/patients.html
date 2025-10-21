@@ -7,8 +7,8 @@
 
         <div class="d-flex gap items-center justify-between card" *ngFor="let patient of patients">
             <div class="d-flex gap items-center">
-                <div class="w-40 h-40">
-                    <avatar class="w-full hide-mobile" [image]="patient?.image" [name]="patient?.full_name ?? ''"
+                <div class="w-40 h-40 hide-mobile">
+                    <avatar class="w-full" [image]="patient?.image" [name]="patient?.full_name ?? ''"
                         alt="profile-picture">
                     </avatar>
                 </div>

@@ -453,9 +453,6 @@ $max-width-scale: (
     .gap {
         gap: 16px !important;
     }
-}
-
-@media screen and (max-width: 425px) {
     .hide-mobile {
         display: none;
     }
