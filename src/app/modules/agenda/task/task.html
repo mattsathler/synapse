@@ -1,7 +1,7 @@
-<div class="d-flex flex-row w-auto gap-4 px-8 py-4 h-full rounded hidden tooltip"
-    [ngClass]="task ? 'bg-primary' : 'bg-secondary'">
-    <p class="text-size-12 text-secondary">{{task?.description}} •</p>
-    <p class="text-size-12 text-bold text-secondary">
+<div class="d-flex flex-row w-auto gap-4 px-8 py-4 h-full rounded hidden"
+    [ngClass]="task ? 'bg-primary' : 'bg-surface'">
+    <p class="text-size-12 text-surface pos-relative">{{task?.description}} •</p>
+    <p class="text-size-12 text-bold text-surface">
         {{task?.start | date:'HH:mm'}} - {{task?.end | date: 'HH:mm'}}
     </p>
 </div>

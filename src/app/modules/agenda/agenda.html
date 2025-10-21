@@ -1,6 +1,6 @@
 <div class="page">
     <page-header [title]="'Agenda'">
-        <button class="primary h-full">Novo agendamento</button>
+        <button class="secondary h-full">Novo agendamento</button>
     </page-header>
 
     <div class="d-flex flex-col gap">
@@ -21,7 +21,7 @@
                 <input class="datepicker" type="date" value="2017-06-01" />
             </div>
         </div>
-        <div class="d-flex gap scroll-x pos-relative">
+        <div #agendaContainer class="d-flex gap max-h-480 scroll-x pos-relative">
             <div class="w-full h-auto">
                 <div class="w-full">
                     <div #slotRef class="timeslot d-flex items-center pb-16 gap-8" *ngFor="let time of timeSlots">
@@ -32,11 +32,10 @@
                     </div>
                 </div>
                 <div class="needle pos-absolute left w-full h-2 bg-error z-index-top" [style.top.px]="needleTop"></div>
-                <div class="pos-absolute top left pl-68 pt-8 d-flex gap-8 w-full h-full">
+                <div class="pos-absolute top left pl-56 pt-8 d-flex gap-8 w-full h-full">
                     <div class="d-flex flex-col gap pos-relative w-full" #agendaRef
                         *ngFor="let employee of selectedEmployees">
-                        <task *ngFor="let task of employee.tasks" class="pr-8 pos-absolute hidden cursor-pointer"
-                             [attr.data-tooltip]="task.description" [task]="task" [style.top.px]="task.top"
+                        <task *ngFor="let task of employee.tasks" class="pr-8 pos-absolute hidden cursor-pointer task" [task]="task" [style.top.px]="task.top"
                             [style.height.px]="task.height" [style.left]="task.left" [style.width]="task.width"></task>
                     </div>
                 </div>
@@ -44,5 +43,3 @@
         </div>
     </div>
 </div>
-
-<span data-tooltip="testeaa">teste</span>

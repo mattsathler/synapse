@@ -1,19 +1,60 @@
 // ==========================
-// CORE COLOR PALETTE
+// COLORS.SCSS
 // ==========================
 
-$color-primary: #4C8A96;
-$color-secondary: #FFFFFF;
-$color-placeholder: #747474;
-$color-background: #F1F1F1;
-$color-error: #BE4B46;
-$color-success: #4F8D64;
-
-$colors: (
-    "primary": $color-primary,
-    "secondary": $color-secondary,
-    "placeholder": $color-placeholder,
-    "background": $color-background,
-    "error": $color-error,
-    "success": $color-success
+// ========== LIGHT THEME ==========
+$theme-light: (
+    primary: #63b7d2,
+    altpri: #255364,
+    secondary: #7DAA91,
+    tertiary: #A89EC9,
+    background: #eceaea,
+    surface: #F8FAFB,
+    placeholder: #535353,
+    text: #2E2E2E,
+    success: #7DBB83,
+    warn: #E9C46A,
+    error: #D96C5F
 );
+
+// ========== DARK THEME ==========
+$theme-dark: (
+    primary: #73a3b3,
+    altpri: #2a424a,
+    secondary: #587e66,
+    tertiary: #C0B7E1,
+    background: #121212,
+    surface: #272727,
+    text: #eceaea,
+    placeholder: #A8A8A8,
+    success: #9BCE9F,
+    warn: #F5E0A7,
+    error: #E5877A
+);
+$theme: $theme-light !default;
+
+// Função SCSS para acessar cores via map
+@function color($key) {
+    @if global-variable-exists(theme) {
+        @return map-get($theme, $key);
+    }
+
+    @warn "No theme is currently set!";
+    @return null;
+}
+
+:root {
+    @each $key, $value in $theme-light {
+        --#{$key}: #{$value};
+    }
+}
+
+[data-theme="dark"] {
+    @each $key, $value in $theme-dark {
+        --#{$key}: #{$value};
+    }
+}
+
+@function var-color($key) {
+    @return var(--#{$key});
+}

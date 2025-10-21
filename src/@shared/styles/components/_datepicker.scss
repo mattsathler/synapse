@@ -1,11 +1,11 @@
 @use '../colors' as *;
 @use "sass:color";
 
-input {
-    background-color: $color-secondary;
+input[type="date"] {
     padding: 12px;
     width: 100%;
     border-radius: 8px;
+    text-indent: 0;
 }
 
 [type="date"]::-webkit-inner-spin-button {

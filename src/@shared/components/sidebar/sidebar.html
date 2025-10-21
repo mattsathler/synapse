@@ -1,23 +1,50 @@
-<div class="sidebar bg-primary" (mouseenter)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)"
+<div class="sidebar bg-surface" (mouseenter)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)"
     [class.open]="isOpen">
-    <div class="w-full d-flex flex-col items-center p-16 gap hidden" [ngClass]="{'p-24': isOpen}">
-        <avatar class="max-w-128" [image]="'/assets/images/avatar.png'" [alt]="'profile-picture'"></avatar>
-        <p *ngIf="isOpen" class="text-secondary text-nowrap">Bem vindo, <span class="text-bold">Dr. Thiago</span></p>
-        <div class="d-flex flex-col gap-8 w-full hidden">
-            <div *ngFor="let menu of sidebarItems"
-                class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between"
-                [routerLink]="menu.route" routerLinkActive="active">
-                <div class="d-flex items-center gap-16">
-                    <span class="material-symbols-outlined">
-                        {{ menu.icon }}
-                    </span>
-                    <span class="text-secondary text-nowrap hide-mobile" *ngIf="isOpen">
-                        {{menu.label}}
+    <div class="w-full h-full d-flex flex-col items-center gap hidden" [ngClass]="{'p-24': isOpen, 'p-16': !isOpen}">
+        <div class="d-flex flex-col gap-8 w-full h-full hidden justify-between">
+            <div class="d-flex flex-col gap-8 w-full h-full hidden">
+                <div class="d-flex flex-col gap-8 items-center justify-center text-center mt-16 mb-24">
+                    <img class="w-40 h-40" src="/assets/images/logo.png" alt="logo">
+                    <h1 class="text-bold text-size-24" *ngIf="isOpen">Synapse</h1>
+                    <!-- <h2 class="text-uppercase text-light text-size-16 text-primary" *ngIf="isOpen">Saúde Digital Integrada</h2> -->
+                </div>
+                <separator class="bg-placeholder" style="height: 1px;"></separator>
+                <div class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between h-64">
+                    <div class="d-flex items-center gap-16">
+                        <span class="w-24 h-24">
+                            <avatar class="w-full text-size-16" [alt]="'profile-picture'" [name]="'Gabriela Alves'">
+                            </avatar>
+                        </span>
+                        <span class="text-text text-nowrap hide-mobile" *ngIf="isOpen">
+                            Gabriela Alves
+                        </span>
+                    </div>
+                </div>
+                <separator class="bg-placeholder" style="height: 1px;"></separator>
+                <div *ngFor="let menu of sidebarItems"
+                    class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between"
+                    [routerLink]="menu.route" routerLinkActive="active">
+                    <div class="d-flex items-center gap-16">
+                        <span class="material-symbols-outlined">
+                            {{ menu.icon }}
+                        </span>
+                        <span class="text-text text-nowrap hide-mobile" *ngIf="isOpen">
+                            {{menu.label}}
+                        </span>
+                    </div>
+                    <span class="text-text p-4 text-nowrap hide-mobile text-size-12 text-success"
+                        *ngIf="isOpen && menu.badge">
+                        {{menu.badge}}
                     </span>
                 </div>
-                <span class="text-secondary p-4 text-nowrap hide-mobile text-size-12" *ngIf="isOpen && menu.badge">
-                    {{menu.badge}}
-                </span>
+            </div>
+            <div class="d-flex justify-center w-full">
+                <div class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between"
+                    (click)="toggleThemeMode()">
+                    <span class="material-symbols-outlined">
+                        {{currentTheme === 'dark' ? 'dark_mode' : 'light_mode'}}
+                    </span>
+                </div>
             </div>
         </div>
     </div>

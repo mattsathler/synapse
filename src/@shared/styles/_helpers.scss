@@ -1,5 +1,20 @@
 @use 'colors' as *;
 
+$color-keys: (
+    primary: var-color(primary),
+    altpri: var-color(altpri),
+    secondary: var-color(secondary),
+    tertiary: var-color(tertiary),
+    background: var-color(background),
+    surface: var-color(surface),
+    placeholder: var-color(placeholder),
+    text: var-color(text),
+    success: var-color(success),
+    warn: var-color(warn),
+    error: var-color(error)
+);
+
+
 // ==========================
 // CONFIGURAÇÕES
 // ==========================
@@ -28,7 +43,7 @@ $space-scale: (
     screen-2xl: 1536px,
     128: 128px,
     148: 148px,
-    164: 164px, 
+    164: 164px,
     240: 240px,
     320: 320px,
     480: 480px,
@@ -106,19 +121,19 @@ $max-width-scale: (
 // COLOR HELPERS
 // ==========================
 
-@each $name, $value in $colors {
+@each $name, $value in $color-keys {
     .bg-#{$name} {
         background-color: $value !important;
     }
 }
 
-@each $name, $value in $colors {
+@each $name, $value in $color-keys {
     .text-#{$name} {
         color: $value !important;
     }
 }
 
-@each $name, $value in $colors {
+@each $name, $value in $color-keys {
     .border-#{$name} {
         border-bottom: 1px solid $value
     }

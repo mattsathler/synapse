@@ -12,7 +12,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: $color-background;
+    background-color: var-color(background);
     overflow-x: hidden;
 }
 
@@ -56,4 +56,13 @@ a {
 ul,
 ol {
     list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var-color(placeholder);
 }

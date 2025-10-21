@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Header } from '../../../@shared/components/header/header';
 import { Task as ITask } from '../../../@shared/types/Task';
 import { Task } from './task/task';
@@ -22,6 +22,7 @@ interface TimeSlot {
 export class Agenda implements OnInit, AfterViewInit {
   @ViewChildren('slotRef') slotRefs!: QueryList<ElementRef>;
   @ViewChildren('agendaRef') agendaRefs!: QueryList<ElementRef>;
+  @ViewChild('agendaContainer', { static: false }) agendaContainerRef!: ElementRef;
 
   public timeSlots: TimeSlot[] = [];
   public tasks: ITask[] = [];
@@ -45,6 +46,7 @@ export class Agenda implements OnInit, AfterViewInit {
 
       return { start, end };
     });
+
   }
 
   ngAfterViewInit() {
@@ -56,6 +58,9 @@ export class Agenda implements OnInit, AfterViewInit {
         this.updateNeedlePosition();
       }, 1);
     });
+
+    this.updateNeedlePosition();
+    this.scrollToNeedle();
   }
 
   public adjustTasks(): void {
@@ -124,16 +129,14 @@ export class Agenda implements OnInit, AfterViewInit {
     return slots * this.slotHeight;
   }
 
-  public onScroll(event: Event) {
-    const scrolledElement = event.target as HTMLElement;
-    const scrollTop = scrolledElement.scrollTop;
+  public scrollToNeedle() {
+    const container = this.agendaContainerRef?.nativeElement;
+    if (!container) return;
 
-    this.agendaRefs.forEach(ref => {
-      const el = ref.nativeElement as HTMLElement;
-      if (el !== scrolledElement) {
-        el.scrollTop = scrollTop;
-      }
-    });
+    const containerHeight = container.offsetHeight;
+    const scrollPosition = this.needleTop - containerHeight / 2;
+
+    container.scrollTo({ top: scrollPosition > 0 ? scrollPosition : 0, behavior: 'smooth' });
   }
 
   public toggleEmployee(id?: string): void {

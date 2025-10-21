@@ -48,7 +48,6 @@
     line-height: 0;
 }
 
-/* Show tooltip content on hover */
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
     visibility: visible;
