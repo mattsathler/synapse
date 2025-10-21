@@ -89,6 +89,10 @@ $max-width-scale: (
     .min-w-#{$key} {
         min-width: $value !important;
     }
+
+    .min-h-#{$key} {
+        min-height: $value !important;
+    }
 }
 
 @each $key, $value in $space-scale {
@@ -396,6 +400,10 @@ $max-width-scale: (
 
 .shadow {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.no-shadow {
+    box-shadow: none!important;
 }
 
 .cursor-pointer {

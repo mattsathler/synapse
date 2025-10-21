@@ -27,7 +27,6 @@ export class Agenda implements OnInit, AfterViewInit {
   public timeSlots: TimeSlot[] = [];
   public tasks: ITask[] = [];
   public needleTop: number = 0;
-  public happening: ITask[] = [];
 
   public employees: Employee[] = [];
   public selectedEmployees: Employee[] = [];
@@ -95,7 +94,7 @@ export class Agenda implements OnInit, AfterViewInit {
     });
 
     overlaps.forEach(group => {
-      const width = 100 / group.length; // porcentagem por tarefa
+      const width = 100 / group.length;
       group.forEach((task, index) => {
         task.width = `${width}%`;
         task.left = `${(index * width)}%`;
@@ -103,8 +102,6 @@ export class Agenda implements OnInit, AfterViewInit {
     });
   }
 
-
-  // exemplo simples de checagem de overlap
   private isOverlapping(a: ITask, b: ITask): boolean {
     if (!(a.top && b.top && b.height && a.height)) {
       return false
@@ -114,19 +111,6 @@ export class Agenda implements OnInit, AfterViewInit {
 
   private getMinutesSinceMidnight(date: Date): number {
     return date.getHours() * 60 + date.getMinutes();
-  }
-
-  private getTop(start: Date): number {
-    const minutes = this.getMinutesSinceMidnight(start);
-    const slotsFromTop = minutes / 60;
-    return slotsFromTop * this.slotHeight;
-  }
-
-  private getHeight(start: Date, end: Date): number {
-    const durationMinutes =
-      this.getMinutesSinceMidnight(end) - this.getMinutesSinceMidnight(start);
-    const slots = durationMinutes / 60;
-    return slots * this.slotHeight;
   }
 
   public scrollToNeedle() {

@@ -6,9 +6,8 @@
                 <div class="d-flex flex-col gap-8 items-center justify-center text-center mt-16 mb-24">
                     <img class="w-40 h-40" src="/assets/images/logo.png" alt="logo">
                     <h1 class="text-bold text-size-24" *ngIf="isOpen">Synapse</h1>
-                    <!-- <h2 class="text-uppercase text-light text-size-16 text-primary" *ngIf="isOpen">Saúde Digital Integrada</h2> -->
                 </div>
-                <separator class="bg-placeholder" style="height: 1px;"></separator>
+                <separator></separator>
                 <div class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between h-64">
                     <div class="d-flex items-center gap-16">
                         <span class="w-24 h-24">
@@ -20,7 +19,7 @@
                         </span>
                     </div>
                 </div>
-                <separator class="bg-placeholder" style="height: 1px;"></separator>
+                <separator></separator>
                 <div *ngFor="let menu of sidebarItems"
                     class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between"
                     [routerLink]="menu.route" routerLinkActive="active">

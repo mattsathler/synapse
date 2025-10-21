@@ -1,0 +1,47 @@
+<div class="page">
+    <page-header [title]="'Prontuário'">
+        <div class="d-flex gap items-center">
+            <button class="circle surface w-40 h-40 p-24" (click)="printRecords()">
+                <span class="material-symbols-outlined">
+                    print
+                </span>
+            </button>
+            <button class="secondary h-full">Novo prontuário</button>
+        </div>
+    </page-header>
+    <div class="d-flex flex-col gap">
+        <div>
+            <h3 class="text-text text-size-40">{{patient.full_name}},</h3>
+            <p class="text-placeholder">{{patient.age}} anos, {{patient.address.city}} - {{patient.address.state}}</p>
+        </div>
+
+        <div class="d-flex flex-col w-full gap-40">
+            <div class="w-full d-flex gap justify-between flex-wrap items-center">
+                <h3 class="text-size-24 text-placeholder">Histórico</h3>
+                <div class="max-w-248">
+                    <input class="datepicker" type="date" />
+                </div>
+            </div>
+            <div *ngFor="let record of patient.records; let i = index"
+                class="d-flex flex-col gap-40 items-center justify-center w-full">
+                <span class="text-size-24 text-bold text-placeholder">
+                    {{record.date | CustomDate}}
+                </span>
+                <div *ngFor="let r of record.records; let j = index" class="w-full d-flex flex-col gap-8 items-center">
+                    <div class="record-content card w-full min-h-128 no-shadow">
+                        <span class="text-placeholder">
+                            {{r.content}}
+                        </span>
+                    </div>
+                    <div class="d-flex justify-between w-full px-16 gap">
+                        <span class="text-size-12 text-placeholder">{{r.date | date:"HH:mm"}}</span>
+                        <span class="text-size-18 text-placeholder">
+                            - {{r.author}}
+                        </span>
+                    </div>
+                </div>
+                <separator class="w-full" *ngIf="i !== patient.records.length - 1"></separator>
+            </div>
+        </div>
+    </div>
+</div>

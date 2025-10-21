@@ -8,7 +8,7 @@ export class NavigationService {
   public getNavigation(): NavigationItem[] {
     return [
       { icon: 'home', route: '/home', label: 'Inicio' },
-      { icon: 'person', route: '/pacientes', label: 'Pacientes', badge: 'BETA' },
+      { icon: 'patient_list', route: '/pacientes', label: 'Pacientes', badge: 'BETA' },
       { icon: 'calendar_today', route: '/agenda', label: 'Agenda', badge: 'BETA' },
     ];
   }
