@@ -8,7 +8,7 @@ import { BottomBar } from '../@shared/components/bottom-bar/bottom-bar';
   selector: 'app-root',
   imports: [RouterOutlet, Sidebar, CommonModule, BottomBar],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
 export class App {
   protected readonly title = signal('synapse');

@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
     <page-header [title]="'Pacientes'">
         <button class="secondary h-full">Novo paciente</button>
     </page-header>
@@ -20,17 +20,17 @@
                 </p>
             </div>
             <div class="d-flex flex-row gap">
-                <button class="circle text-placeholder w-32 h-32 cursor-pointer">
-                    <span class="material-symbols-outlined w-32 cursor-pointer">
+                <button class="circle surface w-40 h-40 cursor-pointer">
+                    <span class="text-primary material-symbols-outlined cursor-pointer">
                         edit
                     </span>
                 </button>
-                <button class="circle text-secondary w-32 h-32 cursor-pointer">
+                <button class="circle surface w-40 h-40 cursor-pointer">
                     <span class="material-symbols-outlined ">
                         calendar_add_on
                     </span>
                 </button>
-                <button class="circle text-primary w-32 h-32 cursor-pointer" [routerLink]="`/pacientes/${patient.id}/`">
+                <button class="circle surface w-40 h-40 cursor-pointer" [routerLink]="`/pacientes/${patient.id}/`">
                     <span class="material-symbols-outlined ">
                         clinical_notes
                     </span>

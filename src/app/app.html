@@ -1,7 +1,7 @@
 <div class="d-flex flex-row w-screen">
     <sidebar *ngIf="isLoggedIn"></sidebar>
-    <div class="flex-1">
-        <router-outlet />
+    <div class="flex-1" animate.leave="slide-vertical-out">
+        <router-outlet #outlet="outlet" animate.leave="slide-vertical-out"/>
     </div>
 </div>
 <!-- <bottom-bar></bottom-bar> -->
