@@ -11,4 +11,6 @@ export class Avatar {
   @Input() image?: string;
   @Input() name: string = '';
   @Input() alt: string = 'User Avatar';
+
+  @Input() size: "small" | "medium" | "large" = "medium";
 }

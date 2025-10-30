@@ -12,7 +12,7 @@
                     <button class="circle w-40 h-40 hidden" *ngFor="let employee of employees"
                         [ngClass]="{'selected': selectedEmployees.includes(employee)}"
                         (click)="toggleEmployee(employee.id)">
-                        <avatar class="w-full" [image]="employee.photo ?? ''" [name]="employee.name">
+                        <avatar [size]="'medium'" [image]="employee.photo ?? ''" [name]="employee.name">
                         </avatar>
                     </button>
                 </div>

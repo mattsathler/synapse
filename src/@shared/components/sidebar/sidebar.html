@@ -1,5 +1,4 @@
-<div class="sidebar bg-surface" (mouseenter)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)"
-    [class.open]="isOpen">
+<div class="sidebar bg-surface" (click)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)" [class.open]="isOpen">
     <div class="w-full h-full d-flex flex-col items-center gap hidden" [ngClass]="{'p-24': isOpen, 'p-16': !isOpen}">
         <div class="d-flex flex-col gap-8 w-full h-full hidden justify-between">
             <div class="d-flex flex-col gap-8 w-full h-full hidden">
@@ -11,7 +10,8 @@
                 <div class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between h-64">
                     <div class="d-flex items-center gap-16">
                         <span class="w-24 h-24">
-                            <avatar class="w-full text-size-16" [alt]="'profile-picture'" [name]="'Gabriela Alves'">
+                            <avatar class="w-full text-size-16" [alt]="'profile-picture'" [name]="'Gabriela Alves'"
+                                [size]="'small'">
                             </avatar>
                         </span>
                         <span class="text-text text-nowrap hide-mobile" *ngIf="isOpen">
