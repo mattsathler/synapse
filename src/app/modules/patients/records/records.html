@@ -18,8 +18,8 @@
         <div class="d-flex flex-col w-full gap-40">
             <div class="w-full d-flex gap justify-between flex-wrap items-center">
                 <h3 class="text-size-24 text-placeholder">Histórico</h3>
-                <div class="max-w-248">
-                    <input class="datepicker" type="date" />
+                <div class="max-w-128">
+                    <input type="date" [(ngModel)]="today" name="date" />
                 </div>
             </div>
             <div *ngFor="let record of patient.records; let i = index"

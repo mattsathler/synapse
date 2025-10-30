@@ -5,15 +5,17 @@ import { Patient } from '../../../../@shared/types/Patient';
 import { CommonModule } from '@angular/common';
 import { Separator } from '../../../../@shared/components/separator/separator';
 import { CustomDate } from '../../../../@shared/pipes/Date';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-records',
-  imports: [Header, CommonModule, Separator, CustomDate],
+  imports: [FormsModule, Header, CommonModule, Separator, CustomDate],
   templateUrl: './records.html',
   styleUrl: './records.scss'
 })
 export class Records {
   public patient: Patient;
+  public today = new Date().toISOString().split('T')[0];
 
   constructor(private service: PatientService) {
     this.patient = this.service.getPatientById();
