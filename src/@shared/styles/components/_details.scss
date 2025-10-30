@@ -1,0 +1,44 @@
+@use '../colors' as *;
+
+details {
+    background: var-color(surface);
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backface-visibility: hidden;
+
+    summary {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: bold;
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+    }
+
+    .accordion-content {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+
+    &[open] {
+        max-height: 500px;
+        transition: all 0.4s ease;
+
+        .accordion-content {
+            opacity: 1;
+            max-height: 500px;
+            margin-top: 20px;
+            transition: all 0.4s ease;
+        }
+    }
+}
