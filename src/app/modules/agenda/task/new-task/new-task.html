@@ -19,15 +19,68 @@
         </div>
         <div class="d-flex flex-col gap-8">
             <h3>Paciente</h3>
-            <select formControlName="patient" [value]="null">
-                <option value="null">Nenhum</option>
-            </select>
+
+            @if (!selectedPatient) {
+            <div class="d-flex gap-8">
+                <input #name class="w-full" type="text" formControlName="patient" placeholder="Pesquisar pacientes"
+                    (keyup.enter)="searchPatient(name.value)">
+                <button class="circle surface" (click)="searchPatient(name.value)">
+                    <span class="text-placeholder text-size-24 material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
+
+            <div *ngIf="(patientList$ | async)?.length && (patientList$ | async)!.length > 0"
+                class="card no-shadow bg-background p-0 d-flex flex-col max-h-128 scroll-y gap-8"
+                animate.enter="slide-vertical-in-reverse">
+                <div class="d-flex gap items-center cursor-pointer card mr-8"
+                    *ngFor="let patient of patientList$ | async"
+                    (click)="selectedPatient = patient; clearPatientList()">
+                    <div class="w-40 h-40 hide-mobile">
+                        <avatar class="w-full" [image]="patient?.image" [name]="patient?.full_name ?? ''"
+                            alt="profile-picture">
+                        </avatar>
+                    </div>
+                    <p class="text-placeholder text-bold hide-mobile">
+                        {{patient?.registration}}
+                    </p>
+                    <p class="text-placeholder">
+                        {{patient?.full_name}}
+                    </p>
+                </div>
+            </div>
+            }
+            @else {
+            <div class="card bg-success d-flex gap items-center justify-between"
+                animate.enter="slide-vertical-in-reverse">
+                <div class="d-flex gap items-center">
+                    <div class="w-40 h-40 hide-mobile">
+                        <avatar class="w-full" [image]="selectedPatient?.image"
+                            [name]="selectedPatient?.full_name ?? ''" alt="profile-picture">
+                        </avatar>
+                    </div>
+                    <p class="text-text text-bold hide-mobile">
+                        {{selectedPatient?.registration}}
+                    </p>
+                    <p class="text-text">
+                        {{selectedPatient?.full_name}}
+                    </p>
+                </div>
+
+                <button class="circle surface" (click)="selectedPatient = null">
+                    <span class="text-placeholder text-size-24 material-symbols-outlined">
+                        delete
+                    </span>
+                </button>
+            </div>
+            }
         </div>
         <div class="d-flex flex-col gap-8">
             <h3>Título <span class="text-error">*</span></h3>
             <div class="d-flex gap-8 items-center">
                 <input class="w-full" type="text" formControlName="title" placeholder="Adicionar título">
-                <button class="circle surface w-40 h-40" (click)="generateDefaultTitle()"
+                <button class="circle surface" (click)="generateDefaultTitle()"
                     [disabled]="!taskForm.controls['type'].valid">
                     <span class="text-placeholder text-size-24 material-symbols-outlined">
                         autorenew
@@ -43,7 +96,7 @@
         <div class="d-flex flex-col gap-8">
             <h3>Descrição</h3>
             <div class="d-flex gap-8">
-                <textarea formControlName="description" type="text" placeholder="Adicionar Descrição"></textarea>
+                <textarea formControlName="description" type="text" placeholder="Adicionar descrição"></textarea>
             </div>
             @if (taskForm.get('description')?.invalid && taskForm.get('description')?.touched) {
             <span animate.enter="slide-vertical-in-reverse" class="text-error">

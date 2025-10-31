@@ -14,23 +14,7 @@ import { Separator } from '../../../@shared/components/separator/separator';
   styleUrl: './patients.scss'
 })
 export class Patients {
-  public patients: Patient[] = [
-    {
-      full_name: "Matheus William",
-      id: 1,
-      registration: '12312',
-      records: [],
-      age: 25,
-      address: {
-        city: "Nova Iguaçu",
-        neighborhood: "Centro",
-        number: '3',
-        state: "RJ",
-        street: "Rua Pedro",
-        zip: "365554-800"
-      },
-    }
-  ];
+  public patients: Patient[] = [];
 
   constructor() {
 

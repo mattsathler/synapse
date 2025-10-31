@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Patient } from '../../../@shared/types/Patient';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,115 @@ export class PatientService {
         }
       ]
     }
+  }
+
+  public getPatientList(query?: string): Observable<Patient[]> {
+    return of([
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+      {
+        full_name: "Matheus William",
+        id: 1,
+        registration: '12312',
+        records: [],
+        age: 25,
+        address: {
+          city: "Nova Iguaçu",
+          neighborhood: "Centro",
+          number: '3',
+          state: "RJ",
+          street: "Rua Pedro",
+          zip: "365554-800"
+        },
+      },
+    ]);
   }
 }

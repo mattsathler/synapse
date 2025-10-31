@@ -5,6 +5,10 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Separator } from '../../../../../@shared/components/separator/separator';
 import { AgendaService } from '../../agenda-service';
+import { Patient } from '../../../../../@shared/types/Patient';
+import { PatientService } from '../../../patients/patient-service';
+import { minTimeValidator } from '../../../../../@shared/validators/minTimeValidator';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'new-task',
@@ -19,7 +23,10 @@ export class NewTask {
   public taskStatus: { title: string, id: number, color: string }[] = [];
   public taskForm: FormGroup;
 
-  constructor(private service: AgendaService, private formBuilder: FormBuilder) {
+  public patientList$: Observable<Patient[]> = of([]);
+  public selectedPatient: Patient | null = null;
+
+  constructor(private service: AgendaService, private patientService: PatientService, private formBuilder: FormBuilder) {
     this.taskTypes = this.service.getTaskTypes().sort((a, b) => a.title.localeCompare(b.title));
     this.taskTypes.unshift({
       title: "Escolha um tipo de agendamento",
@@ -39,19 +46,16 @@ export class NewTask {
     this.taskForm.get('start')!.valueChanges.subscribe(startTime => {
       const endControl = this.taskForm.get('end');
       if (startTime && endControl) {
-        endControl.setValidators([Validators.required, this._minTimeValidator(startTime)]);
+        endControl.setValidators([Validators.required, minTimeValidator(startTime)]);
         endControl.updateValueAndValidity();
       }
     });
   }
 
-
   public generateDefaultTitle(): void {
     const type = this.taskTypes.find(type => this.taskForm.controls['type'].value == type.id)?.title;
-    const patient = this.taskForm.controls['patient'].value;
-
-    if (patient) {
-      this.taskForm.controls['title'].setValue(`${type} - ${patient?.name}`);
+    if (this.selectedPatient) {
+      this.taskForm.controls['title'].setValue(`${type} - ${this.selectedPatient?.full_name}`);
       return;
     }
 
@@ -68,26 +72,17 @@ export class NewTask {
     }
   }
 
-  private _minTimeValidator(minTime: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const inputTime = control.value as string;
-
-      if (!inputTime || !minTime) return null;
-
-      const [minH, minM] = minTime.split(':').map(Number);
-      const [inputH, inputM] = inputTime.split(':').map(Number);
-
-      const minMinutes = minH * 60 + minM;
-      const inputMinutes = inputH * 60 + inputM;
-
-      return inputMinutes >= minMinutes ? null : { minTime: true };
-    };
+  public searchPatient(name: string): void {
+    if (!name || name === "") {
+      this.patientList$ = of([]);
+      return;
+    }
+    this.patientList$ = this.patientService.getPatientList(`&search=${name}`);
+    return;
   }
 
-
-  private toMinutes(value: string): number {
-    if (!value) return 0;
-    const [h, m] = value.split(':').map(Number);
-    return h * 60 + m;
+  public clearPatientList(): void {
+    this.patientList$ = of([]);
+    return;
   }
 }

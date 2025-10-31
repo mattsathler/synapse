@@ -65,3 +65,15 @@
         opacity: 0;
     }
 }
+
+@keyframes slide-vertical-out-reverse {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+}
