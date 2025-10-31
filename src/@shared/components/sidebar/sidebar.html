@@ -1,7 +1,8 @@
-<div class="sidebar bg-surface" (click)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)" [class.open]="isOpen">
-    <div class="w-full h-full d-flex flex-col items-center gap hidden" [ngClass]="{'p-24': isOpen, 'p-16': !isOpen}">
-        <div class="d-flex flex-col gap-8 w-full h-full hidden justify-between">
-            <div class="d-flex flex-col gap-8 w-full h-full hidden">
+<div class="sidebar pos-sticky top left bg-surface" (click)="toggleSidebar(true)" (mouseleave)="toggleSidebar(false)"
+    [class.open]="isOpen">
+    <div class="w-full h-screen d-flex flex-col items-center gap hidden" [ngClass]="{'p-24': isOpen, 'p-16': !isOpen}">
+        <div class="d-flex h-screen flex-col gap-8 w-full hidden justify-between">
+            <div class="d-flex flex-col gap-8 w-full hidden">
                 <div class="d-flex flex-col gap-8 items-center justify-center text-center mt-16 mb-24">
                     <img class="w-40 h-40" src="/assets/images/logo.png" alt="logo">
                     <h1 class="text-bold text-size-24" *ngIf="isOpen">Synapse</h1>

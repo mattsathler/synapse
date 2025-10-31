@@ -1,9 +1,6 @@
 @use '../../styles/colors' as *;
 
 .sidebar {
-    position: sticky;
-    top: 0;
-    left: 0;
     width: 72px;
     height: 100vh;
     transition: width 0.3s ease;
@@ -24,9 +21,6 @@
 
 .sidebar.open {
     width: 260px;
-    height: 100vh;
-    top: 0;
-    left: 0;
     display: flex;
     flex-direction: column;
 }
@@ -36,6 +30,5 @@
 
     span {
         color: var-color(altpri) !important;
-        // background-color: var-color(altpri);
     }
 }
