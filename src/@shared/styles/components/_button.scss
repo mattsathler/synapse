@@ -1,4 +1,4 @@
-@use '../colors' as *;
+@use '../colors' as colors;
 @use './mixins/button' as *;
 
 button {
@@ -6,20 +6,11 @@ button {
 }
 
 /* VARIANTES */
-button.primary {
-    @include button-variant(primary);
-}
 
-button.secondary {
-    @include button-variant(secondary);
-}
-
-button.danger {
-    @include button-variant(danger);
-}
-
-button.surface {
-    @include button-variant(surface);
+@each $name, $value in colors.$color-keys {
+    button.#{$name} {
+        @include button-variant($name);
+    }
 }
 
 /* FORMAS */

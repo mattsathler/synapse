@@ -1,24 +1,5 @@
 @use 'colors' as *;
 
-$color-keys: (
-    primary: var-color(primary),
-    altpri: var-color(altpri),
-    secondary: var-color(secondary),
-    tertiary: var-color(tertiary),
-    background: var-color(background),
-    surface: var-color(surface),
-    placeholder: var-color(placeholder),
-    text: var-color(text),
-    success: var-color(success),
-    warn: var-color(warn),
-    error: var-color(error),
-    info: var-color(info),
-    success-alpha: var-color(success-alpha),
-    warn-alpha: var-color(warn-alpha),
-    error-alpha: var-color(error-alpha),
-);
-
-
 // ==========================
 // CONFIGURAÇÕES
 // ==========================
@@ -461,6 +442,7 @@ $max-width-scale: (
     .gap {
         gap: 16px !important;
     }
+
     .hide-mobile {
         display: none;
     }

@@ -20,7 +20,7 @@
         background-color: color-mix(in srgb, var(--#{$color}) 90%, white);
     }
 
-    &:active {
+    &:active:not(:disabled) {
         background-color: color-mix(in srgb, var(--#{$color}) 100%, white);
         box-shadow: none;
         transform: scale(0.97);

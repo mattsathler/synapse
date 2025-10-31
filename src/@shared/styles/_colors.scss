@@ -40,16 +40,9 @@ $theme-dark: (
 );
 $theme: $theme-light !default;
 
-// Função SCSS para acessar cores via map
-@function color($key) {
-    @if global-variable-exists(theme) {
-        @return map-get($theme, $key);
-    }
-
-    @warn "No theme is currently set!";
-    @return null;
-}
-
+// ==========================
+// CSS Custom Properties
+// ==========================
 :root {
     @each $key, $value in $theme-light {
         --#{$key}: #{$value};
@@ -62,6 +55,35 @@ $theme: $theme-light !default;
     }
 }
 
+// ==========================
+// Funções de acesso
+// ==========================
+
+@function color($key) {
+    @return map-get($theme, $key);
+}
+
 @function var-color($key) {
     @return var(--#{$key});
 }
+
+// ==========================
+// Lista de cores para utilitários
+// ==========================
+$color-keys: (
+    primary: var-color(primary),
+    altpri: var-color(altpri),
+    secondary: var-color(secondary),
+    tertiary: var-color(tertiary),
+    background: var-color(background),
+    surface: var-color(surface),
+    placeholder: var-color(placeholder),
+    text: var-color(text),
+    success: var-color(success),
+    warn: var-color(warn),
+    error: var-color(error),
+    info: var-color(info),
+    success-alpha: var-color(success-alpha),
+    warn-alpha: var-color(warn-alpha),
+    error-alpha: var-color(error-alpha),
+);

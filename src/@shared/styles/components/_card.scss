@@ -1,11 +1,17 @@
-@use '../colors' as *;
+@use '../colors' as colors;
 @use './mixins/card' as *;
 
 .card {
-    @include card;
+    @include card-base;
 }
 
 .card.flat {
-    @include card;
+    @include card-base;
     box-shadow: none;
+}
+
+@each $name, $value in colors.$color-keys {
+    .card.#{$name} {
+        @include card-variant($name);
+    }
 }
