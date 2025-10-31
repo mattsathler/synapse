@@ -32,6 +32,7 @@ export class Agenda implements OnInit, AfterViewInit {
 
   public employees: Employee[] = [];
   public selectedEmployees: Employee[] = [];
+  public selectedTask: ITask | null = null;
 
   public modalOpen: boolean = false;
 
@@ -57,20 +58,22 @@ export class Agenda implements OnInit, AfterViewInit {
     this.slotHeight = firstSlot.offsetHeight + 0.5;
 
     setTimeout(() => {
+      this.updateNeedlePosition();
+      this.scrollToNeedle();
+
       setInterval(() => {
         this.updateNeedlePosition();
       }, 1);
     });
-
-    this.updateNeedlePosition();
-    this.scrollToNeedle();
   }
 
   public adjustTasks(): void {
     this.selectedEmployees.forEach(employee => {
       employee.tasks = employee.tasks.map(task => {
-        const startHour = task.start.getHours() + task.start.getMinutes() / 60;
-        const endHour = task.end.getHours() + task.end.getMinutes() / 60;
+        const startDate = task.start;
+        const endDate = task.end;
+        const startHour = startDate.getHours() + startDate.getMinutes() / 60;
+        const endHour = endDate.getHours() + endDate.getMinutes() / 60;
         const durationHours = endHour - startHour;
 
         const top = (startHour * this.slotHeight) - 2;
@@ -164,6 +167,7 @@ export class Agenda implements OnInit, AfterViewInit {
   }
 
   public newTask(): void {
+    this.selectedTask = null;
     this.modalOpen = true;
   }
 }

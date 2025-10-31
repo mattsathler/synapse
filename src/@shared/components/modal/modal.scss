@@ -26,6 +26,7 @@
         transition: transform 0.3s ease, opacity 0.3s ease;
         opacity: 0;
         z-index: 3;
+        width: 60dvw;
     }
 
     &.active {

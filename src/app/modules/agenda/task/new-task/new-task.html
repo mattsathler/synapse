@@ -1,13 +1,19 @@
 <form action="" [formGroup]="taskForm">
     <div class="d-flex flex-col gap">
-        <div class="card bg-warn-alpha text-text no-shadow">
-            Para adicionar novos funcionários, selecione-os na agenda
-        </div>
         <div class="d-flex flex-col gap-8">
             <h3>Funcionário(s)</h3>
-            <div class="d-flex gap-8">
-                <avatar *ngFor="let employee of selectedEmployees" [size]="'large'" [image]="employee.photo ?? ''"
-                    [name]="employee.name">
+            <select (change)="toggleEmployee($event)">
+                <option [value]="''">Adicione funcionários</option>
+                <option *ngFor="let employee of employeeList" [value]="employee.id">{{employee.name}}</option>
+            </select>
+            @if(taskEmployees.length === 0) {
+            <div class="card bg-warn-alpha text-text no-shadow text-center">
+                Selecione pelo menos um funcionário
+            </div>
+            }
+            <div class="d-flex gap-8 justify-center">
+                <avatar [attr.data-tooltip]="employee.name" (click)="toggleEmployee(undefined, employee.id)" *ngFor="let employee of taskEmployees"
+                    [size]="'large'" [image]="employee.photo ?? ''" [name]="employee.name" class="cursor-pointer">
                 </avatar>
             </div>
         </div>
@@ -130,8 +136,8 @@
         <div class="d-flex flex-col gap-8">
             <h3>Status <span class="text-error">*</span></h3>
             <div class="d-flex gap">
-                <select>
-                    <option *ngFor="let status of taskStatus" value="taskTypes.id" [ngStyle]="{'color': status.color}">
+                <select formControlName="status">
+                    <option *ngFor="let status of taskStatus" [value]="status.id" [ngStyle]="{'color': status.color}">
                         {{status.title}}
                     </option>
                 </select>
@@ -139,7 +145,8 @@
         </div>
         <separator></separator>
         <div class="d-flex w-full justify-end">
-            <button class="secondary h-full" [disabled]="taskForm.invalid">Agendar</button>
+            <button class="secondary h-full" [disabled]="taskForm.invalid || taskEmployees.length === 0">{{task ?
+                'Salvar' : 'Agendar'}}</button>
         </div>
     </div>
 </form>
