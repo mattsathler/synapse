@@ -1,5 +1,5 @@
 @use '../colors' as *;
-@use '../mixins' as *;
+@use './mixins/button' as *;
 
 button {
     @include button-base;

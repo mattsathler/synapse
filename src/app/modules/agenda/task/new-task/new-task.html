@@ -35,7 +35,7 @@
                 <option *ngFor="let type of taskTypes" [value]="type.id">{{type.title}}</option>
             </select>
         </div>
-        <div class="d-flex flex-col gap-8">
+        <div class="d-flex flex-col gap-4">
             <h3>Paciente</h3>
 
             @if (!selectedPatient) {
@@ -50,9 +50,9 @@
             </div>
 
             <div *ngIf="(patientList$ | async)?.length && (patientList$ | async)!.length > 0"
-                class="card no-shadow bg-background p-0 d-flex flex-col max-h-128 scroll-y gap-8"
+                class="card flat bg-background p-0 d-flex flex-col max-h-240 scroll-y gap-4"
                 animate.enter="slide-vertical-in-reverse">
-                <div class="d-flex gap items-center cursor-pointer card mr-8"
+                <div class="d-flex gap items-center cursor-pointer card bg-surface no-shadow mr-8"
                     *ngFor="let patient of patientList$ | async"
                     (click)="selectedPatient = patient; clearPatientList()">
                     <div class="hide-mobile">
@@ -60,17 +60,17 @@
                             alt="profile-picture">
                         </avatar>
                     </div>
-                    <p class="text-placeholder text-bold">
+                    <p class="text-text text-bold">
                         {{patient?.registration}}
                     </p>
-                    <p class="text-placeholder">
+                    <p class="text-text">
                         {{patient?.full_name}}
                     </p>
                 </div>
             </div>
             }
             @else {
-            <div class="card bg-info d-flex gap items-center justify-between" animate.enter="slide-vertical-in-reverse">
+            <div class="card bg-info d-flex gap items-center justify-between" animate.enter="slide-vertical-in">
                 <div class="d-flex gap items-center">
                     <div class="hide-mobile">
                         <avatar class="w-full" [image]="selectedPatient?.image"

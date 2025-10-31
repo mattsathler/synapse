@@ -3,7 +3,7 @@
 }
 
 .slide-vertical-in-reverse {
-    animation: slide-vertical-in 400ms ease backwards;
+    animation: slide-vertical-in-reverse 400ms ease forwards;
 }
 
 .slide-vertical-out {
@@ -45,6 +45,18 @@
 @keyframes slide-vertical-in {
     from {
         transform: translateY(10%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-vertical-in-reverse {
+    from {
+        transform: translateY(-10%);
         opacity: 0;
     }
 

@@ -1,0 +1,12 @@
+@mixin card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px;
+    background-color: var-color(surface);
+
+    @media screen and (max-width: 768px) {
+        .card {
+            padding: 16px;
+        }
+    }
+}
