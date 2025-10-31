@@ -52,7 +52,7 @@ export class NewTask implements AfterViewInit {
       patient: [null],
       start: ['', Validators.required],
       end: ['', Validators.required],
-      status: ['', Validators.required]
+      status: [1, Validators.required]
     })
 
     this.taskForm.get('start')!.valueChanges.pipe(take(1)).subscribe(startTime => {
