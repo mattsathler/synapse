@@ -108,4 +108,34 @@ export class AgendaService {
       { title: 'Pós-operatório', id: 13 },
     ];
   }
+
+  public getTaskStatus() {
+    return [
+      {
+        id: 1,
+        title: "Agendado",
+        color: "#22bb33"
+      },
+      {
+        id: 2,
+        title: "Em andamento",
+        color: "#007bff"
+      },
+      {
+        id: 3,
+        title: "Concluído",
+        color: "#6c757d"
+      },
+      {
+        id: 4,
+        title: "Cancelado",
+        color: "#dc3545"
+      },
+      {
+        id: 5,
+        title: "Aguardando aprovação",
+        color: "#ffc107"
+      }
+    ]
+  }
 }
