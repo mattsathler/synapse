@@ -14,7 +14,11 @@ $theme-light: (
     text: #2E2E2E,
     success: #7DBB83,
     warn: #E9C46A,
-    error: #D96C5F
+    error: #D96C5F,
+    info: #7e75ba,
+    success-alpha: #B6DDB9,
+    warn-alpha: #F3DA9E,
+    error-alpha: #E9A299,
 );
 
 // ========== DARK THEME ==========
@@ -29,7 +33,11 @@ $theme-dark: (
     placeholder: #A8A8A8,
     success: #9BCE9F,
     warn: #F5E0A7,
-    error: #E5877A
+    error: #E5877A,
+    info: #615c7e,
+    success-alpha: #426245,
+    warn-alpha: #94814e,
+    error-alpha: #ac5b51,
 );
 $theme: $theme-light !default;
 

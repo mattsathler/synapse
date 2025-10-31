@@ -16,6 +16,9 @@ export class Header {
   public title: string = '';
 
   @Input()
+  public subtitle: string = '';
+
+  @Input()
   public returnUrl: string = '';
 
   public return(): void {

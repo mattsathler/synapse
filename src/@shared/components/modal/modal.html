@@ -1,0 +1,21 @@
+<div class="modal">
+  <div class="modal-overlay" (click)="close()"></div>
+  <div class="modal-content card min-w-240 d-flex flex-col gap">
+    <div class="w-full pos-relative">
+      <div class="w-full pos-static d-flex flex-col gap items-center mb-24">
+        <div class="d-flex w-full justify-between items-center">
+          <h2 class="text-text">{{title}}</h2>
+          <button class="circle surface w-40 h-40 cursor-pointer" (click)="close()">
+            <span class="material-symbols-outlined ">
+              close
+            </span>
+          </button>
+        </div>
+        <separator class="w-full"></separator>
+      </div>
+      <div class="modal-body scroll-y pr-24">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

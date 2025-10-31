@@ -89,4 +89,23 @@ export class AgendaService {
       }
     ]
   }
+
+  public getTaskTypes() {
+    return [
+      { title: 'Blefaroplastia', id: 0 },
+      { title: 'Bioimpedância', id: 1 },
+      { title: 'Consulta médica', id: 2 },
+      { title: 'Retorno de consulta', id: 3 },
+      { title: 'Avaliação estética', id: 4 },
+      { title: 'Aplicação de botox', id: 5 },
+      { title: 'Preenchimento facial', id: 6 },
+      { title: 'Limpeza de pele', id: 7 },
+      { title: 'Peeling químico', id: 8 },
+      { title: 'Microagulhamento', id: 9 },
+      { title: 'Criolipólise', id: 10 },
+      { title: 'Depilação a laser', id: 11 },
+      { title: 'Exame laboratorial', id: 12 },
+      { title: 'Pós-operatório', id: 13 },
+    ];
+  }
 }

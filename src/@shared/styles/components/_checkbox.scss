@@ -1,0 +1,36 @@
+@use '../colors' as *;
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: var-color(surface);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    vertical-align: middle;
+
+    &:checked {
+        background-color: var-color(secondary);
+        border-color: var-color(secondary);
+    }
+
+    &:checked::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 10px;
+        width: 4px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

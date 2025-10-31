@@ -1,15 +1,17 @@
 @use '../colors' as *;
-@use "sass:color";
 
-input {
-    background-color: var-color(surface);
-    color: var-color(text);
-    padding: 12px;
+textarea {
     width: 100%;
+    min-height: 120px;
+    padding: 16px;
     border-radius: 8px;
+    background-color: var-color(surface);
+    resize: none;
+    line-height: 1.5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-indent: 8px;
-
+    
+    color: var-color(text);
     &::placeholder {
         color: var-color(placeholder);
         opacity: 1;

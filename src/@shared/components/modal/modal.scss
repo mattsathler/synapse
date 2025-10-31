@@ -1,0 +1,44 @@
+@use '../../styles/colors' as *;
+
+:host {
+    padding: 24px;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.4);
+    transition: opacity 0.3s ease;
+    z-index: 3;
+
+    .modal-overlay {
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+    }
+
+    .modal-content {
+        background: var-color(background);
+        border-radius: 12px;
+        transform: translateY(-30px);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        z-index: 3;
+    }
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+
+        .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+.modal-body {
+    max-height: 70vh;
+}

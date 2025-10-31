@@ -7,6 +7,8 @@ import { AgendaService } from './agenda-service';
 import { Separator } from '../../../@shared/components/separator/separator';
 import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { Employee } from '../../../@shared/types/Employee';
+import { Modal } from '../../../@shared/components/modal/modal';
+import { NewTask } from './task/new-task/new-task';
 
 interface TimeSlot {
   start: Date;
@@ -15,7 +17,7 @@ interface TimeSlot {
 
 @Component({
   selector: 'app-agenda',
-  imports: [CommonModule, Header, Task, Separator, Avatar],
+  imports: [CommonModule, Header, Task, Separator, Avatar, Modal, NewTask],
   templateUrl: './agenda.html',
   styleUrl: './agenda.scss'
 })
@@ -30,6 +32,8 @@ export class Agenda implements OnInit, AfterViewInit {
 
   public employees: Employee[] = [];
   public selectedEmployees: Employee[] = [];
+
+  public modalOpen: boolean = false;
 
   private slotHeight: number = 0;
 
@@ -109,10 +113,6 @@ export class Agenda implements OnInit, AfterViewInit {
     return a.top < b.top + b.height && b.top < a.top + a.height;
   }
 
-  private getMinutesSinceMidnight(date: Date): number {
-    return date.getHours() * 60 + date.getMinutes();
-  }
-
   public scrollToNeedle() {
     const container = this.agendaContainerRef?.nativeElement;
     if (!container) return;
@@ -161,5 +161,9 @@ export class Agenda implements OnInit, AfterViewInit {
     const minuteOffset = (currentMinute / 60) * slotHeight;
 
     this.needleTop = fullHoursOffset + minuteOffset + 8;
+  }
+
+  public newTask(): void {
+    this.modalOpen = true;
   }
 }

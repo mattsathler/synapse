@@ -1,3 +1,31 @@
+@use '../colors' as *;
+
 select {
-    
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var-color(surface);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    text-indent: 8px;
+    color: var-color(text);
+
+    &::placeholder {
+        color: var-color(placeholder);
+        opacity: 1;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var-color(surface);
+    }
+
+    option {
+        background-color: var-color(surface);
+        border-radius: 8px;
+        color: var-color(text);
+        font-size: 0.95rem;
+    }
 }
