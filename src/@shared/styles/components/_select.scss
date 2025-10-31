@@ -11,6 +11,8 @@ select {
     cursor: pointer;
     text-indent: 8px;
     color: var-color(text);
+    outline: none;
+    transition: all 0.2s ease;
 
     &::placeholder {
         color: var-color(placeholder);
@@ -19,7 +21,6 @@ select {
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 2px var-color(surface);
     }
 
     option {

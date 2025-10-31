@@ -7,6 +7,11 @@ import { Home } from './modules/home/home';
 
 export const routes: Routes = [
     {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
         path: 'login',
         component: Login
     },
