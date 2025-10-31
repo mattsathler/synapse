@@ -24,7 +24,7 @@
             <div class="d-flex gap-8">
                 <input #name class="w-full" type="text" formControlName="patient" placeholder="Pesquisar pacientes"
                     (keyup.enter)="searchPatient(name.value)">
-                <button class="circle surface" (click)="searchPatient(name.value)">
+                <button class="circle surface w-48 h-48" (click)="searchPatient(name.value)">
                     <span class="text-placeholder text-size-24 material-symbols-outlined">
                         search
                     </span>
@@ -37,12 +37,12 @@
                 <div class="d-flex gap items-center cursor-pointer card mr-8"
                     *ngFor="let patient of patientList$ | async"
                     (click)="selectedPatient = patient; clearPatientList()">
-                    <div class="w-40 h-40 hide-mobile">
+                    <div class="hide-mobile">
                         <avatar class="w-full" [image]="patient?.image" [name]="patient?.full_name ?? ''"
                             alt="profile-picture">
                         </avatar>
                     </div>
-                    <p class="text-placeholder text-bold hide-mobile">
+                    <p class="text-placeholder text-bold">
                         {{patient?.registration}}
                     </p>
                     <p class="text-placeholder">
@@ -52,10 +52,9 @@
             </div>
             }
             @else {
-            <div class="card bg-success d-flex gap items-center justify-between"
-                animate.enter="slide-vertical-in-reverse">
+            <div class="card bg-info d-flex gap items-center justify-between" animate.enter="slide-vertical-in-reverse">
                 <div class="d-flex gap items-center">
-                    <div class="w-40 h-40 hide-mobile">
+                    <div class="hide-mobile">
                         <avatar class="w-full" [image]="selectedPatient?.image"
                             [name]="selectedPatient?.full_name ?? ''" alt="profile-picture">
                         </avatar>
@@ -68,7 +67,7 @@
                     </p>
                 </div>
 
-                <button class="circle surface" (click)="selectedPatient = null">
+                <button class="circle surface w-48 h-48" (click)="selectedPatient = null">
                     <span class="text-placeholder text-size-24 material-symbols-outlined">
                         delete
                     </span>
@@ -80,9 +79,9 @@
             <h3>Título <span class="text-error">*</span></h3>
             <div class="d-flex gap-8 items-center">
                 <input class="w-full" type="text" formControlName="title" placeholder="Adicionar título">
-                <button class="circle surface" (click)="generateDefaultTitle()"
+                <button class="circle surface w-48 h-48" (click)="generateDefaultTitle()"
                     [disabled]="!taskForm.controls['type'].valid">
-                    <span class="text-placeholder text-size-24 material-symbols-outlined">
+                    <span class="text-placeholder material-symbols-outlined">
                         autorenew
                     </span>
                 </button>

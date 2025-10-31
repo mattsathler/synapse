@@ -6,6 +6,6 @@
     }" [ngClass]="{'w-24 h-24' : size === 'small',
                     'w-40 h-40' : size === 'medium',
                     'w-48 h-48' : size === 'large'}">
-    <span *ngIf="!image && name" class="text-placeholder text-center">{{ name[0] }}{{ name.split(' ')[1]?.[0]
+    <span *ngIf="!image && name" class="text-text text-center">{{ name[0] }}{{ name.split(' ')[1]?.[0]
         }}</span>
 </div>

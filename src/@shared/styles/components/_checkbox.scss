@@ -11,6 +11,7 @@ input[type="checkbox"] {
     transition: all 0.2s ease;
     position: relative;
     vertical-align: middle;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
 
     &:checked {
         background-color: var-color(secondary);

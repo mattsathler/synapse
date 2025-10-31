@@ -14,7 +14,7 @@
 @mixin button-variant($color) {
     background-color: var(--#{$color});
     color: var(--text);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
 
     &:hover {
         background-color: color-mix(in srgb, var(--#{$color}) 90%, white);
