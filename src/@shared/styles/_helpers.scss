@@ -379,11 +379,11 @@ $max-width-scale: (
 // ==========================
 
 .w-screen {
-    width: 100vw !important;
+    width: 100dvw !important;
 }
 
 .h-screen {
-    height: 100vh !important;
+    height: 100dvh !important;
 }
 
 .w-full {
