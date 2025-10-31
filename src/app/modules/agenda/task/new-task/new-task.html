@@ -14,12 +14,14 @@
             <div class="d-flex gap-8 scroll-x">
                 <div *ngFor="let employee of taskEmployees" animate.enter="slide-horizontal-in"
                     animate.leave="slide-vertical-out"
-                    class="card bg-info d-flex flex-col gap-8 items-center justify-center text-center w-128 min-w-128">
-                    <avatar [size]="'large'" [image]="employee.photo ?? ''" [name]="employee.name"
-                        class="cursor-pointer">
-                    </avatar>
-                    <p class="text-text">{{employee.name}}</p>
-                    <button class="circle surface w-32 h-32" (click)="toggleEmployee(undefined, employee.id)">
+                    class="card bg-info d-flex flex-col gap-8 items-center justify-between text-center w-128 min-w-128">
+                    <div class="d-flex flex-col items-center">
+                        <avatar [size]="'large'" [image]="employee.photo ?? ''" [name]="employee.name"
+                            class="cursor-pointer">
+                        </avatar>
+                        <p class="text-text">{{employee.name}}</p>
+                    </div>
+                    <button class="w-32 h-32" (click)="toggleEmployee(undefined, employee.id)">
                         <span class="text-placeholder material-symbols-outlined">
                             delete
                         </span>
