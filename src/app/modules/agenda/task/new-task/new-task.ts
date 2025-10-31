@@ -66,7 +66,7 @@ export class NewTask implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.task) {
-      this.taskEmployees = this.task.employees;
+      this.taskEmployees = [...this.task.employees];
       this.selectedPatient = this.task.patient;
       this.taskForm.patchValue({
         title: this.task.title,
@@ -75,18 +75,18 @@ export class NewTask implements AfterViewInit {
         end: this.dateService.formatTimeForInput(this.task.end),
         status: this.task.status,
       });
-    }
-    else {
-      this.taskEmployees = this.selectedEmployees;
+    } else {
+      this.taskEmployees = [...this.selectedEmployees];
     }
 
-    this.taskEmployees.forEach(selected => {
-      this.employeeList = this.employees.filter(e => e.id !== selected.id);
-    })
+    this.employeeList = this.employees.filter(
+      e => !this.taskEmployees.some(selected => selected.id === e.id)
+    );
 
     this.reorderEmployeesList();
     return;
   }
+
 
   public generateDefaultTitle(): void {
     const type = this.taskTypes.find(type => this.taskForm.controls['type'].value == type.id)?.title;

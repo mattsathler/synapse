@@ -11,10 +11,20 @@
                 Selecione pelo menos um funcionário
             </div>
             }
-            <div class="d-flex gap-8 justify-center">
-                <avatar [attr.data-tooltip]="employee.name" (click)="toggleEmployee(undefined, employee.id)" *ngFor="let employee of taskEmployees"
-                    [size]="'large'" [image]="employee.photo ?? ''" [name]="employee.name" class="cursor-pointer">
-                </avatar>
+            <div class="d-flex gap-8 scroll-x">
+                <div *ngFor="let employee of taskEmployees" animate.enter="slide-horizontal-in"
+                    animate.leave="slide-vertical-out"
+                    class="card bg-info d-flex flex-col gap-8 items-center justify-center text-center w-128 min-w-128">
+                    <avatar [size]="'large'" [image]="employee.photo ?? ''" [name]="employee.name"
+                        class="cursor-pointer">
+                    </avatar>
+                    <p class="text-text">{{employee.name}}</p>
+                    <button class="circle surface w-32 h-32" (click)="toggleEmployee(undefined, employee.id)">
+                        <span class="text-placeholder material-symbols-outlined">
+                            delete
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="d-flex flex-col gap-8">
