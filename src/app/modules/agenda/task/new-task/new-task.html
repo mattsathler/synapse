@@ -2,7 +2,7 @@
     <div class="d-flex flex-col gap">
         <div class="d-flex flex-col gap-8">
             <h3>Funcionário(s)</h3>
-            <select (change)="toggleEmployee($event)">
+            <select (change)="toggleEmployee($event)" [disabled]="employeeList.length === 0">
                 <option [value]="''">Adicione funcionários</option>
                 <option *ngFor="let employee of employeeList" [value]="employee.id">{{employee.name}}</option>
             </select>

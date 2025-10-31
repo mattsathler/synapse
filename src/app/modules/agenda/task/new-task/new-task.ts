@@ -83,7 +83,8 @@ export class NewTask implements AfterViewInit {
       e => !this.taskEmployees.some(selected => selected.id === e.id)
     );
 
-    this.reorderEmployeesList();
+    this.reorderEmployeesList(this.employeeList);
+    this.reorderEmployeesList(this.taskEmployees);
     return;
   }
 
@@ -143,14 +144,16 @@ export class NewTask implements AfterViewInit {
       this.employeeList = this.employeeList.filter(e => e.id !== employee.id);
     }
 
-    this.reorderEmployeesList();
     if (target) {
       target.value = "";
     }
+
+    this.reorderEmployeesList(this.employeeList);
+    this.reorderEmployeesList(this.taskEmployees);
   }
 
-  public reorderEmployeesList(): void {
-    this.employeeList = this.employeeList.sort((a, b) => a.name.localeCompare(b.name));
+  public reorderEmployeesList(list: Employee[]): void {
+    list = list.sort((a, b) => a.name.localeCompare(b.name));
     return;
   }
 }
