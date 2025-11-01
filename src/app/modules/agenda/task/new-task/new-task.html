@@ -73,15 +73,15 @@
             <div class="card info d-flex gap items-center justify-between" animate.enter="slide-vertical-in">
                 <div class="d-flex gap items-center">
                     <div class="hide-mobile">
-                        <avatar class="w-full" [image]="selectedPatient?.image"
-                            [name]="selectedPatient?.fullName ?? ''" alt="profile-picture">
+                        <avatar class="w-full" [image]="selectedPatient.image"
+                            [name]="selectedPatient.fullName" alt="profile-picture">
                         </avatar>
                     </div>
                     <p class="text-text text-bold hide-mobile">
-                        {{selectedPatient?.registration}}
+                        {{selectedPatient.registration}}
                     </p>
                     <p class="text-text">
-                        {{selectedPatient?.fullName}}
+                        {{selectedPatient.fullName}}
                     </p>
                 </div>
 

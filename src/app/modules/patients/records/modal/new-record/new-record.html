@@ -1,0 +1,22 @@
+<div class="d-flex flex-col gap">
+    <div class="d-flex flex-col gap-8">
+        <h3>Conteúdo</h3>
+        <rich-text-editor></rich-text-editor>
+    </div>
+
+    <div class="d-flex flex-col gap-8">
+        <h3>Anexos</h3>
+        <div class="card">
+            @if (attachments.length === 0) {
+            <span class="text-placeholder">
+                Arraste um arquivo aqui
+            </span>
+            }
+        </div>
+    </div>
+
+    <div class="d-flex w-full justify-end">
+        <button class="secondary h-full">{{selectedRecord ?
+            'Salvar' : 'Agendar'}}</button>
+    </div>
+</div>

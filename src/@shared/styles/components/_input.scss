@@ -1,7 +1,7 @@
 @use '../colors' as *;
 @use "sass:color";
 
-input {
+input, quill-editor {
     background-color: var-color(surface);
     color: var-color(text);
     padding: 12px;

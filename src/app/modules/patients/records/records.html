@@ -6,7 +6,7 @@
                     print
                 </span>
             </button>
-            <button class="secondary h-full">Novo prontuário</button>
+            <button class="secondary h-full" (click)="modalOpen = true">Novo prontuário</button>
         </div>
     </page-header>
     <ng-container *ngIf="patient$| async as patient">
@@ -33,10 +33,8 @@
 
                     <div *ngFor="let r of record.records; let j = index"
                         class="w-full d-flex flex-col gap-8 items-center">
-                        <div class="record-content card w-full min-h-128 no-shadow">
-                            <span class="text-placeholder">
-                                {{r.content}}
-                            </span>
+                        <div class="record-content card p-0 w-full min-h-128 no-shadow">
+                            <rich-text-viewer [content]="r.content"></rich-text-viewer>
                         </div>
                         <div class="d-flex justify-between w-full px-16 gap">
                             <span class="text-size-12 text-placeholder">{{r.date | date:"HH:mm"}}</span>
@@ -52,3 +50,9 @@
         </div>
     </ng-container>
 </div>
+
+@if(modalOpen) {
+<modal [(open)]="modalOpen" [title]="selectedRecord ? 'Editar prontuário' : 'Novo prontuário'">
+    <new-record></new-record>
+</modal>
+}

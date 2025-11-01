@@ -19,7 +19,7 @@ export const singlePatient: Patient = {
                 {
                     id: '0',
                     author: 'Thalles Gonçalves',
-                    content: 'Paciente retornando após consulta e cirurgia, aparenta normalidade e estabilidade com relação a dores localizadas e inchaços.',
+                    content: `<h1>Meu Post</h1><p>Olá, este é um exemplo de <strong>texto em negrito</ strong>, <em>itálico </em>, <u>sublinhado</u> e uma lista: </p><ul><li>Item 1 </li><li>Item 2 </li></ul><p><a href="https://angular.io" target = "_blank"> Angular </a></p>`,
                     date: new Date(),
                 }
             ],

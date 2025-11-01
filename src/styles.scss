@@ -22,9 +22,9 @@ app-root {
     height: 100%;
 }
 
-body {
+body, .ql-container {
     line-height: 1.5;
-    font-family: "montserrat";
+    font-family: "montserrat" !important;
     box-sizing: border-box;
 }
 
