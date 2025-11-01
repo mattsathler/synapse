@@ -6,8 +6,7 @@
 }
 
 .card.flat {
-    box-shadow: none;
-    @include card-base;
+    @include card-flat;
 }
 
 @each $name, $value in colors.$color-keys {

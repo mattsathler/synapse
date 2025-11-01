@@ -9,6 +9,10 @@
     }
 }
 
+@mixin card-flat {
+    box-shadow: none;
+}
+
 @mixin card-variant($color) {
-    background-color: var(--#{$color})!important;
+    background-color: var(--#{$color}) !important;
 }
