@@ -22,7 +22,7 @@
                         <p class="text-text">{{employee.name}}</p>
                     </div>
                     <button class="w-32 h-32" (click)="toggleEmployee(undefined, employee.id)">
-                        <span class="text-placeholder material-symbols-outlined">
+                        <span class="text-text material-symbols-outlined">
                             delete
                         </span>
                     </button>
@@ -70,7 +70,7 @@
             </div>
             }
             @else {
-            <div class="card info d-flex gap items-center justify-between" animate.enter="slide-vertical-in">
+            <div class="card info d-flex gap items-center justify-between" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
                 <div class="d-flex gap items-center">
                     <div class="hide-mobile">
                         <avatar class="w-full" [image]="selectedPatient.image"
@@ -85,8 +85,8 @@
                     </p>
                 </div>
 
-                <button class="circle surface w-48 h-48" (click)="selectedPatient = null">
-                    <span class="text-placeholder text-size-24 material-symbols-outlined">
+                <button class="circle w-48 h-48" (click)="selectedPatient = null">
+                    <span class="text-text text-size-24 material-symbols-outlined">
                         delete
                     </span>
                 </button>
