@@ -12,7 +12,7 @@
     <ng-container *ngIf="patient$| async as patient">
         <div class="d-flex flex-col gap">
             <div>
-                <h3 class="text-text text-size-40">{{patient.fullName}},</h3>
+                <h3 class="text-text text-size-40">{{patient.fullName}}</h3>
                 <p class="text-placeholder">{{patient.age}} anos, {{patient.address.city}} -
                     {{patient.address.state}}</p>
             </div>
@@ -45,6 +45,7 @@
                             </span>
                         </div>
                     </div>
+                    <hr *ngIf="i !== patient.records.length - 1" />
                     }
                 </div>
             </div>
