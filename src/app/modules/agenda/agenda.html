@@ -49,7 +49,7 @@
 </div>
 
 @if(modalOpen) {
-<modal *ngIf="modalOpen" [(open)]="modalOpen" [title]="selectedTask ? 'Editar agendamento' : 'Novo agendamento'">
+<modal [(open)]="modalOpen" [title]="selectedTask ? 'Editar agendamento' : 'Novo agendamento'">
     <new-task [selectedEmployees]="selectedEmployees" [employees]="employees" [task]="selectedTask"></new-task>
 </modal>
 }

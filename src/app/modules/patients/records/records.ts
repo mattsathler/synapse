@@ -3,13 +3,12 @@ import { Header } from '../../../../@shared/components/header/header';
 import { PatientService } from '../patient-service';
 import { Patient } from '../../../../@shared/types/Patient';
 import { CommonModule } from '@angular/common';
-import { Separator } from '../../../../@shared/components/separator/separator';
 import { CustomDate } from '../../../../@shared/pipes/Date';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-records',
-  imports: [FormsModule, Header, CommonModule, Separator, CustomDate],
+  imports: [FormsModule, Header, CommonModule, CustomDate],
   templateUrl: './records.html',
   styleUrl: './records.scss'
 })

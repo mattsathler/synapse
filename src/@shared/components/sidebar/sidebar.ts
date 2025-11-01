@@ -5,11 +5,10 @@ import { Avatar } from '../avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { NavigationItem } from '../../types/NavigationItem';
 import { NavigationService } from '../../services/navigation-service';
-import { Separator } from '../separator/separator';
 
 @Component({
   selector: 'sidebar',
-  imports: [CommonModule, Avatar, RouterModule, Separator],
+  imports: [CommonModule, Avatar, RouterModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })

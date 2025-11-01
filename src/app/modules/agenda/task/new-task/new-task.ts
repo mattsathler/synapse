@@ -3,7 +3,6 @@ import { Employee } from '../../../../../@shared/types/Employee';
 import { Avatar } from '../../../../../@shared/components/avatar/avatar';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Separator } from '../../../../../@shared/components/separator/separator';
 import { AgendaService } from '../../agenda-service';
 import { Patient } from '../../../../../@shared/types/Patient';
 import { PatientService } from '../../../patients/patient-service';
@@ -14,7 +13,7 @@ import { DateService } from '../../../../../@shared/services/date-service';
 
 @Component({
   selector: 'new-task',
-  imports: [CommonModule, FormsModule, Avatar, Separator, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, Avatar, ReactiveFormsModule],
   templateUrl: './new-task.html',
   styleUrl: './new-task.scss'
 })

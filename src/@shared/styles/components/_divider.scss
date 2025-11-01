@@ -1,0 +1,13 @@
+@use '../colors' as colors;
+@use './mixins/divider' as *;
+
+hr {
+    @include divider-base;
+}
+
+
+@each $name, $value in colors.$color-keys {
+    hr.#{$name} {
+        @include divider-variant($name);
+    }
+}

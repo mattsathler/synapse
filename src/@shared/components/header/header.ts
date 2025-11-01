@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Separator } from '../separator/separator';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'page-header',
-  imports: [CommonModule, Separator],
+  imports: [CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })

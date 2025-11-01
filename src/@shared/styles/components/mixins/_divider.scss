@@ -1,0 +1,12 @@
+@mixin divider-base {
+    width: 100%;
+    height: 1px !important;
+    color: var(placeholder);
+    border: none;
+    background-color: var(--placeholder);
+}
+
+@mixin divider-variant($color) {
+    color: var(--#{$color});
+    background-color: var(--#{$color});
+}

@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { Separator } from '../separator/separator';
 
 @Component({
   selector: 'modal',
-  imports: [CommonModule, Separator],
+  imports: [CommonModule],
   templateUrl: './modal.html',
   styleUrl: './modal.scss'
 })
@@ -14,7 +13,7 @@ export class Modal {
 
   @Input()
   public title: string = "";
-  
+
   @HostBinding('class.active') get isActive() {
     return this.open;
   }

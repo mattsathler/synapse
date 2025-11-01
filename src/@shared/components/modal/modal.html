@@ -1,4 +1,4 @@
-<div class="modal" animate.enter="slide-vertical-in">
+<div class="modal" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
   <div class="modal-overlay" (click)="close()"></div>
   <div class="modal-content card min-w-240 d-flex flex-col gap">
     <div class="w-full pos-relative">
@@ -11,7 +11,7 @@
             </span>
           </button>
         </div>
-        <separator class="w-full"></separator>
+        <hr />
       </div>
       <div class="modal-body scroll-y pr-24">
         <ng-content></ng-content>

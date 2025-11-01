@@ -4,7 +4,6 @@ import { Task as ITask } from '../../../@shared/types/Task';
 import { Task } from './task/task';
 import { CommonModule } from '@angular/common';
 import { AgendaService } from './agenda-service';
-import { Separator } from '../../../@shared/components/separator/separator';
 import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { Employee } from '../../../@shared/types/Employee';
 import { Modal } from '../../../@shared/components/modal/modal';
@@ -17,7 +16,7 @@ interface TimeSlot {
 
 @Component({
   selector: 'app-agenda',
-  imports: [CommonModule, Header, Task, Separator, Avatar, Modal, NewTask],
+  imports: [CommonModule, Header, Task, Avatar, Modal, NewTask],
   templateUrl: './agenda.html',
   styleUrl: './agenda.scss'
 })

@@ -7,7 +7,7 @@
                     <img class="w-40 h-40" src="/assets/images/logo.png" alt="logo">
                     <h1 class="text-bold text-size-24" *ngIf="isOpen">Synapse</h1>
                 </div>
-                <separator></separator>
+                <hr />
                 <div class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between h-64">
                     <div class="d-flex items-center gap-16">
                         <span class="w-24 h-24">
@@ -20,7 +20,7 @@
                         </span>
                     </div>
                 </div>
-                <separator></separator>
+                <hr />
                 <div *ngFor="let menu of sidebarItems"
                     class="sidebar-item d-flex p-8 rounded cursor-pointer gap-16 items-center justify-between"
                     [routerLink]="menu.route" routerLinkActive="active">
