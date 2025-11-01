@@ -56,7 +56,7 @@
                     *ngFor="let patient of patientList$ | async"
                     (click)="selectedPatient = patient; clearPatientList()">
                     <div class="hide-mobile">
-                        <avatar class="w-full" [image]="patient?.image" [name]="patient?.full_name ?? ''"
+                        <avatar class="w-full" [image]="patient?.image" [name]="patient?.fullName ?? ''"
                             alt="profile-picture">
                         </avatar>
                     </div>
@@ -64,7 +64,7 @@
                         {{patient?.registration}}
                     </p>
                     <p class="text-text">
-                        {{patient?.full_name}}
+                        {{patient?.fullName}}
                     </p>
                 </div>
             </div>
@@ -74,14 +74,14 @@
                 <div class="d-flex gap items-center">
                     <div class="hide-mobile">
                         <avatar class="w-full" [image]="selectedPatient?.image"
-                            [name]="selectedPatient?.full_name ?? ''" alt="profile-picture">
+                            [name]="selectedPatient?.fullName ?? ''" alt="profile-picture">
                         </avatar>
                     </div>
                     <p class="text-text text-bold hide-mobile">
                         {{selectedPatient?.registration}}
                     </p>
                     <p class="text-text">
-                        {{selectedPatient?.full_name}}
+                        {{selectedPatient?.fullName}}
                     </p>
                 </div>
 

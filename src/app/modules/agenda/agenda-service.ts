@@ -16,18 +16,20 @@ export class AgendaService {
         type: 1,
         status: 4,
         patient: {
-          full_name: "Matheus William",
+          fullName: "Matheus William",
           id: 1,
           registration: '12312',
           records: [],
           age: 25,
           address: {
+            complement: "",
+            region: "",
             city: "Nova Iguaçu",
             neighborhood: "Centro",
             number: '3',
             state: "RJ",
             street: "Rua Pedro",
-            zip: "365554-800"
+            postalCode: "365554-800"
           },
         },
         employees: [{

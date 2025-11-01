@@ -91,7 +91,7 @@ export class NewTask implements AfterViewInit {
   public generateDefaultTitle(): void {
     const type = this.taskTypes.find(type => this.taskForm.controls['type'].value == type.id)?.title;
     if (this.selectedPatient) {
-      this.taskForm.controls['title'].setValue(`${type} - ${this.selectedPatient?.full_name}`);
+      this.taskForm.controls['title'].setValue(`${type} - ${this.selectedPatient?.fullName}`);
       return;
     }
 

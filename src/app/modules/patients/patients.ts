@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Header } from '../../../@shared/components/header/header';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Patient } from '../../../@shared/types/Patient';
 import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { RouterModule } from '@angular/router';
+import { PatientService } from './patient-service';
 
 @Component({
   selector: 'app-patients',
@@ -13,9 +14,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './patients.scss'
 })
 export class Patients {
-  public patients: Patient[] = [];
+  public patients$: Observable<Patient[]>;
 
-  constructor() {
-
+  constructor(private service: PatientService) {
+    this.patients$ = this.service.getPatientList();
   }
 }
