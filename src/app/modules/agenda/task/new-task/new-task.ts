@@ -42,6 +42,12 @@ export class NewTask implements AfterViewInit {
       title: "Escolha um tipo de agendamento",
       id: null,
     })
+    this.taskTypes.push(
+      {
+        title: "Outros",
+        id: 0
+      }
+    )
 
     this.taskStatus = this.service.getTaskStatus();
     this.taskForm = this.formBuilder.group({

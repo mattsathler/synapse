@@ -42,7 +42,7 @@
             <div class="d-flex gap-8">
                 <input #name class="w-full" type="text" formControlName="patient" placeholder="Pesquisar pacientes"
                     (keyup.enter)="searchPatient(name.value)">
-                <button class="circle surface w-48 h-48" (click)="searchPatient(name.value)">
+                <button data-tooltip="Buscar" class="circle surface w-48 h-48" (click)="searchPatient(name.value)">
                     <span class="text-placeholder text-size-24 material-symbols-outlined">
                         search
                     </span>
@@ -70,11 +70,12 @@
             </div>
             }
             @else {
-            <div class="card info d-flex gap items-center justify-between" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
+            <div class="card info d-flex gap items-center justify-between" animate.enter="slide-vertical-in"
+                animate.leave="slide-vertical-out">
                 <div class="d-flex gap items-center">
                     <div class="hide-mobile">
-                        <avatar class="w-full" [image]="selectedPatient.image"
-                            [name]="selectedPatient.fullName" alt="profile-picture">
+                        <avatar class="w-full" [image]="selectedPatient.image" [name]="selectedPatient.fullName"
+                            alt="profile-picture">
                         </avatar>
                     </div>
                     <p class="text-text text-bold hide-mobile">
@@ -97,9 +98,9 @@
             <h3>Título <span class="text-error">*</span></h3>
             <div class="d-flex gap-8 items-center">
                 <input class="w-full" type="text" formControlName="title" placeholder="Adicionar título">
-                <button class="circle surface w-48 h-48" (click)="generateDefaultTitle()"
+                <button data-tooltip="Gerar" class="circle surface w-48 h-48" (click)="generateDefaultTitle()"
                     [disabled]="!taskForm.controls['type'].valid">
-                    <span class="text-placeholder material-symbols-outlined">
+                    <span class="text-text material-symbols-outlined">
                         autorenew
                     </span>
                 </button>

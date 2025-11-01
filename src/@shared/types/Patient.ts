@@ -16,6 +16,7 @@ export interface Patient {
         date: Date,
         records: Record[]
     }[];
+    totalRecords?: number;
 
     // Address
     address: {

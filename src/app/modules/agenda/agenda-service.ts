@@ -78,7 +78,6 @@ export class AgendaService {
 
   public getTaskTypes() {
     return [
-      { title: 'Blefaroplastia', id: 0 },
       { title: 'Bioimpedância', id: 1 },
       { title: 'Consulta médica', id: 2 },
       { title: 'Retorno de consulta', id: 3 },
@@ -92,6 +91,7 @@ export class AgendaService {
       { title: 'Depilação a laser', id: 11 },
       { title: 'Exame laboratorial', id: 12 },
       { title: 'Pós-operatório', id: 13 },
+      { title: 'Blefaroplastia', id: 14 },
     ];
   }
 

@@ -17,17 +17,17 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
 
     &:hover {
-        background-color: color-mix(in srgb, var(--#{$color}) 90%, white);
+        background-color: color-mix(in srgb, var(--#{$color}) 90%, gray);
     }
 
     &:active:not(:disabled) {
-        background-color: color-mix(in srgb, var(--#{$color}) 100%, white);
+        background-color: color-mix(in srgb, var(--#{$color}) 100%, gray);
         box-shadow: none;
         transform: scale(0.97);
     }
 
     &:disabled {
-        opacity: 0.6;
+        opacity: 0.4;
         cursor: not-allowed;
         box-shadow: none;
     }
