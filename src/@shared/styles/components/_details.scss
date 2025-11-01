@@ -9,6 +9,7 @@ details {
     flex-direction: column;
     justify-content: space-between;
     backface-visibility: hidden;
+    transition: all 0.4s ease;
 
     summary {
         width: 100%;
