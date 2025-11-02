@@ -21,7 +21,7 @@
                         </avatar>
                         <p class="text-text">{{employee.name}}</p>
                     </div>
-                    <button class="w-32 h-32" (click)="toggleEmployee(undefined, employee.id)">
+                    <button class="circle w-32 h-32 info" (click)="toggleEmployee(undefined, employee.id)">
                         <span class="text-text material-symbols-outlined">
                             delete
                         </span>
@@ -86,7 +86,7 @@
                     </p>
                 </div>
 
-                <button class="circle w-48 h-48" (click)="selectedPatient = null">
+                <button class="circle info w-48 h-48" (click)="selectedPatient = null">
                     <span class="text-text text-size-24 material-symbols-outlined">
                         delete
                     </span>

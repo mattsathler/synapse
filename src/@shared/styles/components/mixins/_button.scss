@@ -17,11 +17,11 @@
     color: var(--text);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
 
-    &:hover {
+    &:hover:not(.outline) {
         background-color: color-mix(in srgb, var(--#{$color}) 90%, gray);
     }
 
-    &:active:not(:disabled) {
+    &:active:not(:disabled, .outline) {
         background-color: color-mix(in srgb, var(--#{$color}) 100%, gray);
         box-shadow: none;
         transform: scale(0.97);

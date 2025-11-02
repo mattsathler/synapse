@@ -21,18 +21,17 @@ button.circle {
 
 button.outline {
     background: transparent;
-    border: 1px solid currentColor;
+    border: 1px solid;
 
-    &.primary {
-        color: var(--primary);
+    @each $name, $value in colors.$color-keys {
+        &.#{$name} {
+            color: $value !important;
+            border-color: $value !important;
+        }
     }
 
-    &.secondary {
-        color: var(--secondary);
-    }
-
-    &.danger {
-        color: var(--danger);
+    span {
+        color: inherit;
     }
 
     &:hover:not(.outline) {

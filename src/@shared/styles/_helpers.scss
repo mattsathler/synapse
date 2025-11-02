@@ -467,7 +467,7 @@ $max-width-scale: (
     }
 
     .hide-mobile {
-        display: none;
+        display: none!important;
     }
 
     .wrap-medium {
@@ -475,7 +475,7 @@ $max-width-scale: (
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 456px) {
     @each $key, $value in $space-scale {
         .text-ellipsis-#{$key} {
             overflow: hidden;

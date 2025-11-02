@@ -17,12 +17,13 @@ export class Sidebar {
   public isOpen: boolean = false;
   public isMobile: boolean = false;
   public sidebarItems: NavigationItem[] = [];
-  public currentTheme: string = "light";
+  public currentTheme: string;
 
   constructor(private service: NavigationService) {
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize());
 
+    this.currentTheme = document.body.getAttribute('data-theme') ?? 'light';
     this.sidebarItems = this.service.getNavigation();
   }
 
@@ -30,18 +31,21 @@ export class Sidebar {
     this.isMobile = window.innerWidth <= 768;
     if (this.isMobile) {
       this.isOpen = false;
+    } else {
+      this.isOpen = true;
     }
   }
 
-  public toggleSidebar(state: boolean): void {
+  public toggleSidebar(state?: boolean): void {
     if (this.isMobile) return;
 
-    this.isOpen = state;
+    this.isOpen = state ?? !this.isOpen;
   }
 
   public toggleThemeMode(): void {
-    this.currentTheme = document.body.getAttribute('data-theme') ?? 'light';
     const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
     document.body.setAttribute('data-theme', newTheme);
+    this.currentTheme = document.body.getAttribute('data-theme') ?? 'light';
+
   }
 }

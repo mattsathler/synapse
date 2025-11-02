@@ -9,9 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './settings-task.scss'
 })
 export class SettingsTask {
-  public showTypesWarning: boolean = true;
-  public showStatusWarning: boolean = true;
-
   public defaultTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
   public customTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
 

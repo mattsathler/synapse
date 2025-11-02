@@ -10,20 +10,15 @@
             </button>
         </div>
         <hr />
-        @if(showTypesWarning) {
-        <div class="card d-flex justify-between warn items-center wrap-tiny gap" animate.enter="slide-vertical-in"
+        <div class="card flat d-flex justify-between warn items-center wrap-tiny gap" animate.enter="slide-vertical-in"
             animate.leave="slide-vertical-out-reverse">
-            <p>Ao desativar um tipo de agendamento, todos os agendamentos com esse tipo serão alterados para o tipo
-                "outros" e terão que ser alterados manualmente</p>
-
-            <button class="circle outline w-32 h-32" (click)="showTypesWarning = false">
-                <span class="material-symbols-outlined">
-                    close
-                </span>
-            </button>
+            <p class="text-text">Ao desativar ou excluir um tipo de agendamento, todos os agendamentos deste tipo serão
+                alterados
+                para o tipo <span class="text-bold">"Outros"</span>.
+                Você poderá ajustá-los manualmente depois.</p>
         </div>
-        }
-        <div class="d-flex gap w-full wrap-medium">
+
+        <div class="d-flex gap-40 w-full wrap-medium">
             <div class="d-flex flex-col gap-16 w-full">
                 <h4>Padrões</h4>
                 <div class="d-flex flex-col gap-8 flex-1-1">
@@ -36,7 +31,7 @@
                         </div>
                         <div class="d-flex gap-8">
                             <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
-                                <span class="material-symbols-outlined text-placeholder">
+                                <span class="material-symbols-outlined text-text">
                                     edit
                                 </span>
                             </button>
@@ -61,7 +56,7 @@
                         </div>
                         <div class="d-flex gap-8">
                             <button data-tooltip="Editar" class="circle surface w-28 h-28">
-                                <span class="material-symbols-outlined text-placeholder">
+                                <span class="material-symbols-outlined  text-text">
                                     edit
                                 </span>
                             </button>
@@ -92,22 +87,16 @@
                 </button>
             </div>
             <hr />
-            @if(showStatusWarning) {
-            <div class="card d-flex justify-between warn items-center wrap-tiny gap" animate.enter="slide-vertical-in"
-                animate.leave="slide-vertical-out-reverse">
-                <p>Ao desativar um status de agendamento, todos os agendamentos com esse status serão alterados para
-                    o
-                    status
-                    "Nenhum" e terão que ser alterados manualmente</p>
-
-                <button class="circle outline w-32 h-32" (click)="showStatusWarning = false">
-                    <span class="material-symbols-outlined">
-                        close
-                    </span>
-                </button>
+            <div class="card flat d-flex justify-between warn items-center wrap-tiny gap"
+                animate.enter="slide-vertical-in" animate.leave="slide-vertical-out-reverse">
+                <p class="text-text">Ao desativar ou excluir um status de agendamento, todos os agendamentos com este
+                    status serão
+                    alterados para o status <span class="text-bold">"Nenhum"</span>.
+                    Você poderá ajustá-los manualmente depois.
+                </p>
             </div>
-            }
-            <div class="d-flex gap w-full wrap-medium">
+
+            <div class="d-flex gap-40 w-full wrap-medium">
                 <div class="d-flex flex-col gap-16 w-full">
                     <h4>Padrões</h4>
                     <div class="d-flex flex-col gap-8 flex-1-1">
@@ -122,12 +111,12 @@
                                 </div>
                             </div>
                             <div class="d-flex gap-8">
-                                <button data-tooltip="Editar" disabled class="circle surface w-24 h-24">
-                                    <span class="material-symbols-outlined text-placeholder">
+                                <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
+                                    <span class="material-symbols-outlined  text-text">
                                         edit
                                     </span>
                                 </button>
-                                <button data-tooltip="Excluir" disabled class="circle surface w-24 h-24">
+                                <button data-tooltip="Excluir" disabled class="circle surface w-28 h-28">
                                     <span class="material-symbols-outlined text-error">
                                         delete
                                     </span>
@@ -150,12 +139,12 @@
                                 </div>
                             </div>
                             <div class="d-flex gap-8">
-                                <button data-tooltip="Editar" class="circle surface w-24 h-24">
-                                    <span class="material-symbols-outlined text-placeholder">
+                                <button data-tooltip="Editar" class="circle surface w-28 h-28">
+                                    <span class="material-symbols-outlined  text-text">
                                         edit
                                     </span>
                                 </button>
-                                <button data-tooltip="Excluir" class="circle surface w-24 h-24">
+                                <button data-tooltip="Excluir" class="circle surface w-28 h-28">
                                     <span class="material-symbols-outlined text-error">
                                         delete
                                     </span>
