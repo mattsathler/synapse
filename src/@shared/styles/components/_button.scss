@@ -18,6 +18,7 @@ button.circle {
     border-radius: 50%;
     width: 48px;
     height: 48px;
+    padding: 0 !important;
 }
 
 button.outline {
@@ -50,4 +51,11 @@ button.sm {
 button.lg {
     padding: 16px 24px;
     font-size: 1.1rem;
+}
+
+@media screen and (max-width: 375px) {
+    button {
+        width: 100%;
+    }
+
 }

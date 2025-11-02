@@ -4,6 +4,7 @@ import { Patients } from './modules/patients/patients';
 import { Agenda } from './modules/agenda/agenda';
 import { Records } from './modules/patients/records/records';
 import { Home } from './modules/home/home';
+import { Settings } from './modules/settings/settings';
 
 export const routes: Routes = [
     {
@@ -36,5 +37,9 @@ export const routes: Routes = [
     {
         path: 'agenda',
         component: Agenda
+    },
+    {
+        path: 'ajustes',
+        component: Settings
     }
 ];

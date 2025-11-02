@@ -10,6 +10,7 @@ export class NavigationService {
       { icon: 'home', route: '/home', label: 'Inicio' },
       { icon: 'patient_list', route: '/pacientes', label: 'Pacientes', badge: 'BETA' },
       { icon: 'calendar_today', route: '/agenda', label: 'Agenda', badge: 'BETA' },
+      { icon: 'settings', route: '/ajustes', label: 'Ajustes', badge: 'BETA' },
     ];
   }
 }

@@ -2,7 +2,6 @@
 
 @mixin tooltip($position: top) {
     position: relative;
-    cursor: pointer;
 
     &::before,
     &::after {

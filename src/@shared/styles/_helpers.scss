@@ -21,6 +21,8 @@ $space-scale: (
     64: 64px,
     68: 68px,
     72: 72px,
+    88: 88px,
+    90: 90px,
     screen-sm: 640px,
     screen-md: 768px,
     screen-lg: 1024px,
@@ -237,8 +239,12 @@ $max-width-scale: (
     flex-direction: column !important;
 }
 
-.flex-1 {
+.flex-1-1 {
     flex: 1 1 auto !important;
+}
+
+.flex-0-1 {
+    flex: 0 1 auto !important;
 }
 
 .flex-wrap {
@@ -392,7 +398,11 @@ $max-width-scale: (
 }
 
 .no-shadow {
-    box-shadow: none!important;
+    box-shadow: none !important;
+}
+
+.cursor-normal {
+    cursor: default;
 }
 
 .cursor-pointer {
@@ -405,6 +415,7 @@ $max-width-scale: (
 
 .text-nowrap {
     text-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .hidden {
@@ -427,6 +438,10 @@ $max-width-scale: (
     z-index: 9999;
 }
 
+.transition-slow {
+    transition: all 0.5s ease;
+}
+
 @each $key, $value in $space-scale {
     .gap-#{$key} {
         grid-row-gap: $value;
@@ -445,5 +460,24 @@ $max-width-scale: (
 
     .hide-mobile {
         display: none;
+    }
+
+    .wrap-medium {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    @each $key, $value in $space-scale {
+        .text-ellipsis-#{$key} {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: $value;
+        }
+    }
+
+    .wrap-tiny {
+        flex-direction: column;
     }
 }

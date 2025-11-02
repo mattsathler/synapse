@@ -7,9 +7,10 @@
         <div class="d-flex items-center justify-between gap flex-wrap">
             <div class="d-flex gap-16 items-center flex-wrap max-w-50-p w-full">
                 <div class="d-flex gap-8 flex-wrap w-full items-center">
-                    <button class="rounded d-flex max-w-72 secondary text-size-28"
+                    <button class="rounded d-flex max-w-72 surface text-size-28"
                         (click)="toggleEmployee()">Todos</button>
-                    <div *ngFor="let employee of employees" class="d-flex flex-col items-center gap-4" [attr.data-tooltip]="employee.name">
+                    <div *ngFor="let employee of employees" class="d-flex flex-col items-center gap-4"
+                        [attr.data-tooltip]="employee.name">
                         <button class="circle w-40 h-40 hidden d-flex flex-col"
                             [ngClass]="{'selected': selectedEmployees.includes(employee)}"
                             (click)="toggleEmployee(employee.id)">

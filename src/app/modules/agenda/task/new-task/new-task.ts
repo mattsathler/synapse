@@ -50,6 +50,7 @@ export class NewTask implements AfterViewInit {
     )
 
     this.taskStatus = this.service.getTaskStatus();
+
     this.taskForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: [''],
