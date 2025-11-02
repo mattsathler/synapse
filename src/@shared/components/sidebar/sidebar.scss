@@ -2,7 +2,7 @@
 
 .sidebar {
     width: 72px;
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
     color: var-color(text);
 
     .sidebar-item {
@@ -20,8 +20,6 @@
 
 .sidebar.open {
     width: 260px;
-    display: flex;
-    flex-direction: column;
 }
 
 .active {

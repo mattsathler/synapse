@@ -7,10 +7,20 @@ import { NavigationItem } from '../types/NavigationItem';
 export class NavigationService {
   public getNavigation(): NavigationItem[] {
     return [
-      { icon: 'home', route: '/home', label: 'Inicio' },
-      { icon: 'patient_list', route: '/pacientes', label: 'Pacientes', badge: 'BETA' },
-      { icon: 'calendar_today', route: '/agenda', label: 'Agenda', badge: 'BETA' },
-      { icon: 'settings', route: '/ajustes', label: 'Ajustes', badge: 'BETA' },
+      {
+        title: 'Clínica',
+        children: [
+          { icon: 'home', route: '/home', label: 'Inicio' },
+          { icon: 'patient_list', route: '/pacientes', label: 'Pacientes' },
+          { icon: 'calendar_today', route: '/agenda', label: 'Agenda' },
+        ]
+      },
+      {
+        title: 'Ajustes',
+        children: [
+          { icon: 'event', route: '/ajustes/agendamentos', label: 'Agendamentos' },
+        ]
+      }
     ];
   }
 }

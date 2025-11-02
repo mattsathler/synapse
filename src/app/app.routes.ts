@@ -39,7 +39,7 @@ export const routes: Routes = [
         component: Agenda
     },
     {
-        path: 'ajustes',
+        path: 'ajustes/agendamentos',
         component: Settings
     }
 ];

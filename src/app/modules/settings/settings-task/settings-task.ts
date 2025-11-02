@@ -1,0 +1,28 @@
+import { Component } from '@angular/core';
+import { AgendaService } from '../../agenda/agenda-service';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'settings-task',
+  imports: [CommonModule],
+  templateUrl: './settings-task.html',
+  styleUrl: './settings-task.scss'
+})
+export class SettingsTask {
+  public showTypesWarning: boolean = true;
+  public showStatusWarning: boolean = true;
+
+  public defaultTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
+  public customTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
+
+  public defaultStatus: { title: string, id: number, color: string, isDefault: boolean, isEnabled: boolean }[];
+  public customStatus: { title: string, id: number, color: string, isDefault: boolean, isEnabled: boolean }[];
+
+  constructor(private agendaService: AgendaService) {
+    this.defaultTypes = this.agendaService.getTaskTypes().filter(i => i.isDefault);
+    this.customTypes = this.agendaService.getTaskTypes().filter(i => !i.isDefault);
+
+    this.defaultStatus = this.agendaService.getTaskStatus().filter(i => i.isDefault);
+    this.customStatus = this.agendaService.getTaskStatus().filter(i => !i.isDefault);
+  }
+}

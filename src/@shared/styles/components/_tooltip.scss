@@ -1,9 +1,9 @@
 @use './mixins/tooltip' as *;
 
-[data-tooltip] {
+[data-tooltip]:not(:disabled) {
     @include tooltip(top); // padrão: aparece em cima
 }
 
-[data-tooltip-bottom] {
+[data-tooltip-bottom]:not(:disabled) {
     @include tooltip(bottom); // aparece embaixo
 }

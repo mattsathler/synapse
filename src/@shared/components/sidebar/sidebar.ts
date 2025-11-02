@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ViewChild, ElementRef } from '@angular/core';
 import { Avatar } from '../avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { NavigationItem } from '../../types/NavigationItem';
 import { NavigationService } from '../../services/navigation-service';
+import { ClickOutsideDirective } from '../../directives/clickOutside';
+import { ClickSelfDirective } from '../../directives/clickSelf';
 
 @Component({
   selector: 'sidebar',
-  imports: [CommonModule, Avatar, RouterModule],
+  imports: [CommonModule, Avatar, RouterModule, ClickOutsideDirective, ClickSelfDirective],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
 export class Sidebar {
-  public isOpen: boolean = true;
+  public isOpen: boolean = false;
   public isMobile: boolean = false;
   public sidebarItems: NavigationItem[] = [];
   public currentTheme: string = "light";
