@@ -21,6 +21,10 @@ input, quill-editor {
         outline: none;
     }
 
+    &.surface {
+        background-color: var-color(surface);
+    }
+
 }
 
 input.ng-touched.ng-invalid,

@@ -35,9 +35,12 @@
                 </div>
                 <div *ngFor="let record of patient.records; let i = index"
                     class="d-flex flex-col gap-40 items-center justify-center w-full">
-                    <span class="text-size-24 text-bold text-placeholder">
-                        {{record.date | CustomDate}}
-                    </span>
+                    <div class="d-flex flex-col gap-8 w-full items-center">
+                        <span class="text-size-24 text-bold text-placeholder">
+                            {{record.date | CustomDate}}
+                        </span>
+                        <hr />
+                    </div>
                     @if (patient) {
 
                     <div *ngFor="let r of record.records; let j = index"
