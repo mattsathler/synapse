@@ -10,6 +10,7 @@ import { minTimeValidator } from '../../../../../@shared/validators/minTimeValid
 import { Observable, of, take } from 'rxjs';
 import { Task } from '../../../../../@shared/types/Task';
 import { DateService } from '../../../../../@shared/services/date-service';
+import { hasFormChanged } from '../../../../../@shared/validators/hasFormChanged';
 
 @Component({
   selector: 'new-task',
@@ -58,7 +59,8 @@ export class NewTask implements AfterViewInit {
       patient: [null],
       start: ['', Validators.required],
       end: ['', Validators.required],
-      status: [1, Validators.required]
+      status: [1, Validators.required],
+      employees: [[], Validators.required],
     })
 
     this.taskForm.get('start')!.valueChanges.pipe(take(1)).subscribe(startTime => {
@@ -80,7 +82,10 @@ export class NewTask implements AfterViewInit {
         start: this.dateService.formatTimeForInput(this.task.start),
         end: this.dateService.formatTimeForInput(this.task.end),
         status: this.task.status,
-      });
+      }, { emitEvent: false });
+
+      this.taskForm.patchValue({ patient: this.selectedPatient }, { emitEvent: false });
+      this.taskForm.patchValue({ employees: this.taskEmployees }, { emitEvent: false });
     } else {
       this.taskEmployees = [...this.selectedEmployees];
     }
@@ -91,9 +96,9 @@ export class NewTask implements AfterViewInit {
 
     this.reorderEmployeesList(this.employeeList);
     this.reorderEmployeesList(this.taskEmployees);
+
     return;
   }
-
 
   public generateDefaultTitle(): void {
     const type = this.taskTypes.find(type => this.taskForm.controls['type'].value == type.id)?.title;
@@ -129,6 +134,12 @@ export class NewTask implements AfterViewInit {
     return;
   }
 
+  public togglePatient(patient: Patient): void {
+    this.selectedPatient = patient;
+    this.taskForm.patchValue({ patient: patient }, { emitEvent: true });
+    this.clearPatientList()
+  }
+
   public toggleEmployee(e?: Event, id?: string): void {
     const target = e?.target as HTMLSelectElement;
 
@@ -156,6 +167,9 @@ export class NewTask implements AfterViewInit {
 
     this.reorderEmployeesList(this.employeeList);
     this.reorderEmployeesList(this.taskEmployees);
+
+    this.taskForm.patchValue({ employees: this.taskEmployees }, { emitEvent: true });
+    return;
   }
 
   public reorderEmployeesList(list: Employee[]): void {

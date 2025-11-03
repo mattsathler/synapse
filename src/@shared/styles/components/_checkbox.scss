@@ -1,6 +1,6 @@
 @use '../colors' as *;
 
-input[type="checkbox"] {
+input[type="checkbox"].checkbox {
     appearance: none;
     -webkit-appearance: none;
     width: 20px;

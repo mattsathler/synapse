@@ -2,12 +2,12 @@
 @use "sass:color";
 
 input, quill-editor {
-    background-color: var-color(surface);
+    background-color: var-color(background);
     color: var-color(text);
     padding: 12px;
     width: 100%;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     text-indent: 8px;
     outline: none;
     transition: all 0.2s ease;

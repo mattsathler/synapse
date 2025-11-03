@@ -5,6 +5,8 @@ import { Agenda } from './modules/agenda/agenda';
 import { Records } from './modules/patients/records/records';
 import { Home } from './modules/home/home';
 import { Settings } from './modules/settings/settings';
+import { SettingsTask } from './modules/settings/settings-task/settings-task';
+import { SettingsClinic } from './modules/settings/settings-clinic/settings-clinic';
 
 export const routes: Routes = [
     {
@@ -40,6 +42,10 @@ export const routes: Routes = [
     },
     {
         path: 'ajustes/agendamentos',
-        component: Settings
+        component: SettingsTask
+    },
+    {
+        path: 'ajustes/clinica',
+        component: SettingsClinic
     }
 ];

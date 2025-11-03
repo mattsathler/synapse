@@ -18,6 +18,7 @@ export class NavigationService {
       {
         title: 'Ajustes',
         children: [
+          { icon: 'health_metrics', route: '/ajustes/clinica', label: 'Clínica' },
           { icon: 'event', route: '/ajustes/agendamentos', label: 'Agendamentos' },
         ]
       }

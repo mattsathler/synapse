@@ -7,7 +7,6 @@ import { QuillModule } from 'ngx-quill';
   selector: 'rich-text-editor',
   imports: [CommonModule, FormsModule, QuillModule],
   templateUrl: './rich-text-editor.html',
-  styleUrls: ['./rich-text-editor.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class RichTextEditor {

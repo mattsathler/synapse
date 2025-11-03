@@ -42,8 +42,8 @@
 
                     <div *ngFor="let r of record.records; let j = index"
                         class="w-full d-flex flex-col gap-8 items-center">
-                        <div class="record-content card p-0 w-full min-h-128 no-shadow">
-                            <rich-text-viewer [content]="r.content"></rich-text-viewer>
+                        <div class="record-content card p-0 w-full min-h-128 flat">
+                            <rich-text-viewer [content]="r.content" class="surface"></rich-text-viewer>
                         </div>
                         <div class="d-flex justify-between w-full px-16 gap">
                             <span class="text-size-12 text-placeholder">{{r.date | date:"HH:mm"}}</span>

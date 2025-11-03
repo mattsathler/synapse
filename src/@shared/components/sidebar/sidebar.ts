@@ -4,12 +4,10 @@ import { Avatar } from '../avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { NavigationItem } from '../../types/NavigationItem';
 import { NavigationService } from '../../services/navigation-service';
-import { ClickOutsideDirective } from '../../directives/clickOutside';
-import { ClickSelfDirective } from '../../directives/clickSelf';
 
 @Component({
   selector: 'sidebar',
-  imports: [CommonModule, Avatar, RouterModule, ClickOutsideDirective, ClickSelfDirective],
+  imports: [CommonModule, Avatar, RouterModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
@@ -31,8 +29,6 @@ export class Sidebar {
     this.isMobile = window.innerWidth <= 768;
     if (this.isMobile) {
       this.isOpen = false;
-    } else {
-      this.isOpen = true;
     }
   }
 

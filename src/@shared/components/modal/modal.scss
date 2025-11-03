@@ -20,7 +20,7 @@
     }
 
     .modal-content {
-        background: var-color(background);
+        background: var-color(surface);
         border-radius: 12px;
         transform: translateY(-30px);
         transition: transform 0.3s ease, opacity 0.3s ease;

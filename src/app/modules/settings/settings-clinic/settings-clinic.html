@@ -1,0 +1,97 @@
+<div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
+    <page-header [title]="'Ajustes da Clínica'"></page-header>
+    <div class="d-flex flex-col gap">
+        <form [formGroup]="clinicForm">
+            <div class="d-flex flex-col gap-40 card">
+                <div class="d-flex flex-col gap">
+                    <div class="d-flex flex-col gap">
+                        <h3>Geral</h3>
+                        <hr />
+                    </div>
+                    <div class="d-flex gap w-full flex-wrap">
+                        <div class="d-flex flex-col gap flex-1-1 min-w-80">
+                            <div class="d-flex flex-col gap-8 w-full">
+                                <h4>Nome <span class="text-error">*</span></h4>
+                                <input formControlName="name" type="text" placeholder="Digite o nome da clínica">
+                                @if (clinicForm.get('name')?.invalid && clinicForm.get('name')?.touched) {
+                                <span class="text-error" animate.enter="slide-vertical-in-reverse">
+                                    Nome da clínica inválido
+                                </span>
+                                }
+                            </div>
+                            <div class="d-flex flex-col gap-8 w-full">
+                                <h4>Email <span class="text-error">*</span></h4>
+                                <input formControlName="email" type="text" placeholder="Digite o email da clínica">
+                                @if (clinicForm.get('email')?.invalid && clinicForm.get('email')?.touched) {
+                                <span class="text-error" animate.enter="slide-vertical-in-reverse">
+                                    Email inválido
+                                </span>
+                                }
+                            </div>
+                            <div class="d-flex flex-col gap-8 w-full">
+                                <h4>Endereço <span class="text-error">*</span></h4>
+                                <input formControlName="address" type="text" placeholder="Digite o endereço da clínica">
+                                @if (clinicForm.get('address')?.invalid && clinicForm.get('address')?.touched) {
+                                <span class="text-error" animate.enter="slide-vertical-in-reverse">
+                                    Endereço inválido
+                                </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex flex-col gap-8 flex-1-1">
+                            <h4>Logo da clínica <span class="text-error">*</span></h4>
+                            <div class="card background flat min-h-240 h-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-col gap">
+                    <div class="d-flex flex-col gap">
+                        <h3>Contato</h3>
+                        <hr />
+                    </div>
+                    <div class="d-flex gap wrap-medium">
+                        <div class="d-flex flex-col gap-8 w-full">
+                            <h4>Telefone principal <span class="text-error">*</span></h4>
+                            <input formControlName="main_phone" type="text"
+                                placeholder="Digite o telefone principal da clínica">
+                            @if (clinicForm.get('main_phone')?.invalid && clinicForm.get('main_phone')?.touched) {
+                            <span class="text-error" animate.enter="slide-vertical-in-reverse">
+                                Telefone inválido
+                            </span>
+                            }
+                        </div>
+                        <div class="d-flex flex-col gap-8 w-full">
+                            <h4>Telefone secundário <span class="text-error">*</span></h4>
+                            <input formControlName="secondary_phone" type="text"
+                                placeholder="Digite o telefone secundário da clínica">
+                            @if (clinicForm.get('secondary_phone')?.invalid &&
+                            clinicForm.get('secondary_phone')?.touched) {
+                            <span class="text-error" animate.enter="slide-vertical-in-reverse">
+                                Telefone inválido
+                            </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="d-flex flex-col gap-8">
+                        <div class="d-flex gap items-center card background flat">
+                            <span class="text-placeholder text-bold">Permitir contato via Whatsapp?</span>
+                            <div class="slide-toggle-wrapper">
+                                <input type="checkbox" class="slide-toggle-input" />
+                                <div class="slide-toggle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-col gap">
+                    <hr />
+                    <div class="d-flex w-full justify-end">
+                        <button class="secondary h-full" [disabled]="clinicForm.invalid || !isChanged">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

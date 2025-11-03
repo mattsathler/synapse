@@ -5,7 +5,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   selector: 'rich-text-viewer',
   imports: [],
   templateUrl: './rich-text-viewer.html',
-  styleUrl: './rich-text-viewer.scss',
   encapsulation: ViewEncapsulation.None,
 
 })

@@ -92,6 +92,12 @@ $max-width-scale: (
     }
 }
 
+@each $key in 10, 20, 30, 40, 50, 60, 70, 80, 90 {
+    .w-#{$key}-p {
+        width: #{$key + "%"} !important;
+    }
+}
+
 .max-h-50-p {
     max-height: 50%;
 }
@@ -397,7 +403,7 @@ $max-width-scale: (
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-.no-shadow {
+.flat {
     box-shadow: none !important;
 }
 
@@ -467,7 +473,7 @@ $max-width-scale: (
     }
 
     .hide-mobile {
-        display: none!important;
+        display: none !important;
     }
 
     .wrap-medium {

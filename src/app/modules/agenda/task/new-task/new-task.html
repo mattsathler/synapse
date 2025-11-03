@@ -7,7 +7,7 @@
                 <option *ngFor="let employee of employeeList" [value]="employee.id">{{employee.name}}</option>
             </select>
             @if(taskEmployees.length === 0) {
-            <div class="card warn-alpha text-text no-shadow text-center">
+            <div class="card warn-alpha text-text flat text-center">
                 Selecione pelo menos um funcionário
             </div>
             }
@@ -40,7 +40,7 @@
 
             @if (!selectedPatient) {
             <div class="d-flex gap-8">
-                <input #name class="w-full" type="text" formControlName="patient" placeholder="Pesquisar pacientes"
+                <input #name class="w-full" type="text" placeholder="Pesquisar pacientes"
                     (keyup.enter)="searchPatient(name.value)">
                 <button data-tooltip="Buscar" class="circle surface w-48 h-48" (click)="searchPatient(name.value)">
                     <span class="text-placeholder text-size-24 material-symbols-outlined">
@@ -52,9 +52,8 @@
             <div *ngIf="(patientList$ | async)?.length && (patientList$ | async)!.length > 0"
                 class="card flat bg-background p-0 d-flex flex-col max-h-240 scroll-y gap-4"
                 animate.enter="slide-vertical-in-reverse">
-                <div class="d-flex gap items-center cursor-pointer card surface no-shadow mr-8"
-                    *ngFor="let patient of patientList$ | async"
-                    (click)="selectedPatient = patient; clearPatientList()">
+                <div class="d-flex gap items-center cursor-pointer card surface flat mr-8"
+                    *ngFor="let patient of patientList$ | async" (click)="togglePatient(patient)">
                     <div class="hide-mobile">
                         <avatar class="w-full" [image]="patient?.image" [name]="patient?.fullName ?? ''"
                             alt="profile-picture">
@@ -158,7 +157,8 @@
         </div>
         <hr />
         <div class="d-flex w-full justify-end">
-            <button class="secondary h-full" [disabled]="taskForm.invalid || taskEmployees.length === 0">{{task ?
+            <button class="secondary h-full" [disabled]="taskForm.invalid">{{task
+                ?
                 'Salvar' : 'Agendar'}}</button>
         </div>
     </div>

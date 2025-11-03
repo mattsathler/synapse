@@ -1,0 +1,85 @@
+@use '../colors' as colors;
+
+@each $name, $value in colors.$color-keys {
+    rich-text-viewer.#{$name} {
+        .ql-container.ql-snow {
+            background-color: $value;
+        }
+    }
+}
+
+
+quill-editor {
+    .ql-container.ql-snow {
+        border: none !important;
+        border-radius: 8px 8px 0 8px;
+        padding: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--placeholder);
+        margin: 0;
+
+        .ql-editor {
+            font-size: 16px;
+            padding: 0 !important;
+            width: 100%;
+
+            &.ql-blank {
+                padding: 0;
+                &::before {
+                    left: 24px;
+                }
+            }
+
+            &::before {
+                color: var(--placeholder);
+                font-style: normal;
+            }
+        }
+
+        .ql-formats {
+            display: flex;
+            margin: 0;
+        }
+
+        .ql-picker {
+            color: var(--text);
+        }
+
+        button {
+            color: var(--text);
+
+            &:hover {
+                background-color: color-mix(in srgb, var(--text) 10%, transparent);
+            }
+
+            &.ql-active {
+                color: var(--primary);
+            }
+        }
+
+        .ql-stroke {
+            stroke: var(--text);
+        }
+
+        .ql-fill {
+            fill: var(--text);
+        }
+    }
+
+    .ql-toolbar.ql-snow {
+        border: none;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+
+
+    }
+
+    .ql-snow a {
+        color: var(--primary);
+    }
+}
+
+// @include rich-text-base();
