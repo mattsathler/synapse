@@ -9,7 +9,8 @@
 }
 
 
-quill-editor {
+quill-editor,
+rich-text-viewer {
     .ql-container.ql-snow {
         border: none !important;
         border-radius: 8px 8px 0 8px;
@@ -28,6 +29,7 @@ quill-editor {
 
             &.ql-blank {
                 padding: 0;
+
                 &::before {
                     left: 24px;
                 }
