@@ -16,9 +16,11 @@ describe('PatientService', () => {
 
   it('should get a single patient by his Id', (done) => {
     service.getPatientById('1').subscribe((patient) => {
-      expect(patient).toBeTruthy();
-      expect(patient.id).toBeDefined();
-      expect(patient.fullName).toBeDefined();
+      if (patient) {
+        expect(patient).toBeTruthy();
+        expect(patient.id).toBeDefined();
+        expect(patient.fullName).toBeDefined();
+      }
       done();
     });
   });

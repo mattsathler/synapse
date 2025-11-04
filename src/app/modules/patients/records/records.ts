@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { CustomDate } from '../../../../@shared/pipes/CustomDate';
 import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../../@shared/types/Patient';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { NewRecord } from './modal/new-record/new-record';
 import { Record } from '../../../../@shared/types/Record';
 import { Modal } from '../../../../@shared/components/modal/modal';
 import { RichTextViewer } from '../../../../@shared/components/rich-text/viewer/rich-text-viewer';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-records',
@@ -18,14 +19,18 @@ import { RichTextViewer } from '../../../../@shared/components/rich-text/viewer/
   styleUrl: './records.scss'
 })
 export class Records {
-  public patient$: Observable<Patient>;
+  public patient$: Observable<Patient | undefined> = of();
   public today = new Date().toISOString().split('T')[0];
-
+  public patientId: string | null;
   public modalOpen: boolean = false;
   public selectedRecord: Record | null = null;
 
-  constructor(private service: PatientService) {
-    this.patient$ = this.service.getPatientById('1');
+  constructor(private service: PatientService, private route: ActivatedRoute) {
+    this.patientId = this.route.snapshot.paramMap.get('id');
+
+    if (this.patientId) {
+      this.patient$ = this.service.getPatientById(this.patientId);
+    }
   }
 
   public printRecords() {

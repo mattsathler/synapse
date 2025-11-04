@@ -2,7 +2,7 @@ import { Patient } from "../types/Patient";
 import { Record } from "../types/Record";
 
 export const singlePatient: Patient = {
-    id: 1,
+    id: '1',
     registration: '1001',
     fullName: "Lucas Andrade",
     socialName: "Luke",
@@ -60,7 +60,7 @@ export const singlePatient: Patient = {
 
 export const patientList: Patient[] = [
     {
-        id: 1,
+        id: '1',
         registration: '1001',
         fullName: "Lucas Andrade",
         socialName: "Luke",
@@ -109,7 +109,7 @@ export const patientList: Patient[] = [
         notes: "Allergic to penicillin.",
     },
     {
-        id: 2,
+        id: '2',
         registration: '1002',
         fullName: "Mariana Ribeiro",
         birthDate: "1987-09-22",
@@ -152,7 +152,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 3,
+        id: '3',
         registration: '1003',
         fullName: "Pedro Silva",
         birthDate: "1995-11-05",
@@ -195,7 +195,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 4,
+        id: '4',
         registration: '1004',
         fullName: "Fernanda Costa",
         birthDate: "1992-06-10",
@@ -237,7 +237,7 @@ export const patientList: Patient[] = [
         notes: "Uses contact lenses.",
     },
     {
-        id: 5,
+        id: '5',
         registration: '1005',
         fullName: "Rafael Lima",
         birthDate: "1980-02-19",
@@ -276,7 +276,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 6,
+        id: '6',
         registration: '1006',
         fullName: "Juliana Alves",
         birthDate: "1998-01-30",
@@ -313,7 +313,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 7,
+        id: '7',
         registration: '1007',
         fullName: "Thiago Martins",
         birthDate: "1993-03-18",
@@ -348,7 +348,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 8,
+        id: '8',
         registration: '1008',
         fullName: "Camila Duarte",
         birthDate: "1985-08-08",
@@ -386,7 +386,7 @@ export const patientList: Patient[] = [
         notes: "Frequent migraines.",
     },
     {
-        id: 9,
+        id: '9',
         registration: '1009',
         fullName: "Gabriel Rocha",
         birthDate: "1999-12-25",
@@ -420,7 +420,7 @@ export const patientList: Patient[] = [
         notes: "",
     },
     {
-        id: 10,
+        id: '10',
         registration: '1010',
         fullName: "Larissa Pires",
         birthDate: "1975-05-03",

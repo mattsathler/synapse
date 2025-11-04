@@ -10,11 +10,11 @@ import { Header } from '../../../../@shared/components/header/header';
   styleUrl: './settings-task.scss'
 })
 export class SettingsTask {
-  public defaultTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
-  public customTypes: { title: string, id: number, isDefault: boolean, isEnabled: boolean }[];
+  public defaultTypes: { title: string, id: string, isDefault: boolean, isEnabled: boolean }[];
+  public customTypes: { title: string, id: string, isDefault: boolean, isEnabled: boolean }[];
 
-  public defaultStatus: { title: string, id: number, color: string, isDefault: boolean, isEnabled: boolean }[];
-  public customStatus: { title: string, id: number, color: string, isDefault: boolean, isEnabled: boolean }[];
+  public defaultStatus: { title: string, id: string, color: string, isDefault: boolean, isEnabled: boolean }[];
+  public customStatus: { title: string, id: string, color: string, isDefault: boolean, isEnabled: boolean }[];
 
   constructor(private agendaService: AgendaService) {
     this.defaultTypes = this.agendaService.getTaskTypes().filter(i => i.isDefault);

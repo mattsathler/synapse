@@ -27,8 +27,8 @@ export class NewTask implements AfterViewInit {
   @Input()
   public task: Task | null = null;
 
-  public taskTypes: { title: string, id: number | null }[] = [];
-  public taskStatus: { title: string, id: number, color: string }[] = [];
+  public taskTypes: { title: string, id: string | null }[] = [];
+  public taskStatus: { title: string, id: string, color: string }[] = [];
   public taskForm: FormGroup;
   public taskEmployees: Employee[] = [];
 
@@ -45,7 +45,7 @@ export class NewTask implements AfterViewInit {
     this.taskTypes.push(
       {
         title: "Outros",
-        id: 0
+        id: '0'
       }
     )
 
