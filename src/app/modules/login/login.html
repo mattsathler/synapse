@@ -1,17 +1,31 @@
-<div class="w-screen h-screen login d-flex justify-center items-center">
-    <div class="d-flex flex-col items-center justify-center max-w-320 gap">
-        <div class="d-flex flex-col items-center gap">
-            <div class="d-flex flex-col items-center">
+<div class="page flex-row h-screen p-0" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
+    <div class="w-full h-full cover" style="background-image: url('./assets/images/home.jpg')"></div>
+    <div class="d-flex flex-col items-center justify-center w-50-p gap bg-surface p-24 min-w-320">
+        <div class="d-flex flex-col items-center gap-40 w-320">
+            <div class="d-flex flex-col items-center max-w-128">
                 <img src="/assets/images/logo.png" alt="logo">
                 <h1 class="text-bold text-size-24">Synapse</h1>
-                <h2 class="text-uppercase text-light text-size-16 text-primary">Saúde Digital Integrada</h2>
+                <h2 class="text-uppercase text-light text-size-16 text-primary text-center">Saúde Digital Integrada</h2>
+            </div>
+            <div class="d-flex flex-col gap items-center w-full">
+                <input type="text" name="email" id="email" placeholder="E-mail">
+                <div class="d-flex flex-col items-center gap-8 w-full">
+                    <input type="password" name="password" id="pass" placeholder="Senha">
+                    <a href="#" class="text-error text-size-14">Esqueci minha senha</a>
+                </div>
+            </div>
+            <div class="d-flex flex-col items-center gap-8 w-full">
+                <button class="primary w-full">Entrar</button>
             </div>
 
-            <input type="text" name="email" id="email" placeholder="E-mail">
-            <input type="password" name="password" id="pass" placeholder="Senha">
-            <button class="primary">Entrar</button>
-            <a href="#" class="text-primary text-size-14">Esqueci minha senha</a>
-            <p class="text-error" *ngIf="hasError">E-mail ou senha incorretos</p>
+            <hr />
+
+            <div class="d-flex flex-col items-center gap-8 w-full">
+                <button class="surface w-full google-login">
+                    <img src="./assets/images/google-logo.png" alt="google" class="w-24 mr-16">
+                    Entrar com o Google
+                </button>
+            </div>
         </div>
     </div>
 </div>

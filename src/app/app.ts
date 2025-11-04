@@ -12,5 +12,5 @@ import { CommonModule } from '@angular/common';
 export class App {
   protected readonly title = signal('synapse');
 
-  public isLoggedIn: boolean = true;
+  public isLoggedIn: boolean = false;
 }

@@ -79,6 +79,10 @@ rich-text-viewer {
 
     }
 
+    .ql-snow * {
+        color: var(--text);
+    }
+
     .ql-snow a {
         color: var(--primary);
     }

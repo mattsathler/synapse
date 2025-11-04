@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RichTextEditor } from './rich-text-editor';
 
-import { RichTextComponent } from './rich-text-editor';
-
-describe('RichTextComponent', () => {
-  let component: RichTextComponent;
-  let fixture: ComponentFixture<RichTextComponent>;
+describe('RichTextEditor', () => {
+  let component: RichTextEditor;
+  let fixture: ComponentFixture<RichTextEditor>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RichTextComponent]
+      imports: [RichTextEditor]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RichTextComponent);
+    fixture = TestBed.createComponent(RichTextEditor);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -17,6 +17,7 @@ button {
 button.circle {
     border-radius: 50%;
     padding: 8px !important;
+    flex-shrink: 0;
 }
 
 button.outline {
