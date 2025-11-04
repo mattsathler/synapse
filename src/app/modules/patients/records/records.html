@@ -18,49 +18,43 @@
             <button class="secondary h-full" (click)="modalOpen = true">Novo prontuário</button>
         </div>
     </page-header>
-    <ng-container *ngIf="patient$| async as patient">
-        <div class="d-flex flex-col gap">
-            <div>
-                <h3 class="text-text text-size-40">{{patient.fullName}}</h3>
-                <p class="text-placeholder">{{patient.age}} anos, {{patient.address.city}} -
-                    {{patient.address.state}}</p>
-            </div>
+    <div class="d-flex flex-col gap">
+        <div>
+            <h3 class="text-text text-size-40">{{(patient$ | async)?.fullName}}</h3>
+            <p class="text-placeholder">{{(patient$ | async)?.age}} anos, {{(patient$ | async)?.address?.city}} -
+                {{(patient$ | async)?.address?.state}}</p>
+        </div>
 
-            <div class="d-flex flex-col w-full gap-40">
-                <div class="w-full d-flex gap justify-between flex-wrap items-center">
-                    <h3 class="text-size-24 text-placeholder">Histórico</h3>
-                    <div class="max-w-248">
-                        <input type="date" [(ngModel)]="today" name="date" />
-                    </div>
+        <div class="d-flex flex-col w-full gap-40">
+            <div class="w-full d-flex gap justify-between flex-wrap items-center">
+                <h3 class="text-size-24 text-placeholder">Histórico</h3>
+                <div class="max-w-248">
+                    <input type="date" [(ngModel)]="today" name="date" />
                 </div>
-                <div *ngFor="let record of patient.records; let i = index"
-                    class="d-flex flex-col gap-40 items-center justify-center w-full">
-                    <div class="d-flex flex-col gap-8 w-full items-center">
-                        <span class="text-size-24 text-bold text-placeholder">
-                            {{record.date | CustomDate}}
+            </div>
+            <div *ngFor="let record of (patient$ | async)?.records; let i = index"
+                class="d-flex flex-col gap-40 items-center justify-center w-full" [animate.enter]="'slide-vertical-in'">
+                <div class="d-flex flex-col gap-8 w-full items-center">
+                    <span class="text-size-24 text-bold text-placeholder">
+                        {{record.date | CustomDate}}
+                    </span>
+                    <hr />
+                </div>
+                <div *ngFor="let r of record.records; let j = index" class="w-full d-flex flex-col gap-8 items-center"
+                    [animate.enter]="'slide-vertical-in'">
+                    <div class="record-content card p-0 w-full min-h-128 flat">
+                        <rich-text-viewer [content]="r.content" class="surface"></rich-text-viewer>
+                    </div>
+                    <div class="d-flex justify-between w-full px-16 gap">
+                        <span class="text-size-12 text-placeholder">{{r.date | date:"HH:mm"}}</span>
+                        <span class="text-size-18 text-placeholder">
+                            - {{r.author}}
                         </span>
-                        <hr />
                     </div>
-                    @if (patient) {
-
-                    <div *ngFor="let r of record.records; let j = index"
-                        class="w-full d-flex flex-col gap-8 items-center">
-                        <div class="record-content card p-0 w-full min-h-128 flat">
-                            <rich-text-viewer [content]="r.content" class="surface"></rich-text-viewer>
-                        </div>
-                        <div class="d-flex justify-between w-full px-16 gap">
-                            <span class="text-size-12 text-placeholder">{{r.date | date:"HH:mm"}}</span>
-                            <span class="text-size-18 text-placeholder">
-                                - {{r.author}}
-                            </span>
-                        </div>
-                    </div>
-                    <hr *ngIf="i !== patient.records.length - 1" />
-                    }
                 </div>
             </div>
         </div>
-    </ng-container>
+    </div>
 </div>
 
 @if(modalOpen) {
