@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'CustomDate' })
 export class CustomDate implements PipeTransform {
-    transform(value: Date): string {
+    transform(value: Date): string | null {
+        if(!value) return '';
         const today = new Date();
         const yesterday = new Date();
         yesterday.setDate(today.getDate() - 1);

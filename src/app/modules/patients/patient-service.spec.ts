@@ -13,4 +13,21 @@ describe('PatientService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get a single patient by his Id', (done) => {
+    service.getPatientById('1').subscribe((patient) => {
+      expect(patient).toBeTruthy();
+      expect(patient.id).toBeDefined();
+      expect(patient.fullName).toBeDefined();
+      done();
+    });
+  });
+
+  it('should get a list of patient', (done) => {
+    service.getPatientList().subscribe((patient) => {
+      expect(patient).toBeTruthy();
+      expect(Array.isArray(patient)).toBeTruthy();
+      done();
+    });
+  });
 });

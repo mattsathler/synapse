@@ -7,7 +7,7 @@ import { patientList, singlePatient } from '../../../@shared/mockups/Patients';
   providedIn: 'root'
 })
 export class PatientService {
-  public getPatientById(): Observable<Patient> {
+  public getPatientById(id: string): Observable<Patient> {
     return of(singlePatient);
   }
 

@@ -1,8 +1,8 @@
-import { AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input } from '@angular/core';
 import { Employee } from '../../../../../@shared/types/Employee';
 import { Avatar } from '../../../../../@shared/components/avatar/avatar';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AgendaService } from '../../agenda-service';
 import { Patient } from '../../../../../@shared/types/Patient';
 import { PatientService } from '../../../patients/patient-service';
@@ -10,7 +10,6 @@ import { minTimeValidator } from '../../../../../@shared/validators/minTimeValid
 import { Observable, of, take } from 'rxjs';
 import { Task } from '../../../../../@shared/types/Task';
 import { DateService } from '../../../../../@shared/services/date-service';
-import { hasFormChanged } from '../../../../../@shared/validators/hasFormChanged';
 
 @Component({
   selector: 'new-task',

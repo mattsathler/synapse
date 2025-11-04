@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Header } from '../../../../@shared/components/header/header';
 import { PatientService } from '../patient-service';
 import { CommonModule } from '@angular/common';
-import { CustomDate } from '../../../../@shared/pipes/Date';
+import { CustomDate } from '../../../../@shared/pipes/CustomDate';
 import { FormsModule } from '@angular/forms';
 import { Patient } from '../../../../@shared/types/Patient';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ export class Records {
   public selectedRecord: Record | null = null;
 
   constructor(private service: PatientService) {
-    this.patient$ = this.service.getPatientById();
+    this.patient$ = this.service.getPatientById('1');
   }
 
   public printRecords() {
