@@ -7,17 +7,18 @@
         <div class="d-flex items-center justify-between gap flex-wrap">
             <div class="d-flex gap-16 items-center flex-wrap max-w-50-p w-full">
                 <div class="d-flex gap-8 flex-wrap w-full items-center">
-                    <button class="rounded d-flex max-w-72 surface text-size-28"
-                        (click)="toggleEmployee()">Todos</button>
-                    <div *ngFor="let employee of employees" class="d-flex flex-col items-center gap-4"
-                        [attr.data-tooltip]="employee.name">
-                        <button class="circle w-40 h-40 hidden d-flex flex-col"
-                            [ngClass]="{'selected': selectedEmployees.includes(employee)}"
-                            (click)="toggleEmployee(employee.id)">
-                            <avatar [size]="'medium'" [image]="employee.photo ?? ''" [name]="employee.name">
-                            </avatar>
-                        </button>
-                    </div>
+                    <ng-container
+                        *skeleton="(isLoadingEmployees$ | async); className: ['w-48', 'h-48', 'rounded-full']; size: 4">
+                        <div *ngFor="let employee of (employeesList$ | async)"
+                            class="d-flex flex-col items-center gap-4" [attr.data-tooltip]="employee.name">
+                            <button class="circle w-40 h-40 hidden d-flex flex-col"
+                                [ngClass]="{'selected': (selectedEmployees.includes(employee) || isAllSelected)}"
+                                (click)="toggleEmployee(employee)">
+                                <avatar [size]="'medium'" [image]="employee.photo ?? ''" [name]="employee.name">
+                                </avatar>
+                            </button>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
             <div class="d-flex">
@@ -51,6 +52,6 @@
 
 @if(modalOpen) {
 <modal [(open)]="modalOpen" [title]="selectedTask ? 'Editar agendamento' : 'Novo agendamento'">
-    <new-task [selectedEmployees]="selectedEmployees" [employees]="employees" [task]="selectedTask"></new-task>
+    <new-task [selectedEmployees]="selectedEmployees" [employeeList$]="employeesList$" [task]="selectedTask"></new-task>
 </modal>
 }

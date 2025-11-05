@@ -8,6 +8,10 @@ import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { Employee } from '../../../@shared/types/Employee';
 import { Modal } from '../../../@shared/components/modal/modal';
 import { NewTask } from './task/new-task/new-task';
+import { getMockedEmployees } from '../../../@shared/mockups/Employees';
+import { BehaviorSubject } from 'rxjs';
+import { EmployeesService } from '../employees/employees-service';
+import { SkeletonDirective } from '../../../@shared/directives/skeleton';
 
 interface TimeSlot {
   start: Date;
@@ -16,7 +20,7 @@ interface TimeSlot {
 
 @Component({
   selector: 'app-agenda',
-  imports: [CommonModule, Header, Task, Avatar, Modal, NewTask],
+  imports: [CommonModule, Header, Task, Avatar, Modal, NewTask, SkeletonDirective],
   templateUrl: './agenda.html',
   styleUrl: './agenda.scss'
 })
@@ -29,16 +33,21 @@ export class Agenda implements OnInit, AfterViewInit {
   public tasks: ITask[] = [];
   public needleTop: number = 0;
 
-  public employees: Employee[] = [];
+  public employeesList$: BehaviorSubject<Employee[] | null>;
+  public isLoadingEmployees$: BehaviorSubject<boolean>;
+
   public selectedEmployees: Employee[] = [];
+  public isAllSelected: boolean = false;
   public selectedTask: ITask | null = null;
 
   public modalOpen: boolean = false;
 
   private slotHeight: number = 0;
 
-  constructor(private service: AgendaService) {
-    this.employees = this.service.getMockedEmployees();
+  constructor(private service: AgendaService, private employeesService: EmployeesService) {
+    this.employeesService.getEmployeesList();
+    this.employeesList$ = this.employeesService.employeesList$;
+    this.isLoadingEmployees$ = this.employeesService.isLoading$;
   }
 
   ngOnInit() {
@@ -125,24 +134,16 @@ export class Agenda implements OnInit, AfterViewInit {
     container.scrollTo({ top: scrollPosition > 0 ? scrollPosition : 0, behavior: 'smooth' });
   }
 
-  public toggleEmployee(id?: string): void {
-    if (id) {
-      const index = this.selectedEmployees.findIndex(emp => emp.id === id);
+  public toggleEmployee(employee?: Employee): void {
+    if (employee) {
+      const index = this.selectedEmployees.findIndex(emp => emp.id === employee.id);
       if (index > -1) {
         this.selectedEmployees.splice(index, 1);
       } else {
-        const employee = this.employees.find(emp => emp.id === id);
-        if (employee) {
-          this.selectedEmployees.push(employee);
-        }
-      }
-    } else {
-      if (this.selectedEmployees.length === this.employees.length) {
-        this.selectedEmployees = [];
-      } else {
-        this.selectedEmployees = [...this.employees];
+        this.selectedEmployees.push(employee);
       }
     }
+    
     this.updateNeedlePosition();
     this.adjustTasks();
   }

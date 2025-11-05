@@ -7,13 +7,15 @@ import { AgendaService } from '../../agenda-service';
 import { Patient } from '../../../../../@shared/types/Patient';
 import { PatientService } from '../../../patients/patient-service';
 import { minTimeValidator } from '../../../../../@shared/validators/minTimeValidator';
-import { Observable, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, of, take } from 'rxjs';
 import { Task } from '../../../../../@shared/types/Task';
 import { DateService } from '../../../../../@shared/services/date-service';
+import { EmployeesService } from '../../../employees/employees-service';
+import { SkeletonDirective } from '../../../../../@shared/directives/skeleton';
 
 @Component({
   selector: 'new-task',
-  imports: [CommonModule, FormsModule, Avatar, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, Avatar, ReactiveFormsModule, SkeletonDirective],
   templateUrl: './new-task.html',
   styleUrl: './new-task.scss'
 })
@@ -22,7 +24,7 @@ export class NewTask implements AfterViewInit {
   public selectedEmployees: Employee[] = [];
 
   @Input()
-  public employees: Employee[] = [];
+  public employeeList$: BehaviorSubject<Employee[] | null>;
 
   @Input()
   public task: Task | null = null;
@@ -32,11 +34,21 @@ export class NewTask implements AfterViewInit {
   public taskForm: FormGroup;
   public taskEmployees: Employee[] = [];
 
-  public employeeList: Employee[] = [];
-  public patientList$: Observable<Patient[]> = of([]);
+  public isLoadingEmployees$: BehaviorSubject<boolean>;
+
   public selectedPatient: Patient | null = null;
 
-  constructor(private service: AgendaService, private dateService: DateService, private patientService: PatientService, private formBuilder: FormBuilder) {
+  public patientList$: BehaviorSubject<Patient[]>;
+  public isLoadingPatientList$: BehaviorSubject<boolean>;
+  public patientSearchQuery: string = '';
+
+  constructor(private service: AgendaService, private employeesService: EmployeesService, private dateService: DateService, private patientService: PatientService, private formBuilder: FormBuilder) {
+    this.patientList$ = this.patientService.patientList$;
+    this.isLoadingPatientList$ = this.patientService.isLoading$;
+
+    this.employeeList$ = this.employeesService.employeesList$;
+    this.isLoadingEmployees$ = this.employeesService.isLoading$;
+
     this.taskTypes = this.service.getTaskTypes().sort((a, b) => a.title.localeCompare(b.title));
     this.taskTypes.unshift({
       title: "Escolha um tipo de agendamento",
@@ -89,11 +101,6 @@ export class NewTask implements AfterViewInit {
       this.taskEmployees = [...this.selectedEmployees];
     }
 
-    this.employeeList = this.employees.filter(
-      e => !this.taskEmployees.some(selected => selected.id === e.id)
-    );
-
-    this.reorderEmployeesList(this.employeeList);
     this.reorderEmployeesList(this.taskEmployees);
 
     return;
@@ -121,15 +128,15 @@ export class NewTask implements AfterViewInit {
 
   public searchPatient(name: string): void {
     if (!name || name === "") {
-      this.patientList$ = of([]);
       return;
     }
-    this.patientList$ = this.patientService.getPatientList(`&search=${name}`);
+
+    this.patientSearchQuery = name;
+    this.patientService.getPatientList();
     return;
   }
 
   public clearPatientList(): void {
-    this.patientList$ = of([]);
     return;
   }
 
@@ -139,37 +146,36 @@ export class NewTask implements AfterViewInit {
     this.clearPatientList()
   }
 
-  public toggleEmployee(e?: Event, id?: string): void {
-    const target = e?.target as HTMLSelectElement;
+  public toggleEmployee(e?: Event, employee?: Employee): void {
+    const target = e?.target as HTMLSelectElement | undefined;
+    const employees = this.employeeList$.getValue(); // 👈 pega o valor atual do BehaviorSubject
+    let targetEmployee: Employee | undefined;
 
-    if (!target && !id) return;
+    if (target?.value) {
+      targetEmployee = employees?.find(emp => emp.id === target.value);
+    } else if (employee) {
+      targetEmployee = employee;
+    }
 
-    const employee = target
-      ? this.employees.find(emp => emp.id === target.value)
-      : this.employees.find(emp => emp.id === id);
+    if (!targetEmployee) return;
 
-    if (!employee) return;
+    // Toggle: adiciona ou remove
+    const alreadySelected = this.taskEmployees.some(e => e.id === targetEmployee.id);
 
-    const isSelected = this.taskEmployees.find(e => e.id === employee.id);
-
-    if (isSelected) {
-      this.taskEmployees = this.taskEmployees.filter(e => e.id !== isSelected.id);
-      this.employeeList.push(isSelected);
+    if (alreadySelected) {
+      this.taskEmployees = this.taskEmployees.filter(e => e.id !== targetEmployee.id);
     } else {
-      this.taskEmployees.push(employee);
-      this.employeeList = this.employeeList.filter(e => e.id !== employee.id);
+      this.taskEmployees = [...this.taskEmployees, targetEmployee];
     }
 
-    if (target) {
-      target.value = "";
-    }
+    // Limpa o select se veio de um evento
+    if (target) target.value = '';
 
-    this.reorderEmployeesList(this.employeeList);
+    // Atualiza o form
     this.reorderEmployeesList(this.taskEmployees);
-
     this.taskForm.patchValue({ employees: this.taskEmployees }, { emitEvent: true });
-    return;
   }
+
 
   public reorderEmployeesList(list: Employee[]): void {
     list = list.sort((a, b) => a.name.localeCompare(b.name));

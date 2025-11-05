@@ -19,7 +19,7 @@ import { Component, Directive, ElementRef, Input, OnChanges, SimpleChanges, Temp
 @Directive({ selector: '[skeleton]' })
 export class SkeletonDirective implements OnChanges {
     @Input('skeleton') source: any;
-    @Input('skeletonRepeat') size = 1;
+    @Input('skeletonSize') size = 1;
     @Input('skeletonClassName') className: string[] = [''];
 
     constructor(private tpl: TemplateRef<any>, private vcr: ViewContainerRef) { }
@@ -31,7 +31,10 @@ export class SkeletonDirective implements OnChanges {
     private render(value: any) {
         this.vcr.clear();
         if (value === null || value === undefined || value === true) {
-            Array.from({ length: this.size }).forEach(() => { const ref = this.vcr.createComponent(SkeletonRect); Object.assign(ref.instance, { className: this.className }) })
+            Array.from({ length: this.size }).forEach(() => {
+                const ref = this.vcr.createComponent(SkeletonRect);
+                Object.assign(ref.instance, { className: this.className })
+            })
         }
         else {
             this.vcr.createEmbeddedView(this.tpl, { $implicit: value });

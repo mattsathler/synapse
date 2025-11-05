@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { PatientService } from './patient-service';
 
@@ -15,7 +15,9 @@ describe('PatientService', () => {
   });
 
   it('should get a single patient by his Id', (done) => {
-    service.getPatientById('1').subscribe((patient) => {
+    service.getPatientList('1');
+
+    service.patient$.subscribe((patient) => {
       if (patient) {
         expect(patient).toBeTruthy();
         expect(patient.id).toBeDefined();
@@ -25,11 +27,13 @@ describe('PatientService', () => {
     });
   });
 
-  it('should get a list of patient', (done) => {
-    service.getPatientList().subscribe((patient) => {
-      expect(patient).toBeTruthy();
-      expect(Array.isArray(patient)).toBeTruthy();
-      done();
+  it('should get a list of patients', fakeAsync(() => {
+    service.getPatientList();
+
+    tick(3000)
+    service.patientList$.subscribe((patientList) => {
+      expect(patientList).toBeTruthy();
+      expect(Array.isArray(patientList)).toBeTruthy();
     });
-  });
+  }));
 });
