@@ -7,6 +7,7 @@ import { Home } from './modules/home/home';
 import { Settings } from './modules/settings/settings';
 import { SettingsTask } from './modules/settings/settings-task/settings-task';
 import { SettingsClinic } from './modules/settings/settings-clinic/settings-clinic';
+import { Employees } from './modules/employees/employees';
 
 export const routes: Routes = [
     {
@@ -41,11 +42,25 @@ export const routes: Routes = [
         component: Agenda
     },
     {
-        path: 'ajustes/agendamentos',
-        component: SettingsTask
-    },
-    {
-        path: 'ajustes/clinica',
-        component: SettingsClinic
+        path: 'ajustes',
+        children: [
+            {
+                path: '',
+                redirectTo: 'clinica',
+                pathMatch: 'full',
+            },
+            {
+                path: 'clinica',
+                component: SettingsClinic,
+            },
+            {
+                path: 'agendamentos',
+                component: SettingsTask,
+            },
+            {
+                path: 'funcionarios',
+                component: Employees,
+            },
+        ]
     }
 ];

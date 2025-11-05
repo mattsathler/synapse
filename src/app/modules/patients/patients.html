@@ -11,7 +11,7 @@
                 </span>
             </button>
         </div>
-
+        <hr />
         <div class="d-flex flex-col gap" *skeleton="(isLoading$ | async); className: ['w-full', 'h-88']; size: 4">
             <details *ngFor="let patient of patients$ | async" animate.enter="slide-vertical-in">
                 <summary>
@@ -34,8 +34,8 @@
                                 edit
                             </span>
                         </button>
-                        <button data-tooltip="Agendar" class="circle surface w-40 h-40 cursor-pointer">
-                            <span class="material-symbols-outlined ">
+                        <button data-tooltip="Agendar" class="circle surface w-40 h-40 cursor-pointer hide-mobile">
+                            <span class="material-symbols-outlined">
                                 calendar_add_on
                             </span>
                         </button>

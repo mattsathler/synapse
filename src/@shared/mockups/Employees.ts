@@ -32,6 +32,21 @@ export function getMockedAgenda(): Task[] {
                 name: 'Ana Souza',
                 photo: 'https://randomuser.me/api/portraits/women/1.jpg',
                 tasks: [],
+                address: {
+                    complement: "",
+                    region: "",
+                    city: "Nova Iguaçu",
+                    neighborhood: "Centro",
+                    number: '3',
+                    state: "RJ",
+                    street: "Rua Pedro",
+                    postalCode: "365554-800"
+                },
+                mainPhone: '(21) 99942-3321',
+                identification: '212321312',
+                isMedic: false,
+                position: 'Secretário',
+                email: 'dasjdas@gmail.com'
             }],
         },
     ]
@@ -43,30 +58,102 @@ export function getMockedEmployees(): Employee[] {
             id: '1',
             name: 'Ana Souza',
             photo: 'https://randomuser.me/api/portraits/women/1.jpg',
-            tasks: getMockedAgenda()
+            tasks: getMockedAgenda(),
+            address: {
+                complement: "",
+                region: "",
+                city: "Nova Iguaçu",
+                neighborhood: "Centro",
+                number: '3',
+                state: "RJ",
+                street: "Rua Pedro",
+                postalCode: "365554-800"
+            },
+            mainPhone: '(21) 99942-3321',
+            identification: '212321312',
+            isMedic: false,
+            position: 'Secretário',
+            email: 'dasjdas@gmail.com'
         },
         {
             id: '2',
             name: 'Carlos Silva',
             photo: 'https://randomuser.me/api/portraits/men/2.jpg',
-            tasks: getMockedAgenda()
+            tasks: getMockedAgenda(),
+            address: {
+                complement: "",
+                region: "",
+                city: "Nova Iguaçu",
+                neighborhood: "Centro",
+                number: '3',
+                state: "RJ",
+                street: "Rua Pedro",
+                postalCode: "365554-800"
+            },
+            mainPhone: '(21) 99942-3321',
+            identification: '212321312',
+            isMedic: false,
+            position: 'Secretário',
+            email: 'dasjdas@gmail.com'
         },
         {
             id: '3',
             name: 'Mariana Lima',
             photo: 'https://randomuser.me/api/portraits/women/3.jpg',
-            tasks: getMockedAgenda()
+            tasks: getMockedAgenda(), address: {
+                complement: "",
+                region: "",
+                city: "Nova Iguaçu",
+                neighborhood: "Centro",
+                number: '3',
+                state: "RJ",
+                street: "Rua Pedro",
+                postalCode: "365554-800"
+            },
+            mainPhone: '(21) 99942-3321',
+            identification: '212321312',
+            isMedic: false,
+            position: 'Secretário',
+            email: 'dasjdas@gmail.com'
         },
         {
             id: '4',
             name: 'João Pereira',
-            tasks: getMockedAgenda()
+            tasks: getMockedAgenda(), address: {
+                complement: "",
+                region: "",
+                city: "Nova Iguaçu",
+                neighborhood: "Centro",
+                number: '3',
+                state: "RJ",
+                street: "Rua Pedro",
+                postalCode: "365554-800"
+            },
+            mainPhone: '(21) 99942-3321',
+            identification: '212321312',
+            isMedic: true,
+            position: 'Oftalmologista',
+            email: 'dasjdas@gmail.com'
         },
         {
             id: '5',
             name: 'Fernanda Costa',
             photo: 'https://randomuser.me/api/portraits/women/5.jpg',
-            tasks: getMockedAgenda()
+            tasks: getMockedAgenda(), address: {
+                complement: "",
+                region: "",
+                city: "Nova Iguaçu",
+                neighborhood: "Centro",
+                number: '3',
+                state: "RJ",
+                street: "Rua Pedro",
+                postalCode: "365554-800"
+            },
+            mainPhone: '(21) 99942-3321',
+            identification: '212321312',
+            isMedic: false,
+            position: 'Secretário',
+            email: 'dasjdas@gmail.com'
         }
     ]
 }

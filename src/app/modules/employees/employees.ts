@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Header } from '../../../@shared/components/header/header';
+import { Employee } from '../../../@shared/types/Employee';
+import { BehaviorSubject } from 'rxjs';
+import { EmployeesService } from './employees-service';
+import { Avatar } from '../../../@shared/components/avatar/avatar';
+import { CommonModule } from '@angular/common';
+import { SkeletonDirective } from '../../../@shared/directives/skeleton';
 
 @Component({
   selector: 'app-employees',
-  imports: [],
+  imports: [CommonModule, Header, Avatar, SkeletonDirective],
   templateUrl: './employees.html',
   styleUrl: './employees.scss'
 })
-export class Employees {
+export class Employees implements OnInit {
+  public employeesList$: BehaviorSubject<Employee[] | null>;
 
+  constructor(private service: EmployeesService) {
+    this.employeesList$ = this.service.employeesList$;
+  }
+
+  ngOnInit(): void {
+    this.service.getEmployeesList();
+  }
 }

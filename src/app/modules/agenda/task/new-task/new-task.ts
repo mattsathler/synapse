@@ -148,7 +148,7 @@ export class NewTask implements AfterViewInit {
 
   public toggleEmployee(e?: Event, employee?: Employee): void {
     const target = e?.target as HTMLSelectElement | undefined;
-    const employees = this.employeeList$.getValue(); // 👈 pega o valor atual do BehaviorSubject
+    const employees = this.employeeList$.getValue();
     let targetEmployee: Employee | undefined;
 
     if (target?.value) {
@@ -159,7 +159,6 @@ export class NewTask implements AfterViewInit {
 
     if (!targetEmployee) return;
 
-    // Toggle: adiciona ou remove
     const alreadySelected = this.taskEmployees.some(e => e.id === targetEmployee.id);
 
     if (alreadySelected) {

@@ -1,3 +1,4 @@
+import { Address } from "./Address";
 import { Record } from "./Record";
 
 export interface Patient {
@@ -19,16 +20,7 @@ export interface Patient {
     totalRecords?: number;
 
     // Address
-    address: {
-        postalCode: string;
-        region: string;
-        state: string;
-        city: string;
-        street: string;
-        complement: string;
-        number: string;
-        neighborhood: string;
-    }
+    address: Address;
 
     // Contact
     phone?: string;

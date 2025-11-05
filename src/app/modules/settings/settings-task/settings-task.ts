@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { AgendaService } from '../../agenda/agenda-service';
 import { CommonModule } from '@angular/common';
 import { Header } from '../../../../@shared/components/header/header';
+import { TabsComponent } from '../../../../@shared/components/tabs/tabs';
+import { TabComponent } from '../../../../@shared/components/tabs/tab';
 
 @Component({
   selector: 'settings-task',
-  imports: [CommonModule, Header],
+  imports: [CommonModule, Header, TabsComponent, TabComponent],
   templateUrl: './settings-task.html',
   styleUrl: './settings-task.scss'
 })

@@ -132,7 +132,7 @@ $max-width-scale: (
 
 @each $name, $value in $color-keys {
     .border-#{$name} {
-        border-bottom: 1px solid $value
+        border: 2px solid $value
     }
 }
 

@@ -1,1 +1,76 @@
-<p>employees works!</p>
+<div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
+    <page-header [title]="'Funcionários'">
+        <button class="secondary h-full">Novo funcionário</button>
+    </page-header>
+    <div class="d-flex flex-col gap">
+        <div class="d-flex gap">
+            <input class="surface" type="text" placeholder="Pesquisar funcionário">
+            <button class="surface circle w-48 h-48">
+                <span class="text-placeholder text-size-24 material-symbols-outlined">
+                    search
+                </span>
+            </button>
+        </div>
+
+        <hr />
+
+        <ng-container *skeleton="(employeesList$ | async); className: ['w-full', 'gap', 'h-88']; size:6">
+            <details *ngFor="let employee of (employeesList$ | async)" class="card d-flex w-full"
+                animate.enter="slide-vertical-in">
+                <summary>
+                    <div class="d-flex gap items-center">
+                        <div class="w-40 h-40 hide-mobile">
+                            <avatar class="w-full" [image]="employee?.photo" [name]="employee?.name ?? ''"
+                                alt="profile-picture">
+                            </avatar>
+                        </div>
+                        <p class="text-text">
+                            {{employee?.name}}
+                        </p>
+                        <p class="text-placeholder text-normal hide-mobile">
+                            {{employee?.position}}
+                        </p>
+                    </div>
+                    <div class="d-flex flex-row gap-8 justify-end">
+                        <button data-tooltip="Editar" class="circle surface w-40 h-40 cursor-pointer">
+                            <span class="material-symbols-outlined cursor-pointer">
+                                edit
+                            </span>
+                        </button>
+                        <button data-tooltip="Agendar" class="circle surface w-40 h-40 cursor-pointer">
+                            <span class="material-symbols-outlined ">
+                                calendar_add_on
+                            </span>
+                        </button>
+                    </div>
+                </summary>
+                <div class="accordion-content d-flex flex-col w-full gap">
+                    <hr />
+                    <div class="d-flex flex-col w-full gap-8">
+                        <span class="text-bold">
+                            Data de nascimento: <span class="text-placeholder text-normal">
+                                {{employee?.birthDate ?? 'Não declarado'}}
+                            </span>
+                        </span>
+                        <span class="text-bold">
+                            Endereço: <span class="text-placeholder text-normal">
+                                {{employee.address?.street}}, nº {{employee.address?.number}} -
+                                {{employee.address?.city}},
+                                {{employee.address?.state}}
+                            </span>
+                        </span>
+                        <span class="text-bold">
+                            Telefone: <span class="text-placeholder text-normal">{{employee.mainPhone}}</span>
+                        </span>
+                        <span class="text-bold">
+                            Email: <span class="text-placeholder text-normal">{{employee.email}}</span>
+                        </span>
+                        <!-- <span class="text-bold">
+                            Prontuários: <span class="text-placeholder text-normal">{{employee.totalRecords ?? 0}}</span>
+                        </span> -->
+                    </div>
+                </div>
+            </details>
+        </ng-container>
+    </div>
+</div>

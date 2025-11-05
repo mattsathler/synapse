@@ -2,170 +2,177 @@
     <page-header [title]="'Ajustes de Agendamentos'"></page-header>
     <div class="d-flex flex-col gap">
         <div class="d-flex flex-col gap">
-            <div class="d-flex flex-col gap card">
-                <div class="d-flex gap items-center justify-between">
-                    <h3 class="text-ellipsis-90">Tipos de agendamentos</h3>
-                    <button data-tooltip="Criar tipo" class="circle secondary w-32 h-32">
-                        <span class="material-symbols-outlined">
-                            add
-                        </span>
-                    </button>
-                </div>
-                <hr />
-                <div class="card flat d-flex justify-between warn items-center wrap-tiny gap"
-                    animate.enter="slide-vertical-in" animate.leave="slide-vertical-out-reverse">
-                    <p class="text-text">Ao desativar ou excluir um tipo de agendamento, todos os agendamentos deste
-                        tipo serão
-                        alterados
-                        para o tipo <span class="text-bold">"Outros"</span>.
-                        Você poderá ajustá-los manualmente depois.</p>
-                </div>
-
-                <div class="d-flex gap-40 w-full wrap-medium">
-                    <div class="d-flex flex-col gap-16 w-full">
-                        <h4>Padrões</h4>
-                        <div class="d-flex flex-col gap-8 flex-1-1">
-                            <div *ngFor="let task of defaultTypes"
-                                class="d-flex gap-8 items-center flex-0-1 justify-between">
-                                <div class="d-flex gap-8">
-                                    <input type="checkbox" class="checkbox" disabled checked="true">
-                                    <div class="text-ellipsis-48" [attr.data-tooltip]="task.title">
-                                        <span class="text-text text-nowrap cursor-normal">{{task.title}}</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-8">
-                                    <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
-                                        <span class="material-symbols-outlined text-text">
-                                            edit
-                                        </span>
-                                    </button>
-                                    <button data-tooltip="Excluir" disabled class="circle surface w-28 h-28">
-                                        <span class="material-symbols-outlined text-error">
-                                            delete
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+            <tabs class="d-flex flex-row gap flex-wrap">
+                <tab title="Tipos de agendamentos" icon="medical_mask">
+                    <div class="d-flex flex-col gap card">
+                        <div class="d-flex gap items-center justify-between">
+                            <h3 class="text-ellipsis-90">Tipos de agendamentos</h3>
+                            <button data-tooltip="Criar tipo" class="circle secondary w-32 h-32">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="d-flex flex-col gap-16 w-full">
-                        <h4>Personalizados</h4>
-                        <div class="d-flex flex-col gap-8 flex-1-1">
-                            <div *ngFor="let task of customTypes"
-                                class="d-flex gap-8 items-center flex-0-1 justify-between">
-                                <div class="d-flex gap-8">
-                                    <input type="checkbox" class="checkbox" [checked]="task.isEnabled">
-                                    <div class="text-ellipsis-48" [attr.data-tooltip]="task.title">
-                                        <span class="text-text text-nowrap cursor-normal">{{task.title}}</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-8">
-                                    <button data-tooltip="Editar" class="circle surface w-28 h-28">
-                                        <span class="material-symbols-outlined  text-text">
-                                            edit
-                                        </span>
-                                    </button>
-                                    <button data-tooltip="Excluir" class="circle surface w-28 h-28">
-                                        <span class="material-symbols-outlined text-error">
-                                            delete
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+                        <hr />
+                        <div class="card flat d-flex justify-between warn items-center wrap-tiny gap"
+                            animate.enter="slide-vertical-in" animate.leave="slide-vertical-out-reverse">
+                            <p class="text-text">Ao desativar ou excluir um tipo de agendamento, todos os agendamentos
+                                deste
+                                tipo serão
+                                alterados
+                                para o tipo <span class="text-bold">"Outros"</span>.
+                                Você poderá ajustá-los manualmente depois.</p>
                         </div>
-                    </div>
-                </div>
-                <hr />
-                <div class="d-flex w-full justify-end">
-                    <button class="secondary h-full">Salvar</button>
-                </div>
-            </div>
 
-            <div class="d-flex flex-col gap">
-                <div class="d-flex flex-col gap card">
-                    <div class="d-flex gap items-center justify-between">
-                        <h3 class="text-ellipsis-90">Status de agendamentos</h3>
-                        <button data-tooltip="Criar status" class="circle secondary w-32 h-32">
-                            <span class="material-symbols-outlined">
-                                add
-                            </span>
-                        </button>
-                    </div>
-                    <hr />
-                    <div class="card flat d-flex justify-between warn items-center wrap-tiny gap"
-                        animate.enter="slide-vertical-in" animate.leave="slide-vertical-out-reverse">
-                        <p class="text-text">Ao desativar ou excluir um status de agendamento, todos os agendamentos com
-                            este
-                            status serão
-                            alterados para o status <span class="text-bold">"Nenhum"</span>.
-                            Você poderá ajustá-los manualmente depois.
-                        </p>
-                    </div>
-
-                    <div class="d-flex gap-40 w-full wrap-medium">
-                        <div class="d-flex flex-col gap-16 w-full">
-                            <h4>Padrões</h4>
-                            <div class="d-flex flex-col gap-8 flex-1-1">
-                                <div *ngFor="let status of defaultStatus"
-                                    class="d-flex gap-8 items-center flex-0-1 justify-between">
-                                    <div class="d-flex gap-8">
-                                        <input type="checkbox" class="checkbox" disabled checked>
-                                        <div [ngStyle]="{'color': status.color}" class="text-ellipsis-48"
-                                            [attr.data-tooltip]="status.title">
-                                            <span class="text-nowrap text-ellipsis-48 cursor-normal"
-                                                [ngStyle]="{'color': status.color}">{{status.title}}</span>
+                        <div class="d-flex gap-40 w-full wrap-medium">
+                            <div class="d-flex flex-col gap-16 w-full">
+                                <h4>Padrões</h4>
+                                <div class="d-flex flex-col gap-8 flex-1-1">
+                                    <div *ngFor="let task of defaultTypes"
+                                        class="d-flex gap-8 items-center flex-0-1 justify-between">
+                                        <div class="d-flex gap-8">
+                                            <input type="checkbox" class="checkbox" disabled checked="true">
+                                            <div class="text-ellipsis-48" [attr.data-tooltip]="task.title">
+                                                <span class="text-text text-nowrap cursor-normal">{{task.title}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-8">
+                                            <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
+                                                <span class="material-symbols-outlined text-text">
+                                                    edit
+                                                </span>
+                                            </button>
+                                            <button data-tooltip="Excluir" disabled class="circle surface w-28 h-28">
+                                                <span class="material-symbols-outlined text-error">
+                                                    delete
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="d-flex gap-8">
-                                        <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
-                                            <span class="material-symbols-outlined  text-text">
-                                                edit
-                                            </span>
-                                        </button>
-                                        <button data-tooltip="Excluir" disabled class="circle surface w-28 h-28">
-                                            <span class="material-symbols-outlined text-error">
-                                                delete
-                                            </span>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex flex-col gap-16 w-full">
-                            <h4>Personalizados</h4>
-                            <div class="d-flex flex-col gap-8 flex-1-1">
-                                <div *ngFor="let status of customStatus"
-                                    class="d-flex gap-8 items-center flex-0-1 justify-between">
-                                    <div class="d-flex gap-8">
-                                        <input type="checkbox" class="checkbox" [checked]="status.isEnabled">
-                                        <div [ngStyle]="{'color': status.color}" class="text-ellipsis-48"
-                                            [attr.data-tooltip]="status.title">
-                                            <span class="text-nowrap text-ellipsis-48 cursor-normal"
-                                                [ngStyle]="{'color': status.color}">{{status.title}}</span>
+                            <div class="d-flex flex-col gap-16 w-full">
+                                <h4>Personalizados</h4>
+                                <div class="d-flex flex-col gap-8 flex-1-1">
+                                    <div *ngFor="let task of customTypes"
+                                        class="d-flex gap-8 items-center flex-0-1 justify-between">
+                                        <div class="d-flex gap-8">
+                                            <input type="checkbox" class="checkbox" [checked]="task.isEnabled">
+                                            <div class="text-ellipsis-48" [attr.data-tooltip]="task.title">
+                                                <span class="text-text text-nowrap cursor-normal">{{task.title}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-8">
+                                            <button data-tooltip="Editar" class="circle surface w-28 h-28">
+                                                <span class="material-symbols-outlined  text-text">
+                                                    edit
+                                                </span>
+                                            </button>
+                                            <button data-tooltip="Excluir" class="circle surface w-28 h-28">
+                                                <span class="material-symbols-outlined text-error">
+                                                    delete
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="d-flex gap-8">
-                                        <button data-tooltip="Editar" class="circle surface w-28 h-28">
-                                            <span class="material-symbols-outlined  text-text">
-                                                edit
-                                            </span>
-                                        </button>
-                                        <button data-tooltip="Excluir" class="circle surface w-28 h-28">
-                                            <span class="material-symbols-outlined text-error">
-                                                delete
-                                            </span>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex w-full justify-end">
+                            <button class="secondary h-full">Salvar</button>
+                        </div>
                     </div>
-                    <hr />
-                    <div class="d-flex w-full justify-end">
-                        <button class="secondary h-full">Salvar</button>
+                </tab>
+                <tab title="Status de agendamentos" icon="lab_profile">
+                    <div class="d-flex flex-col gap">
+                        <div class="d-flex flex-col gap card">
+                            <div class="d-flex gap items-center justify-between">
+                                <h3 class="text-ellipsis-90">Status de agendamentos</h3>
+                                <button data-tooltip="Criar status" class="circle secondary w-32 h-32">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                </button>
+                            </div>
+                            <hr />
+                            <div class="card flat d-flex justify-between warn items-center wrap-tiny gap"
+                                animate.enter="slide-vertical-in" animate.leave="slide-vertical-out-reverse">
+                                <p class="text-text">Ao desativar ou excluir um status de agendamento, todos os
+                                    agendamentos com
+                                    este
+                                    status serão
+                                    alterados para o status <span class="text-bold">"Nenhum"</span>.
+                                    Você poderá ajustá-los manualmente depois.
+                                </p>
+                            </div>
+
+                            <div class="d-flex gap-40 w-full wrap-medium">
+                                <div class="d-flex flex-col gap-16 w-full">
+                                    <h4>Padrões</h4>
+                                    <div class="d-flex flex-col gap-8 flex-1-1">
+                                        <div *ngFor="let status of defaultStatus"
+                                            class="d-flex gap-8 items-center flex-0-1 justify-between">
+                                            <div class="d-flex gap-8">
+                                                <input type="checkbox" class="checkbox" disabled checked>
+                                                <div [ngStyle]="{'color': status.color}" class="text-ellipsis-48"
+                                                    [attr.data-tooltip]="status.title">
+                                                    <span class="text-nowrap text-ellipsis-48 cursor-normal"
+                                                        [ngStyle]="{'color': status.color}">{{status.title}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex gap-8">
+                                                <button data-tooltip="Editar" disabled class="circle surface w-28 h-28">
+                                                    <span class="material-symbols-outlined  text-text">
+                                                        edit
+                                                    </span>
+                                                </button>
+                                                <button data-tooltip="Excluir" disabled
+                                                    class="circle surface w-28 h-28">
+                                                    <span class="material-symbols-outlined text-error">
+                                                        delete
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-col gap-16 w-full">
+                                    <h4>Personalizados</h4>
+                                    <div class="d-flex flex-col gap-8 flex-1-1">
+                                        <div *ngFor="let status of customStatus"
+                                            class="d-flex gap-8 items-center flex-0-1 justify-between">
+                                            <div class="d-flex gap-8">
+                                                <input type="checkbox" class="checkbox" [checked]="status.isEnabled">
+                                                <div [ngStyle]="{'color': status.color}" class="text-ellipsis-48"
+                                                    [attr.data-tooltip]="status.title">
+                                                    <span class="text-nowrap text-ellipsis-48 cursor-normal"
+                                                        [ngStyle]="{'color': status.color}">{{status.title}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex gap-8">
+                                                <button data-tooltip="Editar" class="circle surface w-28 h-28">
+                                                    <span class="material-symbols-outlined  text-text">
+                                                        edit
+                                                    </span>
+                                                </button>
+                                                <button data-tooltip="Excluir" class="circle surface w-28 h-28">
+                                                    <span class="material-symbols-outlined text-error">
+                                                        delete
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="d-flex w-full justify-end">
+                                <button class="secondary h-full">Salvar</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </tab>
+            </tabs>
         </div>
     </div>
 </div>
