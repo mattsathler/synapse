@@ -43,3 +43,9 @@ details {
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    details {
+        padding: 16px;
+    }
+}

@@ -325,6 +325,10 @@ $max-width-scale: (
     text-transform: capitalize !important;
 }
 
+.text-wrap {
+    text-wrap: wrap;
+}
+
 @each $key, $value in $space-scale {
     .text-size-#{$key} {
         font-size: $value !important;

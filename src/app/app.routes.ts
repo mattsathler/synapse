@@ -9,6 +9,8 @@ import { SettingsTask } from './modules/settings/settings-task/settings-task';
 import { SettingsClinic } from './modules/settings/settings-clinic/settings-clinic';
 import { Employees } from './modules/employees/employees';
 import { SettingsApp } from './modules/settings/settings-app/settings-app';
+import { FinanceDashboard } from './modules/finance/finance-dashboard/finance-dashboard';
+import { FinanceAccounts } from './modules/finance/finance-accounts/finance-accounts';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,25 @@ export const routes: Routes = [
                 component: Records,
             }
         ]
+    },
+    {
+        path: 'financeiro',
+        children: [
+            {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full',
+            },
+            {
+                path: 'dashboard',
+                component: FinanceDashboard,
+            },
+            {
+                path: 'contas',
+                component: FinanceAccounts
+            }
+        ]
+
     },
     {
         path: 'agenda',

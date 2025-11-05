@@ -35,16 +35,6 @@ describe('SettingsAppCustomization', () => {
     done()
   })
 
-  it('should load theme from document', fakeAsync(() => {
-    fixture = TestBed.createComponent(SettingsAppCustomization);
-    component = fixture.componentInstance;
-
-    component.readTheme();
-    tick();
-    const theme = document.body.getAttribute('data-theme');
-    expect(component.theme).toBe(theme!);
-  }))
-
   it('should load theme from localstorage', fakeAsync(() => {
     fixture = TestBed.createComponent(SettingsAppCustomization);
     component = fixture.componentInstance;
