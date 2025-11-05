@@ -46,16 +46,6 @@
             </div>
 
             <div class="d-flex flex-col items-center gap-8">
-                <button class="text w-full d-flex p-8 gap-16 items-center justify-center" (click)="toggleThemeMode()">
-                    <div class="d-flex items-center gap-16">
-                        <span class="material-symbols-outlined text-surface">
-                            {{currentTheme === 'dark' ? 'light_mode' : 'dark_mode'}}
-                        </span>
-                        <span class="text-nowrap hide-mobile text-surface" *ngIf="isOpen">
-                            Tema {{currentTheme === 'dark' ? 'claro' : 'escuro'}}
-                        </span>
-                    </div>
-                </button>
                 <div class="d-flex justify-center w-full">
                     <button class="error outline w-full d-flex p-8 gap-16 items-center justify-center">
                         <div class=" d-flex items-center gap-16">

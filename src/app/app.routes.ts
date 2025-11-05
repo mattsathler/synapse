@@ -8,6 +8,7 @@ import { Settings } from './modules/settings/settings';
 import { SettingsTask } from './modules/settings/settings-task/settings-task';
 import { SettingsClinic } from './modules/settings/settings-clinic/settings-clinic';
 import { Employees } from './modules/employees/employees';
+import { SettingsApp } from './modules/settings/settings-app/settings-app';
 
 export const routes: Routes = [
     {
@@ -52,6 +53,10 @@ export const routes: Routes = [
             {
                 path: 'clinica',
                 component: SettingsClinic,
+            },
+            {
+                path: 'app',
+                component: SettingsApp,
             },
             {
                 path: 'agendamentos',

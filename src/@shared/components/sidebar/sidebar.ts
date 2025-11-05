@@ -37,11 +37,4 @@ export class Sidebar {
 
     this.isOpen = state ?? !this.isOpen;
   }
-
-  public toggleThemeMode(): void {
-    const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', newTheme);
-    this.currentTheme = document.body.getAttribute('data-theme') ?? 'light';
-
-  }
 }
