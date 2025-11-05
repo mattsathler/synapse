@@ -1,7 +1,8 @@
-<div class="sidebar pos-sticky top left bg-surface" [class.open]="isOpen">
-    <div class="w-full h-screen d-flex flex-col items-center gap hidden" [ngClass]="{'p-24': isOpen, 'p-16': !isOpen}">
-        <div class="d-flex h-screen flex-col gap-8 w-full hidden justify-between">
-            <div class="d-flex flex-col gap-8 w-full hidden">
+<div class="sidebar pos-sticky top left bg-surface " [class.open]="isOpen">
+    <div [ngClass]="{'pt-24 pb-24 pl-24': isOpen, 'pt-16 pb-16 pl-16': !isOpen}"
+        class="w-full h-screen d-flex flex-col items-center gap scroll-y pr-0">
+        <div class="d-flex h-screen flex-col gap-8 w-full justify-between scroll-y">
+            <div class="d-flex flex-col gap-8 w-full scroll-y pr-16">
                 <button class="w-full surface d-flex p-8 gap-16 items-center justify-center hide-mobile"
                     (click)="toggleSidebar()">
                     <span class="material-symbols-outlined">
@@ -9,7 +10,7 @@
                     </span>
                 </button>
                 <!-- <hr class="hide-mobile" /> -->
-                <button class="surface gap-16 items-center px-8 w-full py-24">
+                <button class="secondary gap-16 items-center px-8 w-full py-24">
                     <div class="d-flex items-center gap-16">
                         <span class="w-24 h-24">
                             <avatar class="w-full text-size-16" [alt]="'profile-picture'" [name]="'Gabriela Alves'"
@@ -24,11 +25,12 @@
                 <hr />
                 <div *ngFor="let group of sidebarItems; let i = index" class="d-flex flex-col gap-8 mt-24">
                     <hr *ngIf="i !== 0" class="mb-24" />
-                    <div class="d-flex flex-col gap-8 hide-mobile" *ngIf="isOpen">
+                    <div class="d-flex flex-col gap-8" *ngIf="isOpen">
                         <span class="text-placeholder ml-8 text-bold">{{group.title}}</span>
                     </div>
-                    <button *ngFor="let menu of group.children" class="surface w-full p-8 gap-16 justify-between"
-                        [routerLink]="menu.route" routerLinkActive="active">
+                    <button *ngFor="let menu of group.children" class="surface w-full p-8 gap-16"
+                        [ngClass]="{'justify-between' : isOpen, 'justify-center': !isOpen}" [routerLink]="menu.route"
+                        routerLinkActive="active">
                         <div class="d-flex items-center gap-16">
                             <span class="material-symbols-outlined">
                                 {{ menu.icon }}
@@ -43,9 +45,9 @@
                         </span>
                     </button>
                 </div>
+                <hr class="mt-40"/>
             </div>
-
-            <div class="d-flex flex-col items-center gap-8">
+            <div class="d-flex flex-col items-center gap-8 pr-16">
                 <div class="d-flex justify-center w-full">
                     <button class="error outline w-full d-flex p-8 gap-16 items-center justify-center">
                         <div class=" d-flex items-center gap-16">

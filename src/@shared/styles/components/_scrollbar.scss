@@ -24,3 +24,16 @@
   scrollbar-width: thin;
   scrollbar-color: var(--placeholder) transparent;
 }
+
+::-webkit-scrollbar-button:horizontal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Hide vertical scrollbar arrows */
+::-webkit-scrollbar-button:vertical {
+  display: none;
+  width: 0;
+  height: 0;
+}

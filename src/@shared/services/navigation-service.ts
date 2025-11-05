@@ -16,6 +16,15 @@ export class NavigationService {
         ]
       },
       {
+        title: 'Financeiro',
+        children: [
+          { icon: 'bar_chart_4_bars', route: '/financeiro/resumo', label: 'Resumo' },
+          { icon: 'paid', route: '/financeiro/transacoes', label: 'Transações' },
+          { icon: 'account_balance', route: '/financeiro/contas', label: 'Contas bancárias' },
+          { icon: 'wallet', route: '/financeiro/contas', label: 'Chaves pix' },
+        ]
+      },
+      {
         title: 'Ajustes',
         children: [
           { icon: 'health_metrics', route: '/ajustes/clinica', label: 'Clínica' },
@@ -23,7 +32,7 @@ export class NavigationService {
           { icon: 'event', route: '/ajustes/agendamentos', label: 'Agendamentos' },
           { icon: 'slide_library', route: '/ajustes/app', label: 'Aplicativo' },
         ]
-      }
+      },
     ];
   }
 }
