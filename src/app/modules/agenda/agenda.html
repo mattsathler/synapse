@@ -26,6 +26,13 @@
             </div>
         </div>
         <hr />
+        <div class="d-flex flex-row w-full pl-56">
+            <div class="card info flat w-full mr-16 d-flex gap items-center flex-wrap justify-center text-center" *ngFor="let employee of selectedEmployees"
+                animate.enter="slide-horizontal-in" animate.leave="slide-horizontal-out">
+                <avatar [image]="employee?.photo" [name]="employee.name"></avatar>
+                <span class="text-text text-bold">{{employee.name}}</span>
+            </div>
+        </div>
         <div #agendaContainer class="d-flex gap max-h-480 scroll-x pos-relative">
             <div class="w-full h-auto">
                 <div class="w-full">
@@ -41,9 +48,9 @@
                     <div class="d-flex flex-col gap pos-relative w-full" #agendaRef
                         *ngFor="let employee of selectedEmployees">
                         <task *ngFor="let task of employee.tasks" class="pr-8 pos-absolute hidden cursor-pointer task"
-                            animate.enter="slide-horizontal-in" [task]="task" [style.top.px]="task.top"
-                            [style.height.px]="task.height" [style.left]="task.left" [style.width]="task.width"
-                            (click)="selectedTask = task; modalOpen = true"></task>
+                            animate.enter="slide-horizontal-in" animate.leave="slide-horizontal-out" [task]="task"
+                            [style.top.px]="task.top" [style.height.px]="task.height" [style.left]="task.left"
+                            [style.width]="task.width" (click)="selectedTask = task; modalOpen = true"></task>
                     </div>
                 </div>
             </div>
