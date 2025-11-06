@@ -33,7 +33,7 @@ describe('App', () => {
 
     localStorage.setItem('theme', 'dark');
     component.setTheme();
-    tick();
+    tick(2000);
 
     expect(document.body.getAttribute('data-theme')).toBe('dark');
   }));

@@ -1,5 +1,5 @@
 export interface FinanceAccount {
-    id: number;
+    id: string;
     title: string;
     transactions: {
         title: string,

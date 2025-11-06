@@ -3,7 +3,7 @@ import { FinanceAccount } from "../types/FinanceAccount";
 export function getMockedFinanceAccounts(): FinanceAccount[] {
     return [
         {
-            id: 1,
+            id: '1',
             title: "Corrente - Principal",
             transactions: [
                 { title: "Depósito inicial", amount: 2500.00, date: "2025-10-01" },
@@ -15,7 +15,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 2400,
         },
         {
-            id: 2,
+            id: '2',
             title: "Poupança",
             transactions: [
                 { title: "Depósito mensal", amount: 500.00, date: "2025-09-01" },
@@ -26,7 +26,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 0,
         },
         {
-            id: 3,
+            id: '3',
             title: "Investimentos",
             transactions: [
                 { title: "Aplicação CDB", amount: -1500.00, date: "2025-09-15" },
@@ -37,7 +37,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 24,
         },
         {
-            id: 4,
+            id: '4',
             title: "PJ - Empresa Alpha",
             transactions: [
                 { title: "Receita - Projeto A", amount: 12000.00, date: "2025-09-25" },
@@ -49,7 +49,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 231223,
         },
         {
-            id: 5,
+            id: '5',
             title: "PJ - Beta Studio",
             transactions: [
                 { title: "Pagamento cliente Beta", amount: 8700.00, date: "2025-10-04" },
@@ -60,7 +60,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 24222,
         },
         {
-            id: 6,
+            id: '6',
             title: "Digital - Pessoal",
             transactions: [
                 { title: "Pix recebido", amount: 240.00, date: "2025-10-09" },
@@ -71,7 +71,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 54445,
         },
         {
-            id: 7,
+            id: '7',
             title: "Universitária",
             transactions: [
                 { title: "Mensalidade faculdade", amount: -980.00, date: "2025-09-05" },
@@ -82,7 +82,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 6544,
         },
         {
-            id: 8,
+            id: '8',
             title: "Pagamentos Online",
             transactions: [
                 { title: "Recebimento via PayPal", amount: 620.00, date: "2025-09-22" },
@@ -93,7 +93,7 @@ export function getMockedFinanceAccounts(): FinanceAccount[] {
             balance: 233322,
         },
         {
-            id: 9,
+            id: '9',
             title: "Freelancer",
             transactions: [
                 { title: "Projeto Web", amount: 3500.00, date: "2025-09-20" },

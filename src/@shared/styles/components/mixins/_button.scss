@@ -9,6 +9,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    max-height: 64px;
 }
 
 @mixin button-variant($color) {
@@ -28,7 +29,7 @@
 
     &:disabled {
         opacity: 0.4;
-        cursor: not-allowed;
+        cursor: default;
         box-shadow: none;
     }
 }
