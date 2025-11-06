@@ -1,11 +1,12 @@
 <div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
     <page-header [title]="'Extrato'" [returnUrl]="'financeiro/contas'">
-        <button class="secondary h-full" disabled>Nova transação</button>
+        <button class="secondary h-full" [disabled]="!(accountStatement$ | async)?.isActive">Nova transação</button>
     </page-header>
     <div class="d-flex flex-col gap">
         <div class="d-flex justify-between gap-40 w-full flex-wrap">
-            <div class="d-flex flex-col gap-4 w-60-p flex-1-1">
-                <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
+            <div class="d-flex flex-col gap-4 w-60-p flex-1-1" [attr.data-tooltip]="(accountStatement$ |
+                    async)?.title">
+                <h3 animate.enter="slide-vertical-in" class="text-text text-size-40 text-ellipsis-128"
                     *skeleton="(isLoading$ | async); className: ['w-60-p', 'h-64']">{{(accountStatement$ |
                     async)?.title}}
                 </h3>
@@ -15,11 +16,14 @@
                     async)?.bank?.name}} - {{(accountStatement$ | async)?.number}}</p>
             </div>
             <div class="card surface d-flex justify-between gap items-center flex-1-1">
-                <p class="text-placeholder text-bold">Esta conta está ativa?</p>
-                <div class="slide-toggle-wrapper">
-                    <input id="themeToggler" type="checkbox" class="slide-toggle-input" />
-                    <div class="slide-toggle"></div>
-                </div>
+                <p class="text-placeholder text-bold" animate.enter="slide-horizontal-in">Esta conta está ativa?</p>
+                <ng-container *skeleton="(isLoading$ | async); className: ['w-full', 'h-24']">
+                    <div class="slide-toggle-wrapper">
+                        <input id="themeToggler" type="checkbox" class="slide-toggle-input"
+                            [checked]="(accountStatement$ | async)?.isActive" />
+                        <div class="slide-toggle"></div>
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div class="d-flex gap flex-wrap">
@@ -54,18 +58,52 @@
                     currency:'BRL'}}</span>
             </div>
         </div>
-        <div class="card warn flat">
-            <span class="text-text">Esta conta está desativada. Transações anteriores permanecem visíveis, mas não é
-                possível registrar novas.</span>
-        </div>
+        <ng-container *skeleton="(isLoading$ | async); className: ['d-none']">
+            <div class="card warn flat" *ngIf="!(accountStatement$ | async)?.isActive"
+                animate.enter="slide-vertical-in">
+                <span class="text-text">Esta conta está desativada. Transações anteriores permanecem visíveis, mas não é
+                    possível registrar novas.</span>
+            </div>
+        </ng-container>
         <div class="d-flex gap">
-            <input class="surface" type="text" placeholder="Pesquisar transação">
-            <button class="surface circle w-48 h-48" data-tooltip="Pesquisar">
-                <span class="text-placeholder text-size-24 material-symbols-outlined">
-                    search
+            <div class="d-flex gap-8 w-full">
+                <input class="surface" type="text" placeholder="Pesquisar transação">
+                <button class="surface circle w-48 h-48" data-tooltip="Pesquisar">
+                    <span class="text-size-24 material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
+            <button class="secondary circle w-48 h-48 hide-mobile" [disabled]="!(accountStatement$ | async)?.isActive"
+                data-tooltip="Criar transação">
+                <span class="text-size-24 material-symbols-outlined">
+                    add
                 </span>
             </button>
         </div>
         <hr />
+        <ng-container *skeleton="(isLoading$ | async); className: ['w-full', 'h-54']; size: 6">
+            <div class="card gap" *ngFor="let transaction of (accountStatement$ | async)?.transactions"
+                animate.enter="slide-horizontal-in">
+                <div class="d-flex gap d-flex flex-wrap justify-between">
+                    <div class="d-flex gap items-center d-flex flex-wrap justify-center">
+                        <span class="text-size-24 material-symbols-outlined"
+                            [ngClass]="{'text-success' : transaction.amount > 0, 'text-error': transaction.amount < 0}">
+                            {{transaction.amount > 0 ? 'download' : 'upload'}}
+                        </span>
+                        <h3 [ngClass]="{'text-success' : transaction.amount > 0, 'text-error': transaction.amount < 0}">
+                            <span class="text-success">{{transaction.amount > 0 ? '+' : ''}}</span>{{transaction.amount
+                            |
+                            currency:'BRL'}}
+                        </h3>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-between gap items-center flex-wrap w-full">
+                        <h3>{{transaction.title}}</h3>
+                        <span class="text-placeholder">{{transaction.date | date:'dd/MM/yyyy - HH:mm'}}</span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
     </div>
 </div>

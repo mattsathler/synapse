@@ -3,13 +3,16 @@
     border-radius: 8px;
     padding: 12px 24px;
     font-weight: 500;
-    cursor: pointer;
     transition: all 0.2s ease;
     width: fit-content;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     max-height: 64px;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
 @mixin button-variant($color) {
@@ -17,7 +20,7 @@
     color: var(--text);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
 
-    &:hover:not(.outline) {
+    &:hover:not(.outline, :disabled) {
         background-color: color-mix(in srgb, var(--#{$color}) 90%, gray);
     }
 

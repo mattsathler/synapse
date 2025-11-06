@@ -18,10 +18,10 @@ export class NavigationService {
       {
         title: 'Financeiro',
         children: [
-          { icon: 'bar_chart_4_bars', route: '/financeiro/resumo', label: 'Resumo' },
-          { icon: 'paid', route: '/financeiro/transacoes', label: 'Transações' },
+          // { icon: 'bar_chart_4_bars', route: '/financeiro/resumo', label: 'Resumo' },
+          // { icon: 'paid', route: '/financeiro/transacoes', label: 'Transações' },
           { icon: 'account_balance', route: '/financeiro/contas', label: 'Contas bancárias' },
-          { icon: 'wallet', route: '/financeiro/pix', label: 'Chaves pix' },
+          // { icon: 'wallet', route: '/financeiro/pix', label: 'Chaves pix' },
         ]
       },
       {
