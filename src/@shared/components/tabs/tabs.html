@@ -1,6 +1,6 @@
 <div class="card w-full gap d-flex gap">
     <button *ngFor="let tab of tabs" [ngClass]="{'active': tab.title === active, 'surface': tab.title !== active}"
-        (click)="select(tab.title)" class="d-flex gap-8 flex-1-1 max-w-240">
+        (click)="select(tab.title)" class="d-flex gap-8 flex-1-1">
         <span *ngIf="tab.icon" class="material-symbols-outlined hide-mobile">
             {{ tab.icon }}
         </span>

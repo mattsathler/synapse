@@ -14,9 +14,9 @@ tabs {
         border-radius: 0;
         border-bottom: 2px solid var-color(surface) !important;
         box-sizing: border-box;
+        max-width: 240px;
 
         &.active {
-
             overflow: hidden;
             border-bottom: 2px solid var-color(primary) !important;
         }
@@ -24,5 +24,18 @@ tabs {
 
     tab {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    tabs {
+        &>div {
+            flex-direction: column;
+
+            &>button {
+                max-width: none;
+                width: 100%;
+            }
+        }
     }
 }
