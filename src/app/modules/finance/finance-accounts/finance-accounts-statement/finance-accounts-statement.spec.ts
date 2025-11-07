@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinanceAccountsStatement } from './finance-accounts-statement';
+import { provideRouter } from '@angular/router';
 
 describe('FinanceAccountsStatement', () => {
   let component: FinanceAccountsStatement;
@@ -8,7 +9,8 @@ describe('FinanceAccountsStatement', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FinanceAccountsStatement]
+      imports: [FinanceAccountsStatement],
+      providers: [provideRouter([])]
     })
       .compileComponents();
 
@@ -19,9 +21,5 @@ describe('FinanceAccountsStatement', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should redirect when dont find account', () => {
-    
   });
 });
