@@ -54,7 +54,6 @@ export class PatientService {
         this._patientList.set(patientList);
         this.patientListCache = patientList;
         this._isLoading.set(false);
-        console.log(this.isLoading())
       });
   }
 }

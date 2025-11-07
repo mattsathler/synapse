@@ -29,7 +29,6 @@ export class SkeletonDirective implements OnChanges {
     }
 
     private render(value: any) {
-        console.log(value)
         this.vcr.clear();
         if (value === null || value === undefined || value === true) {
             Array.from({ length: this.size }).forEach(() => {
