@@ -2,8 +2,9 @@
     <div class="card background flat d-flex justify-between gap items-center">
         <p class="text-placeholder text-bold">Tema escuro</p>
         <div class="slide-toggle-wrapper">
-            <input id="themeToggler" type="checkbox" class="slide-toggle-input" (change)="toggleTheme()"
-                [checked]="theme === 'dark'" />
+            <input id="themeToggler" type="checkbox" class="slide-toggle-input"
+                (change)="service.setTheme(service.theme() === 'dark' ? 'light' : 'dark')"
+                [checked]="service.theme() === 'dark'" />
             <div class="slide-toggle"></div>
         </div>
     </div>

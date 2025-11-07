@@ -26,7 +26,7 @@ export class NewTask implements AfterViewInit {
 
   @Input()
   public task: Task | null = null;
-  
+
   public employeeList;
   public taskTypes: { title: string, id: string | null }[] = [];
   public taskStatus: { title: string, id: string, color: string }[] = [];
@@ -42,8 +42,8 @@ export class NewTask implements AfterViewInit {
   public patientSearchQuery: string = '';
 
   constructor(private service: AgendaService, private employeesService: EmployeesService, private dateService: DateService, private patientService: PatientService, private formBuilder: FormBuilder) {
-    this.patientList = this.patientService.patientList();
-    this.isLoadingPatientList = this.patientService.isLoading();
+    this.patientList = this.patientService.patientList;
+    this.isLoadingPatientList = this.patientService.isLoading;
 
     this.employeeList = this.employeesService.employeesList;
     this.isLoadingEmployees = this.employeesService.isLoading;
@@ -92,16 +92,17 @@ export class NewTask implements AfterViewInit {
         start: this.dateService.formatTimeForInput(this.task.start),
         end: this.dateService.formatTimeForInput(this.task.end),
         status: this.task.status,
-      }, { emitEvent: false });
+      });
 
-      this.taskForm.patchValue({ patient: this.selectedPatient }, { emitEvent: false });
-      this.taskForm.patchValue({ employees: this.taskEmployees }, { emitEvent: false });
+      this.taskForm.patchValue({ patient: this.selectedPatient });
+      this.taskForm.patchValue({ employees: this.taskEmployees });
     } else {
       this.taskEmployees = [...this.selectedEmployees];
+      this.taskForm.patchValue({ employees: this.selectedEmployees });
+
     }
 
     this.reorderEmployeesList(this.taskEmployees);
-
     return;
   }
 
@@ -135,14 +136,11 @@ export class NewTask implements AfterViewInit {
     return;
   }
 
-  public clearPatientList(): void {
-    return;
-  }
-
   public togglePatient(patient: Patient): void {
     this.selectedPatient = patient;
     this.taskForm.patchValue({ patient: patient }, { emitEvent: true });
-    this.clearPatientList()
+    this.patientSearchQuery = '';
+    return;
   }
 
   public toggleEmployee(e?: Event, employee?: Employee): void {
@@ -166,10 +164,8 @@ export class NewTask implements AfterViewInit {
       this.taskEmployees = [...this.taskEmployees, targetEmployee];
     }
 
-    // Limpa o select se veio de um evento
     if (target) target.value = '';
 
-    // Atualiza o form
     this.reorderEmployeesList(this.taskEmployees);
     this.taskForm.patchValue({ employees: this.taskEmployees }, { emitEvent: true });
   }

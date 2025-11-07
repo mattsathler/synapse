@@ -32,6 +32,7 @@ export class Agenda implements OnInit, AfterViewInit {
   public timeSlots: TimeSlot[] = [];
   public tasks: ITask[] = [];
   public needleTop: number = 0;
+  public selectedDate: string = new Date().toISOString().split('T')[0];
 
   public employeesList;
   public isLoadingEmployees;
@@ -143,7 +144,7 @@ export class Agenda implements OnInit, AfterViewInit {
         this.selectedEmployees.push(employee);
       }
     }
-    
+
     this.updateNeedlePosition();
     this.adjustTasks();
   }

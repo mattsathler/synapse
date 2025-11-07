@@ -11,27 +11,38 @@
                         <div *ngFor="let employee of employeesList()" class="d-flex flex-col items-center gap-4"
                             [attr.data-tooltip]="employee.name" animate.enter="slide-horizontal-in">
                             <button class="circle w-40 h-40 hidden d-flex flex-col"
-                                [ngClass]="{'selected': (selectedEmployees.includes(employee) || isAllSelected)}"
+                                [ngClass]="{'border-info': (selectedEmployees.includes(employee) || isAllSelected)}"
                                 (click)="toggleEmployee(employee)">
                                 <avatar [size]="'medium'" [image]="employee.photo ?? ''" [name]="employee.name">
                                 </avatar>
                             </button>
                         </div>
+
                     </ng-container>
                 </div>
             </div>
             <div class="d-flex flex-1-1">
-                <input class="datepicker" type="date" value="2017-06-01" />
+                <input class="datepicker" type="date" [value]="selectedDate" />
             </div>
         </div>
         <hr />
-        <div class="d-flex flex-row w-full pl-56">
-            <div class="card info flat w-full mr-16 d-flex gap items-center flex-wrap justify-center text-center"
-                *ngFor="let employee of selectedEmployees" animate.enter="slide-horizontal-in"
-                animate.leave="slide-horizontal-out">
-                <avatar [image]="employee?.photo" [name]="employee.name"></avatar>
-                <span class="text-text text-bold">{{employee.name}}</span>
+        <ng-container *ngIf="selectedEmployees.length > 0">
+            <div class="d-flex flex-row w-full pl-56">
+                <div class="card info flat w-full mr-16 d-flex gap items-center flex-wrap justify-center text-center"
+                    *ngFor="let employee of selectedEmployees" animate.enter="slide-horizontal-in"
+                    animate.leave="slide-horizontal-out">
+                    <avatar [image]="employee?.photo" [name]="employee.name"></avatar>
+                    <span class="text-text text-bold">{{employee.name}}</span>
+                    <button class="circle w-32 h-32 info" (click)="toggleEmployee(employee)">
+                        <span class="text-text material-symbols-outlined">
+                            delete
+                        </span>
+                    </button>
+                </div>
             </div>
+        </ng-container>
+        <div class="card warn-alpha flat w-full text-center" *ngIf="selectedEmployees.length === 0" animate.enter="slide-vertical-in">
+            <span>Selecione um funcionário para ver a agenda</span>
         </div>
         <div #agendaContainer class="d-flex gap max-h-480 scroll-x pos-relative">
             <div class="w-full h-auto">

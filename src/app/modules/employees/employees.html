@@ -48,6 +48,9 @@
                     <hr />
                     <div class="d-flex flex-col w-full gap-8">
                         <span class="text-bold">
+                            Cargo: <span class="text-placeholder text-normal">{{employee.position}}</span>
+                        </span>
+                        <span class="text-bold">
                             Data de nascimento: <span class="text-placeholder text-normal">
                                 {{employee?.birthDate ?? 'Não declarado'}}
                             </span>
@@ -65,9 +68,6 @@
                         <span class="text-bold">
                             Email: <span class="text-placeholder text-normal">{{employee.email}}</span>
                         </span>
-                        <!-- <span class="text-bold">
-                            Prontuários: <span class="text-placeholder text-normal">{{employee.totalRecords ?? 0}}</span>
-                        </span> -->
                     </div>
                 </div>
             </details>
