@@ -23,31 +23,30 @@ export class NewTask implements AfterViewInit {
   @Input()
   public selectedEmployees: Employee[] = [];
 
-  @Input()
-  public employeeList$: BehaviorSubject<Employee[] | null>;
 
   @Input()
   public task: Task | null = null;
-
+  
+  public employeeList;
   public taskTypes: { title: string, id: string | null }[] = [];
   public taskStatus: { title: string, id: string, color: string }[] = [];
   public taskForm: FormGroup;
   public taskEmployees: Employee[] = [];
 
-  public isLoadingEmployees$: BehaviorSubject<boolean>;
+  public isLoadingEmployees;
 
   public selectedPatient: Patient | null = null;
 
-  public patientList$: BehaviorSubject<Patient[]>;
-  public isLoadingPatientList$: BehaviorSubject<boolean>;
+  public patientList;
+  public isLoadingPatientList;
   public patientSearchQuery: string = '';
 
   constructor(private service: AgendaService, private employeesService: EmployeesService, private dateService: DateService, private patientService: PatientService, private formBuilder: FormBuilder) {
-    this.patientList$ = this.patientService.patientList$;
-    this.isLoadingPatientList$ = this.patientService.isLoading$;
+    this.patientList = this.patientService.patientList();
+    this.isLoadingPatientList = this.patientService.isLoading();
 
-    this.employeeList$ = this.employeesService.employeesList$;
-    this.isLoadingEmployees$ = this.employeesService.isLoading$;
+    this.employeeList = this.employeesService.employeesList;
+    this.isLoadingEmployees = this.employeesService.isLoading;
 
     this.taskTypes = this.service.getTaskTypes().sort((a, b) => a.title.localeCompare(b.title));
     this.taskTypes.unshift({
@@ -148,7 +147,7 @@ export class NewTask implements AfterViewInit {
 
   public toggleEmployee(e?: Event, employee?: Employee): void {
     const target = e?.target as HTMLSelectElement | undefined;
-    const employees = this.employeeList$.getValue();
+    const employees = this.employeeList();
     let targetEmployee: Employee | undefined;
 
     if (target?.value) {

@@ -33,8 +33,8 @@ export class Agenda implements OnInit, AfterViewInit {
   public tasks: ITask[] = [];
   public needleTop: number = 0;
 
-  public employeesList$: BehaviorSubject<Employee[] | null>;
-  public isLoadingEmployees$: BehaviorSubject<boolean>;
+  public employeesList;
+  public isLoadingEmployees;
 
   public selectedEmployees: Employee[] = [];
   public isAllSelected: boolean = false;
@@ -46,8 +46,8 @@ export class Agenda implements OnInit, AfterViewInit {
 
   constructor(private service: AgendaService, private employeesService: EmployeesService) {
     this.employeesService.getEmployeesList();
-    this.employeesList$ = this.employeesService.employeesList$;
-    this.isLoadingEmployees$ = this.employeesService.isLoading$;
+    this.employeesList = this.employeesService.employeesList;
+    this.isLoadingEmployees = this.employeesService.isLoading;
   }
 
   ngOnInit() {

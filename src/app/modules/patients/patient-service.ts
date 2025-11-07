@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Patient } from '../../../@shared/types/Patient';
 import { BehaviorSubject, catchError, delay, map, Observable, of, shareReplay, startWith, Subject, tap } from 'rxjs';
 import { patientList, singlePatient } from '../../../@shared/mockups/Patients';
@@ -7,48 +7,54 @@ import { patientList, singlePatient } from '../../../@shared/mockups/Patients';
   providedIn: 'root'
 })
 export class PatientService {
-  public patient$: BehaviorSubject<Patient | null> = new BehaviorSubject<Patient | null>(null);
-  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public patientList$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([]);
+  // --- signals ---
+  private _patient = signal<Patient | null>(null);
+  private _isLoading = signal<boolean>(true);
+  private _patientList = signal<Patient[]>([]);
 
+  // --- cache ---
   private patientCache = new Map<string, Patient | null>();
   private patientListCache: Patient[] | null = null;
 
+  // --- sinais derivados (readonly) ---
+  public patient = computed(() => this._patient());
+  public isLoading = computed(() => this._isLoading());
+  public patientList = computed(() => this._patientList());
+
   public getPatientById(id: string): void {
     if (this.patientCache.has(id)) {
-      this.patient$.next(this.patientCache.get(id)!);
+      this._patient.set(this.patientCache.get(id)!);
       return;
     }
 
-    this.isLoading$.next(true);
+    this._isLoading.set(true);
     const patient = patientList.find(p => p.id === id);
 
-    of(patient ?? null).pipe(
-      delay(2000)
-    ).pipe(
-      tap(patient => {
-        this.patient$.next(patient);
+    of(patient ?? null)
+      .pipe(delay(2000))
+      .subscribe(patient => {
+        this._patient.set(patient);
         this.patientCache.set(id, patient);
-        this.isLoading$.next(false);
-      }),
-    ).subscribe();
-
+        this._isLoading.set(false);
+      });
   }
 
   public getPatientList(query?: string): void {
     if (this.patientListCache) {
-      this.patientList$.next(this.patientListCache);
+      this._patientList.set(this.patientListCache);
       return;
     }
-    this.isLoading$.next(true);
-    of(patientList).pipe(
-      delay(2000),
-      tap(list => {
-        this.patientList$.next(list);
-        this.isLoading$.next(false);
-        this.patientListCache = list;
-      })
-    ).subscribe();
+
+    this._isLoading.set(true);
+
+    of(patientList ?? null)
+      .pipe(delay(2000))
+      .subscribe(patient => {
+        this._patientList.set(patientList);
+        this.patientListCache = patientList;
+        this._isLoading.set(false);
+        console.log(this.isLoading())
+      });
   }
 }

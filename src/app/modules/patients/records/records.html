@@ -21,12 +21,11 @@
     <div class="d-flex flex-col gap">
         <div class="d-flex flex-col gap-4">
             <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
-                *skeleton="(isLoading$ | async); className: ['w-60-p', 'h-64']">{{(patient$ | async)?.fullName}}</h3>
+                *skeleton="isLoading(); className: ['w-60-p', 'h-64']">{{patient()?.fullName}}</h3>
 
-            <p class="text-placeholder" *skeleton="(isLoading$ | async); className: ['w-40-p', 'h-24']">{{(patient$ |
-                async)?.age}}
-                anos, {{(patient$ | async)?.address?.city}} -
-                {{(patient$ | async)?.address?.state}}</p>
+            <p class="text-placeholder" *skeleton="isLoading(); className: ['w-40-p', 'h-24']">{{patient()?.age}}
+                anos, {{patient()?.address?.city}} -
+                {{patient()?.address?.state}}</p>
         </div>
 
         <div class="d-flex flex-col w-full gap-40">
@@ -36,12 +35,11 @@
                     <input type="date" [(ngModel)]="today" name="date" />
                 </div>
             </div>
-            <div class="d-flex flex-col w-full"
-                *skeleton="(isLoading$ | async); className: ['w-full', 'min-h-240']; size: 4"
+            <div class="d-flex flex-col w-full" *skeleton="isLoading(); className: ['w-full', 'min-h-240']; size: 4"
                 animate.enter="slide-vertical-in">
 
-                <ng-container *ngIf="(patient$ | async)?.records?.length">
-                    <div *ngFor="let record of (patient$ | async)?.records; let i = index"
+                <ng-container *ngIf="patient()?.records?.length">
+                    <div *ngFor="let record of patient()?.records; let i = index"
                         class="d-flex flex-col gap-40 items-center justify-center w-full"
                         [animate.enter]="'slide-vertical-in'">
                         <div class="d-flex flex-col gap-8 w-full items-center">
@@ -64,7 +62,7 @@
                         </div>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="!(patient$ | async)?.records?.length">
+                <ng-container *ngIf="!patient()?.records?.length">
                     <div class="card flat text-center w-full">
                         <span class="text-placeholder">
                             Nenhum histórico encontrado

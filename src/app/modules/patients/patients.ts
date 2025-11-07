@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Header } from '../../../@shared/components/header/header';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Patient } from '../../../@shared/types/Patient';
 import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { PatientService } from './patient-service';
@@ -15,12 +13,12 @@ import { SkeletonDirective } from '../../../@shared/directives/skeleton';
   styleUrl: './patients.scss'
 })
 export class Patients implements OnInit {
-  public patients$: BehaviorSubject<Patient[]>;
-  public isLoading$: BehaviorSubject<boolean>;
+  public patients;
+  public isLoading;
 
   constructor(private service: PatientService) {
-    this.patients$ = this.service.patientList$;
-    this.isLoading$ = this.service.isLoading$;
+    this.patients = this.service.patientList;
+    this.isLoading = this.service.isLoading;
   }
 
   ngOnInit() {

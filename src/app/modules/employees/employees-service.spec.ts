@@ -15,30 +15,20 @@ describe('EmployeesService', () => {
   });
 
   it('should return a list of employees', fakeAsync(() => {
-    let isLoading: boolean = false;
     service.getEmployeesList();
-    service.isLoading$.subscribe(value => isLoading = value);
-
-    expect(isLoading).toBe(true);
+    expect(service.isLoading()).toBe(true);
     tick(3000);
-    service.employeesList$.subscribe(employeesList => {
-      expect(employeesList).toBeTruthy();
-      expect(service.employeesListCache).toBe(employeesList);
-      expect(isLoading).toBe(false);
-    })
+    expect(service.employeesList()).toBeTruthy();
+    expect(service.employeesListCache).toBe(service.employeesList());
+    expect(service.isLoading()).toBe(false);
   }))
 
   it('should return a single employee by his id', fakeAsync(() => {
-    let isLoading: boolean = false;
     service.getEmployeeById('1');
-    service.isLoading$.subscribe(value => isLoading = value);
-
-    expect(isLoading).toBe(true);
+    expect(service.isLoading()).toBe(true);
     tick(3000);
-    service.employee$.subscribe(employee => {
-      expect(employee).toBeTruthy();
-      expect(service.employeeCache.get('1')).toBeTruthy();
-      expect(isLoading).toBe(false);
-    })
+    expect(service.employee()).toBeTruthy();
+    expect(service.employeeCache.get('1')).toBeTruthy();
+    expect(service.isLoading()).toBe(false);
   }))
 });

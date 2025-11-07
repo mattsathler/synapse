@@ -2,10 +2,10 @@
     <div class="d-flex flex-col gap">
         <div class="d-flex flex-col gap-8">
             <h3>Funcionário(s)</h3>
-            <select (change)="toggleEmployee($event)" [disabled]="!(employeeList$ | async)">
-                <option [value]="''" *ngIf="!(employeeList$ | async)">Carregando listagem de funcionários...</option>
-                <option [value]="''" *ngIf="(employeeList$ | async)">Adicione funcionários</option>
-                <option *ngFor="let employee of (employeeList$ | async)" [value]="employee.id">{{employee.name}}
+            <select (change)="toggleEmployee($event)" [disabled]="!employeeList()">
+                <option [value]="''" *ngIf="!employeeList()">Carregando listagem de funcionários...</option>
+                <option [value]="''" *ngIf="employeeList()">Adicione funcionários</option>
+                <option *ngFor="let employee of employeeList()" [value]="employee.id">{{employee.name}}
                 </option>
             </select>
             @if(taskEmployees.length === 0) {
@@ -53,9 +53,9 @@
 
             <div *ngIf="patientSearchQuery" class="card flat bg-background p-8 d-flex flex-col max-h-240 scroll-y gap-8"
                 animate.enter="slide-vertical-in-reverse">
-                <ng-container *skeleton="(isLoadingPatientList$ | async); className: ['w-full', 'min-h-88']; size: 4">
+                <ng-container *skeleton="isLoadingPatientList; className: ['w-full', 'min-h-88']; size: 4">
                     <div class="d-flex gap items-center cursor-pointer card surface flat"
-                        *ngFor="let patient of patientList$ | async" (click)="togglePatient(patient)"
+                        *ngFor="let patient of patientList" (click)="togglePatient(patient)"
                         animate.enter="'slide-vertical-in'">
                         <div class="hide-mobile">
                             <avatar class="w-full" [image]="patient?.image" [name]="patient?.fullName ?? ''"

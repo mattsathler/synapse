@@ -14,8 +14,8 @@
 
         <hr />
 
-        <ng-container *skeleton="(employeesList$ | async); className: ['w-full', 'gap', 'h-88']; size:6">
-            <details *ngFor="let employee of (employeesList$ | async)" class="card d-flex w-full"
+        <ng-container *skeleton="isLoading(); className: ['w-full', 'gap', 'h-88']; size:6">
+            <details *ngFor="let employee of employeesList()" class="card d-flex w-full"
                 animate.enter="slide-vertical-in">
                 <summary>
                     <div class="d-flex gap items-center">

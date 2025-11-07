@@ -14,10 +14,12 @@ import { SkeletonDirective } from '../../../@shared/directives/skeleton';
   styleUrl: './employees.scss'
 })
 export class Employees implements OnInit {
-  public employeesList$: BehaviorSubject<Employee[] | null>;
+  public employeesList;
+  public isLoading;
 
   constructor(private service: EmployeesService) {
-    this.employeesList$ = this.service.employeesList$;
+    this.employeesList = this.service.employeesList;
+    this.isLoading = this.service.isLoading;
   }
 
   ngOnInit(): void {
