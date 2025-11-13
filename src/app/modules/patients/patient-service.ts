@@ -1,12 +1,14 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Patient } from '../../../@shared/types/Patient';
-import { BehaviorSubject, catchError, delay, map, Observable, of, shareReplay, startWith, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, finalize, map, Observable, of, shareReplay, startWith, Subject, tap } from 'rxjs';
 import { patientList, singlePatient } from '../../../@shared/mockups/Patients';
+import { HttpService } from '../../../@shared/services/http-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
+  constructor(private httpService: HttpService) { }
 
   // --- signals ---
   private _patient = signal<Patient | null>(null);
@@ -15,7 +17,7 @@ export class PatientService {
 
   // --- cache ---
   private patientCache = new Map<string, Patient | null>();
-  private patientListCache: Patient[] | null = null;
+  private patientListCache = new Map<string, Patient[] | null>
 
   // --- sinais derivados (readonly) ---
   public patient = computed(() => this._patient());
@@ -40,19 +42,22 @@ export class PatientService {
       });
   }
 
-  public getPatientList(query?: string): void {
-    if (this.patientListCache) {
-      this._patientList.set(this.patientListCache);
+  public getPatientList(query: string): void {
+    const cache = this.patientListCache.get(query);
+    if (cache) {
+      this._patientList.set(cache);
       return;
     }
 
     this._isLoading.set(true);
 
-    of(patientList ?? null)
-      .pipe(delay(2000))
+    this.httpService.get<{ data: Patient[] }>(`patients/?${query}`)
+      .pipe(
+        finalize(() => this._isLoading.set(false)),
+      )
       .subscribe(patient => {
-        this._patientList.set(patientList);
-        this.patientListCache = patientList;
+        this._patientList.set(patient.data);
+        this.patientListCache.set(query, patient.data)
         this._isLoading.set(false);
       });
   }

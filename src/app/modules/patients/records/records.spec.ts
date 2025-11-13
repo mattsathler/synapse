@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Records } from './records';
 import { provideRouter, Routes } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('Records', () => {
   let component: Records;
@@ -11,12 +12,12 @@ describe('Records', () => {
     { path: 'pacientes/:id', component: Records },
   ]
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Records],
-      providers: [provideRouter(routes)]
-    })
-      .compileComponents();
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
+        imports: [Records],
+        providers: [provideRouter(routes), provideHttpClient()]
+      })
+        .compileComponents();
 
     fixture = TestBed.createComponent(Records);
     component = fixture.componentInstance;

@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from '../@shared/components/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
-import { ThemeService } from './theme-service';
+import { AuthService } from './modules/auth/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +14,7 @@ export class App {
   protected readonly title = signal('synapse');
   public isLoggedIn: boolean = true;
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private authService: AuthService) {
+    this.isLoggedIn = !!this.authService.user();
+  }
 }

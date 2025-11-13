@@ -82,6 +82,10 @@ $max-width-scale: (
     }
 }
 
+.min-h-screen {
+    min-height: 100dvh;
+}
+
 @each $key, $value in $space-scale {
     .w-#{$key} {
         width: $value !important;

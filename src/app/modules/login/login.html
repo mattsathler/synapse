@@ -1,27 +1,40 @@
-<div class="page flex-row h-screen p-0" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
-    <div class="w-full h-full cover" style="background-image: url('./assets/images/home.jpg')"></div>
-    <div class="d-flex flex-col items-center justify-center w-50-p gap bg-surface p-24 min-w-320">
-        <div class="d-flex flex-col items-center gap-40 w-320">
+<div class="page flex-row h-full min-h-screen p-0 bg-surface" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
+    <div class="w-full h-full cover hide-mobile max-w-50-p" style="background-image: url('./assets/images/background.png')"></div>
+    <div class="d-flex flex-col items-center justify-center flex-1-1 gap px-16 py-40">
+        <div class="d-flex flex-col items-center gap-40 px-24">
             <div class="d-flex flex-col items-center max-w-128">
                 <img src="/assets/images/logo.png" alt="logo">
                 <h1 class="text-bold text-size-24">Synapse</h1>
                 <h2 class="text-uppercase text-light text-size-16 text-primary text-center">Saúde Digital Integrada</h2>
             </div>
-            <div class="d-flex flex-col gap items-center w-full">
-                <input type="text" name="email" id="email" placeholder="E-mail">
-                <div class="d-flex flex-col items-center gap-8 w-full">
-                    <input type="password" name="password" id="pass" placeholder="Senha">
-                    <a href="#" class="text-error text-size-14">Esqueci minha senha</a>
+            <form [formGroup]="loginForm" class="d-flex flex-col gap-40 items-center w-full">
+                <div class="d-flex flex-col gap items-center w-full">
+                    <div class="d-flex flex-col gap-8 w-full">
+                        <span class="text-placeholder">E-mail</span>
+                        <input formControlName="email" type="text" name="email" id="email"
+                            placeholder="Digite o e-mail">
+                    </div>
+                    <div class="d-flex flex-col gap-8 w-full">
+                        <span class="text-placeholder">Senha</span>
+                        <div class="d-flex flex-col items-center gap-8 w-full">
+                            <input formControlName="password" type="password" name="password" id="pass"
+                                placeholder="Digite a senha">
+                            <a href="#" class="text-error text-size-14">Esqueci minha senha</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex flex-col items-center gap-8 w-full">
-                <button class="primary w-full">Entrar</button>
-            </div>
+                <div class="d-flex flex-col items-center gap-8 w-full">
+                    <button class="primary w-full" (click)="login()" [disabled]="isLoading() || loginForm.invalid">Entrar</button>
+                    @if(error()) {
+                    <span class="text-error" animate.enter="slide-vertical-in">{{error()}}</span>
+                    }
+                </div>
+            </form>
 
             <hr />
 
             <div class="d-flex flex-col items-center gap-8 w-full">
-                <button class="surface w-full google-login">
+                <button class="surface w-full google-login" disabled>
                     <img src="./assets/images/google-logo.png" alt="google" class="w-24 mr-16">
                     Entrar com o Google
                 </button>

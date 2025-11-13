@@ -37,4 +37,10 @@ export class Sidebar {
 
     this.isOpen = state ?? !this.isOpen;
   }
+
+  public logout(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
 }

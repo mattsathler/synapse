@@ -132,7 +132,7 @@ export class NewTask implements AfterViewInit {
     }
 
     this.patientSearchQuery = name;
-    this.patientService.getPatientList();
+    this.patientService.getPatientList('page=1&limit=10&search=' + name);
     return;
   }
 

@@ -10,6 +10,7 @@ import { SettingsClinic } from './modules/settings/settings-clinic/settings-clin
 import { Employees } from './modules/employees/employees';
 import { SettingsApp } from './modules/settings/settings-app/settings-app';
 import { financeRoutes } from './modules/finance/finance.routes';
+import { authGuard } from './modules/auth/authGuard';
 
 export const routes: Routes = [
     {
@@ -24,10 +25,12 @@ export const routes: Routes = [
     {
         path: 'home',
         component: Home,
+        canActivate: [authGuard],
     },
     {
 
         path: 'pacientes',
+        canActivate: [authGuard],
         children: [
             {
                 path: '',
@@ -41,10 +44,12 @@ export const routes: Routes = [
     },
     {
         path: 'agenda',
-        component: Agenda
+        component: Agenda,
+        canActivate: [authGuard],
     },
     {
         path: 'ajustes',
+        canActivate: [authGuard],
         children: [
             {
                 path: '',

@@ -16,12 +16,21 @@ export class Patients implements OnInit {
   public patients;
   public isLoading;
 
+  public page = 1;
+
   constructor(private service: PatientService) {
     this.patients = this.service.patientList;
     this.isLoading = this.service.isLoading;
   }
 
   ngOnInit() {
-    this.service.getPatientList();
+    this.fetchPatients(1);
+  }
+
+  public fetchPatients(page: number, query?: string): void {
+    let queryString = `page=${page}`;
+    queryString += query ? `&search=${query}` : '';
+
+    this.service.getPatientList(queryString);
   }
 }

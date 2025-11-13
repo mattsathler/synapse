@@ -7,7 +7,7 @@ export interface Patient {
     registration: string;
     fullName: string;
     socialName?: string;
-    birthDate?: string; // ISO format 'YYYY-MM-DD'
+    birthDate?: string;
     gender?: 'Male' | 'Female' | 'Other';
     identification?: string;
     rg?: string;

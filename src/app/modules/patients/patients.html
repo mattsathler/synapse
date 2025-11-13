@@ -4,8 +4,9 @@
     </page-header>
     <div class="d-flex flex-col gap">
         <div class="d-flex gap">
-            <input class="surface" type="text" placeholder="Pesquisar paciente">
-            <button class="surface circle w-48 h-48">
+            <input class="surface" type="text" placeholder="Pesquisar paciente" #search
+                (keyup.enter)="fetchPatients(page, search.value)" />
+            <button class="surface circle w-48 h-48" (click)="fetchPatients(page, search.value)">
                 <span class="text-placeholder text-size-24 material-symbols-outlined">
                     search
                 </span>
@@ -73,6 +74,12 @@
                     </div>
                 </div>
             </details>
+
+            <div class="card surface flat text-center" *ngIf="patients().length === 0">
+                <span class="text-placeholder">
+                    Nenhum paciente encontrado
+                </span>
+            </div>
         </div>
     </div>
 </div>
