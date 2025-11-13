@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  private baseUrl = 'http://localhost:3000';
+
+  private baseUrl = environment['API_URL'] || '';
 
   constructor(private http: HttpClient) { }
 
