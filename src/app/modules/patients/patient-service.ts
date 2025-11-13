@@ -31,13 +31,13 @@ export class PatientService {
     }
 
     this._isLoading.set(true);
-    const patient = patientList.find(p => p.id === id);
-
-    of(patient ?? null)
-      .pipe(delay(2000))
+    this.httpService.get<Patient>(`patients/${id}`)
+      .pipe(
+        finalize(() => this._isLoading.set(false)),
+      )
       .subscribe(patient => {
         this._patient.set(patient);
-        this.patientCache.set(id, patient);
+        this.patientCache.set(id, patient)
         this._isLoading.set(false);
       });
   }

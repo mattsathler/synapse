@@ -22,18 +22,18 @@ export class Records {
   public isLoading;
 
   public today = new Date().toISOString().split('T')[0];
-  public patientId: string | null;
+  public patientRegistration: string | null;
   public modalOpen: boolean = false;
   public selectedRecord: Record | null = null;
 
   constructor(private service: PatientService, private route: ActivatedRoute) {
-    this.patientId = this.route.snapshot.paramMap.get('id');
+    this.patientRegistration = this.route.snapshot.paramMap.get('id');
     this.patient = this.service.patient;
     this.isLoading = this.service.isLoading;
   }
 
   ngOnInit() {
-    this.service.getPatientById(this.patientId ?? '0');
+    this.service.getPatientById(this.patientRegistration ?? '0');
   }
 
   public printRecords() {
