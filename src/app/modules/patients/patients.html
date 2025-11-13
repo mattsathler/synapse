@@ -1,6 +1,6 @@
 <div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
     <page-header [title]="'Pacientes'">
-        <button class="secondary h-full">Novo paciente</button>
+        <button class="secondary h-full" routerLink="/pacientes/novo">Novo paciente</button>
     </page-header>
     <div class="d-flex flex-col gap">
         <div class="d-flex gap">
@@ -30,7 +30,7 @@
                         </p>
                     </div>
                     <div class="d-flex flex-row gap-8 justify-end">
-                        <button data-tooltip="Editar" class="circle surface w-40 h-40">
+                        <button data-tooltip="Editar" class="circle surface w-40 h-40" [routerLink]="`/pacientes/editar/${patient.registration}/`">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
@@ -41,7 +41,7 @@
                             </span>
                         </button>
                         <button data-tooltip="Prontuários" class="circle surface w-40 h-40"
-                            [routerLink]="`/pacientes/${patient.registration}/`">
+                            [routerLink]="`/pacientes/detalhes/${patient.registration}/`">
                             <span class="material-symbols-outlined ">
                                 clinical_notes
                             </span>

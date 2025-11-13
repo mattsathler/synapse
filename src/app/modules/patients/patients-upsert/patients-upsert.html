@@ -1,1 +1,170 @@
-<p>patients-upsert works!</p>
+<div class="page" animate.enter="slide-horizontal-in" animate.leave="slide-horizontal-out">
+    <page-header [title]="patient()?.fullName || 'Novo paciente'" [returnUrl]="'/pacientes/'"
+        *skeleton="isLoading(); className: ['w-full', 'h-56', 'mb-40'];">
+    </page-header>
+    <form [formGroup]="patientForm" class="d-flex flex-col gap-40 card">
+        <div class="d-flex flex-col gap">
+            <h3>Informações básicas</h3>
+            <hr />
+            <div class="d-flex flex-col gap-8">
+                <h4>Nome completo <span class="text-error">*</span></h4>
+                <input formControlName="fullName" type="text" placeholder="Digite o nome"
+                    *skeleton="isLoading(); className: ['w-full', 'h-40'];" />
+            </div>
+            <div class="d-flex flex-col gap-8">
+                <h4>Nome social</h4>
+                <input formControlName="socialName" type="text" placeholder="Digite o nome social"
+                    *skeleton="isLoading(); className: ['w-full', 'h-40'];">
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Data de nascimento <span class="text-error">*</span></h4>
+                    <input formControlName="birthDate" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        class="bg-background" type="date">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Identificação <span class="text-error">*</span></h4>
+                    <input formControlName="identification" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o RG ou CPF">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-col gap">
+            <h3>Contato</h3>
+            <hr />
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Telefone principal <span class="text-error">*</span></h4>
+                    <input formControlName="phone" *skeleton="isLoading(); className: ['w-full', 'h-40'];" type="text"
+                        placeholder="Digite o telefone principal">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Celular principal <span class="text-error">*</span></h4>
+                    <input formControlName="cellphone" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o celular principal">
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Telefone secundário</h4>
+                    <input formControlName="secondaryPhone" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o telefone secundário">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Celular secundário</h4>
+                    <input formControlName="secondaryCellphone" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o celular secundário">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-col gap">
+            <h3>Seguro</h3>
+            <hr />
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Tipo de seguro</h4>
+                    <input formControlName="insuranceType" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o tipo de seguro">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Código do seguro</h4>
+                    <input formControlName="insuranceCode" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o código do seguro">
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Número do CNS</h4>
+                    <input formControlName="cnsNumber" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o número do CNS">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Registro médico</h4>
+                    <input formControlName="medicalRecordNumber" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o número do registro médico">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-col gap">
+            <h3>Informações adicionais</h3>
+            <hr />
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Firma</h4>
+                    <input formControlName="company" *skeleton="isLoading(); className: ['w-full', 'h-40'];" type="text"
+                        placeholder="Digite o nome da firma">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Referência</h4>
+                    <input formControlName="reference" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite a referência da referência">
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-0-1 max-w-30-p w-full">
+                    <h4>Estado civil</h4>
+                    <select class="w-full">
+                        <option value="married">Casado(a)</option>
+                        <option value="single">Solteiro(a)</option>
+                        <option value="widower">Viúvo(a)</option>
+                        <option value="divorced">Separado(a)</option>
+                        <option value="stable union">União estável</option>
+                    </select>
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Escolaridade</h4>
+                    <select class="w-full">
+                        <option>Fundamental incompleto</option>
+                        <option>Fundamental completo</option>
+                        <option>Médio incompleto</option>
+                        <option>Médio completo</option>
+                        <option>Superior incompleto</option>
+                        <option>Superior completo</option>
+                        <option>Pós Graduado</option>
+                        <option>Mestre</option>
+                        <option>Doutor</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Profissão</h4>
+                    <input formControlName="profession" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite a profissão">
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Nome do pai</h4>
+                    <input formControlName="motherName" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o nome do pai">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Nome da mãe</h4>
+                    <input formControlName="fatherName" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o nome da mãe">
+                </div>
+            </div>
+            <div class="d-flex gap flex-wrap">
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Número de filhos</h4>
+                    <input formControlName="children" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="number" placeholder="Digite a quantidade de filhos">
+                </div>
+                <div class="d-flex flex-col gap-8 flex-1-1">
+                    <h4>Nome do cônjuge</h4>
+                    <input formControlName="companion" *skeleton="isLoading(); className: ['w-full', 'h-40'];"
+                        type="text" placeholder="Digite o nome do cônjuge">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-col gap">
+            <hr />
+            <div class="d-flex w-full justify-end">
+                <button class="secondary h-full">{{patient()
+                    ?
+                    'Salvar' : 'Criar'}}</button>
+            </div>
+        </div>
+    </form>
+</div>

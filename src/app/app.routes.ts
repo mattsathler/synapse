@@ -11,6 +11,7 @@ import { Employees } from './modules/employees/employees';
 import { SettingsApp } from './modules/settings/settings-app/settings-app';
 import { financeRoutes } from './modules/finance/finance.routes';
 import { authGuard } from './modules/auth/authGuard';
+import { PatientsUpsert } from './modules/patients/patients-upsert/patients-upsert';
 
 export const routes: Routes = [
     {
@@ -37,8 +38,17 @@ export const routes: Routes = [
                 component: Patients,
             },
             {
-                path: ':id',
+                path: 'detalhes/:id',
                 component: Records,
+                pathMatch: 'full',
+            },
+            {
+                path: 'novo',
+                component: PatientsUpsert,
+            },
+                        {
+                path: 'editar/:id',
+                component: PatientsUpsert,
             }
         ]
     },

@@ -10,7 +10,6 @@ export interface Patient {
     birthDate?: string;
     gender?: 'Male' | 'Female' | 'Other';
     identification?: string;
-    rg?: string;
     age: number;
     image?: string;
     records: {
