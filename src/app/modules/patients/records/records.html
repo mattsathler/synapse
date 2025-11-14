@@ -10,7 +10,7 @@
         <div class="d-flex gap items-center justify-between flex-wrap">
             <div class="d-flex flex-col gap-4">
                 <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
-                    *skeleton="isLoading(); className: ['w-60-p', 'h-64']">{{patient()?.fullName}}</h3>
+                    *skeleton="isLoading(); className: ['w-128', 'h-64']">{{patient()?.fullName}}</h3>
 
                 <p class="text-placeholder" *skeleton="isLoading(); className: ['w-40-p', 'h-24']">{{patient()?.age}}
                     anos, {{patient()?.address?.city}} -
@@ -34,7 +34,7 @@
             <div class="w-full d-flex gap justify-between flex-wrap items-center">
                 <h3 class="text-size-24 text-placeholder">Histórico do paciente</h3>
             </div>
-            <div class="d-flex flex-col w-full gap" *skeleton="isLoading(); className: ['w-full', 'min-h-240']; size: 4"
+            <div class="d-flex flex-col w-full gap" *skeleton="isLoading(); className: ['w-full', 'min-h-128']; size: 4"
                 animate.enter="slide-vertical-in">
                 <div *ngFor="let record of orderedRecords; let i = index"
                     class="d-flex flex-col gap-40 items-center justify-center w-full"

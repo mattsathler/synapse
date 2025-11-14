@@ -43,9 +43,11 @@ export class Records {
   }
 
   private async fetchPatient(id: string) {
+    this.isLoading.set(true);
     try {
       await this.service.getPatientById(this.patientRegistration ?? '0');
       this.orderedRecords = this.groupRecordsByDay(this.patient()?.records!);
+      this.isLoading.set(false);
     }
     catch (error: any) {
       this.router.navigate(['/pacientes']);
