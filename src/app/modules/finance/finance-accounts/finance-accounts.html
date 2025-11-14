@@ -14,7 +14,8 @@
         <hr />
         <ng-container>
             <div class="d-flex flex-col gap" *skeleton="(isLoading$ | async); className: ['w-full', 'h-88']; size: 4">
-                <details *ngFor="let financeAccount of financeAccountsList$ | async" animate.enter="slide-vertical-in">
+                <details *ngFor="let financeAccount of financeAccountsList$ | async"
+                    [ngClass]="{'card' : financeAccount.isActive}" animate.enter="slide-vertical-in">
                     <summary>
                         <div class="d-flex gap items-center">
                             <p class="text-bold text-ellipsis-64"
