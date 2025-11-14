@@ -1,33 +1,36 @@
 <div class="page" animate.enter="slide-horizontal-in" animate.leave="slide-horizontal-out">
     <page-header [title]="'Prontuário'" [returnUrl]="'pacientes'">
-        <div class="d-flex gap items-center flex-wrap">
+        <!-- <div class="d-flex gap items-center">
+        </div> -->
+        <div class="w-full d-flex gap items-center flex-wrap">
+            <button class="secondary h-full flex-1-1" (click)="modalOpen = true">Novo prontuário</button>
+        </div>
+    </page-header>
+    <div class="d-flex flex-col gap">
+        <div class="d-flex gap items-center justify-between flex-wrap">
+            <div class="d-flex flex-col gap-4">
+                <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
+                    *skeleton="isLoading(); className: ['w-60-p', 'h-64']">{{patient()?.fullName}}</h3>
+
+                <p class="text-placeholder" *skeleton="isLoading(); className: ['w-40-p', 'h-24']">{{patient()?.age}}
+                    anos, {{patient()?.address?.city}} -
+                    {{patient()?.address?.state}}</p>
+            </div>
             <div class="d-flex gap-16">
-                <button data-tooltip-bottom="Baixar em PDF" class="circle background w-40 h-40 p-24"
+                <button data-tooltip-bottom="Baixar em PDF" class="circle surface w-40 h-40 p-24"
                     (click)="printRecords()">
                     <span class="material-symbols-outlined">
                         download
                     </span>
                 </button>
-                <button data-tooltip-bottom="Imprimir" class="circle background w-40 h-40 p-24"
+                <button data-tooltip-bottom="Imprimir" class="circle surface w-40 h-40 p-24"
                     (click)="printRecords()">
                     <span class="material-symbols-outlined">
                         print
                     </span>
                 </button>
             </div>
-            <button class="secondary h-full" (click)="modalOpen = true">Novo prontuário</button>
         </div>
-    </page-header>
-    <div class="d-flex flex-col gap">
-        <div class="d-flex flex-col gap-4">
-            <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
-                *skeleton="isLoading(); className: ['w-60-p', 'h-64']">{{patient()?.fullName}}</h3>
-
-            <p class="text-placeholder" *skeleton="isLoading(); className: ['w-40-p', 'h-24']">{{patient()?.age}}
-                anos, {{patient()?.address?.city}} -
-                {{patient()?.address?.state}}</p>
-        </div>
-
         <div class="d-flex flex-col w-full gap-40">
             <div class="w-full d-flex gap justify-between flex-wrap items-center">
                 <h3 class="text-size-24 text-placeholder">Histórico do paciente</h3>

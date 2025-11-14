@@ -1,6 +1,6 @@
 <div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
     <page-header [title]="'Extrato'" [returnUrl]="'financeiro/contas'">
-        <button class="secondary h-full" [disabled]="!(accountStatement$ | async)?.isActive">Nova transação</button>
+        <button class="secondary h-full w-full" [disabled]="!(accountStatement$ | async)?.isActive">Nova transação</button>
     </page-header>
     <div class="d-flex flex-col gap">
         <div class="d-flex justify-between gap-40 w-full flex-wrap">

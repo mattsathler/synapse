@@ -1,6 +1,6 @@
 <div class="page" animate.enter="slide-vertical-in" animate.leave="slide-vertical-out">
     <page-header [title]="'Agenda'">
-        <button class="secondary h-full" (click)="newTask()">Novo
+        <button class="secondary h-full w-full" (click)="newTask()">Novo
             agendamento</button>
     </page-header>
     <div class="d-flex flex-col gap">
@@ -41,7 +41,8 @@
                 </div>
             </div>
         </ng-container>
-        <div class="card warn-alpha flat w-full text-center" *ngIf="selectedEmployees.length === 0" animate.enter="slide-vertical-in">
+        <div class="card warn-alpha flat w-full text-center" *ngIf="selectedEmployees.length === 0"
+            animate.enter="slide-vertical-in">
             <span>Selecione um funcionário para ver a agenda</span>
         </div>
         <div #agendaContainer class="d-flex gap max-h-480 scroll-x pos-relative">

@@ -1,19 +1,19 @@
-<div class="d-flex flex-row gap header w-full justify-between flex-wrap" animate.enter="slide-vertical-in">
-    <div class="d-flex flex-col gap max-w-240 w-full">
-        <div class="d-flex flex-row gap items-center">
+<div class="d-flex gap flex-wrap justify-between mb-40 w-full" animate.enter="slide-vertical-in">
+    <div class="d-flex flex-col flex-1-1 gap w-60-p">
+        <div class="d-flex gap items-center">
             <button class="circle background w-40 h-40 p-24" (click)="return()" *ngIf="returnUrl">
                 <span class="text-placeholder material-symbols-outlined">
                     arrow_back
                 </span>
             </button>
-            <div class="d-flex flex-col">
+            <div class="">
                 <h2>{{title}}</h2>
                 <h3 class="text-normal">{{subtitle}}</h3>
             </div>
         </div>
-        <hr />
+        <hr class="max-w-320" />
     </div>
-    <div class="header-content">
-        <ng-content class="header-content max-w-48 items-center"></ng-content>
+    <div class="d-flex flex-1-1">
+        <ng-content></ng-content>
     </div>
 </div>

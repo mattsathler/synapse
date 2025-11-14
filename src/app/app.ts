@@ -6,6 +6,7 @@ import { AuthService } from './modules/auth/auth-service';
 import { Snackbar } from '../@shared/components/snackbar/snackbar';
 import { SnackbarService } from '../@shared/components/snackbar/snackbar-service';
 import { provideNgxMask } from 'ngx-mask';
+import { ThemeService } from './theme-service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { provideNgxMask } from 'ngx-mask';
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   providers: [provideNgxMask()]
-  
+
 })
 export class App {
   protected readonly title = signal('synapse');
@@ -21,7 +22,7 @@ export class App {
 
   public showSnackbar;
 
-  constructor(private authService: AuthService, private snackbarService: SnackbarService) {
+  constructor(private themeService: ThemeService, private authService: AuthService, private snackbarService: SnackbarService) {
     this.isLoggedIn = !!this.authService.user();
 
     this.showSnackbar = this.snackbarService.show;

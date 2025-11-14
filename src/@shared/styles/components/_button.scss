@@ -51,9 +51,8 @@ button.lg {
     font-size: 1.1rem;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 425px) {
     button:not(.circle) {
         width: 100%;
     }
-
 }
