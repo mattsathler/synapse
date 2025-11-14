@@ -8,6 +8,7 @@ import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PatientsUpsertService } from './patients-upsert-service';
 import { NgxMaskDirective } from 'ngx-mask';
+import { removeEmptyFields } from '../../../../@shared/validators/removeEmptyFields';
 
 @Component({
   selector: 'app-patients-upsert',
@@ -47,8 +48,10 @@ export class PatientsUpsert implements OnInit {
   ngOnInit() { }
 
   public submitForm(): void {
-    const raw = this.patientForm.value;
-    const patient = { ...raw } as Patient & Record<string, any>;
+    let raw = this.patientForm.value;
+    raw = removeEmptyFields(raw);
+    
+    let patient = { ...raw } as Patient;
 
     patient.address = {
       street: raw.street,
@@ -73,7 +76,7 @@ export class PatientsUpsert implements OnInit {
       return;
     }
   }
-  
+
   private injectDataIntoForm() {
     this.patientForm.patchValue(this.patient()!);
     this.patientForm.patchValue(this.patient()?.address!);
