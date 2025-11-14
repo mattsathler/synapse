@@ -1,14 +1,15 @@
-import { Component, effect, OnInit, Signal } from '@angular/core';
+import { Component, effect, OnInit, signal, Signal } from '@angular/core';
 import { Header } from '../../../../@shared/components/header/header';
 import { CommonModule } from '@angular/common';
 import { Patient } from '../../../../@shared/types/Patient';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../patient-service';
 import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PatientsUpsertService } from './patients-upsert-service';
 import { NgxMaskDirective } from 'ngx-mask';
 import { removeEmptyFields } from '../../../../@shared/validators/removeEmptyFields';
+import { SnackbarService } from '../../../../@shared/components/snackbar/snackbar-service';
 
 @Component({
   selector: 'app-patients-upsert',
@@ -18,17 +19,16 @@ import { removeEmptyFields } from '../../../../@shared/validators/removeEmptyFie
   standalone: true,
 })
 export class PatientsUpsert implements OnInit {
+  public isLoading = signal(false);
+
   public patient: Signal<Patient | null> | (() => null) = () => null;
   public patientId;
   public hasCompanion: boolean = false;
-  public isLoading;
 
   public patientForm: FormGroup;
 
-  constructor(private service: PatientsUpsertService, private patientService: PatientService, private activatedRoute: ActivatedRoute) {
+  constructor(private snackbarService: SnackbarService, private service: PatientsUpsertService, private patientService: PatientService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.patientId = this.activatedRoute.snapshot.params['id'] as string | null;
-    this.isLoading = this.patientService.isLoading;
-
     this.patientForm = this.service.getPatientFormBuilder();
 
     if (this.patientId) {
@@ -48,7 +48,8 @@ export class PatientsUpsert implements OnInit {
 
   ngOnInit() { }
 
-  public submitForm(): void {
+  public async submitForm(): Promise<void> {
+    this.isLoading.set(true);
     let raw = this.patientForm.value;
     raw = removeEmptyFields(raw);
 
@@ -67,14 +68,20 @@ export class PatientsUpsert implements OnInit {
     ['street', 'number', 'complement', 'neighborhood', 'city', 'state', 'postalCode']
       .forEach(k => delete (patient as any)[k]);
 
-    if (!this.patient()) {
-      this.patientService.createNewPatient(patient);
-      return;
-    }
+    try {
+      await this.patientService.savePatient(patient);
+      if (this.patient()) {
+        this.snackbarService.showMessage('Paciente atualizado com sucesso!');
+      } else {
+        this.snackbarService.showMessage('Paciente criado com sucesso!');
+      }
 
-    if (this.patientId) {
-      this.patientService.updatePatient(this.patientId, patient);
-      return;
+      this.isLoading.set(false);
+      this.router.navigate(['/pacientes']);
+
+    } catch (error: any) {
+      this.isLoading.set(false);
+      this.snackbarService.showMessage(error.message || 'Ocorreu um erro');
     }
   }
 

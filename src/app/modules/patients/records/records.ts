@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Header } from '../../../../@shared/components/header/header';
 import { PatientService } from '../patient-service';
 import { CommonModule } from '@angular/common';
@@ -8,8 +8,10 @@ import { NewRecord } from './modal/new-record/new-record';
 import { Record } from '../../../../@shared/types/Record';
 import { Modal } from '../../../../@shared/components/modal/modal';
 import { RichTextViewer } from '../../../../@shared/components/rich-text/viewer/rich-text-viewer';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
+import { retryWhen } from 'rxjs';
+import { SnackbarService } from '../../../../@shared/components/snackbar/snackbar-service';
 
 @Component({
   selector: 'app-records',
@@ -19,21 +21,35 @@ import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 })
 export class Records {
   public patient;
-  public isLoading;
+  public isLoading = signal(false);
 
   public today = new Date().toISOString().split('T')[0];
   public patientRegistration: string | null;
   public modalOpen: boolean = false;
   public selectedRecord: Record | null = null;
 
-  constructor(private service: PatientService, private route: ActivatedRoute) {
+  constructor(private service: PatientService, private route: ActivatedRoute, private snackbarService: SnackbarService, private router: Router) {
     this.patientRegistration = this.route.snapshot.paramMap.get('id');
     this.patient = this.service.patient;
-    this.isLoading = this.service.isLoading;
   }
 
   ngOnInit() {
-    this.service.getPatientById(this.patientRegistration ?? '0');
+    if (this.patientRegistration) {
+
+      this.fetchPatient(this.patientRegistration);
+    }
+
+    return;
+  }
+
+  private async fetchPatient(id: string) {
+    try {
+      await this.service.getPatientById(this.patientRegistration ?? '0');
+    }
+    catch (error: any) {
+      this.router.navigate(['/pacientes']);
+      this.snackbarService.showMessage(error?.message, 'error');
+    }
   }
 
   public printRecords() {

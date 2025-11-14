@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { RecordsService } from './records-service';
 import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('RecordsService', () => {
   let service: RecordsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideRouter([])]
     });
     service = TestBed.inject(RecordsService);
   });

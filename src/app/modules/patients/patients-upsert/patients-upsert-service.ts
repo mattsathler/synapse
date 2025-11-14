@@ -21,6 +21,7 @@ export class PatientsUpsertService {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       number: ['', Validators.required],
+      registration: [''],
       complement: ['', Validators.required],
       socialName: [''],
       image: [''],

@@ -14,7 +14,7 @@ export class SnackbarService {
   public message = computed(() => this._message());
   public type = computed(() => this._type());
 
-  public showNessage(text: string, type: string = 'success'): void {
+  public showMessage(text: string, type: string = 'success'): void {
     this._message.set(text);
     this._type.set(type);
     this._show.set(true);

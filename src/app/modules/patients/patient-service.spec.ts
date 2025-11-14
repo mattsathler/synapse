@@ -49,10 +49,10 @@ describe('PatientService', () => {
     service.getPatientById(mockPatient.id);
 
     const req = httpMock.expectOne(`${environment.API_URL}/patients/1`);
-    expect(service.isLoading()).toBe(true);
     expect(req.request.method).toBe('GET');
-
     req.flush(mockPatient);
+
+    tick();
     expect(service.patient()).toBeTruthy();
     expect(service.patient()?.id).toBe('1');
     expect(service.patient()?.fullName).toBe('Júlio César');
@@ -71,10 +71,10 @@ describe('PatientService', () => {
     };
 
     const req = httpMock.expectOne(`${environment.API_URL}/patients/?page=1&limit=10`);
-    expect(service.isLoading()).toBe(true);
     expect(req.request.method).toBe('GET');
     req.flush(mockPatient);
 
+    tick();
     expect(service.patientList()).toBeTruthy();
     expect(Array.isArray(service.patientList())).toBeTruthy();
     expect(service.patientList().length).toEqual(1);
@@ -86,7 +86,6 @@ describe('PatientService', () => {
     service.patientListCache.set(testQuery, [mockedPatient]);
 
     service.getPatientList(testQuery);
-    expect(service.isLoading()).toBe(false);
     expect(service.patientList()).toEqual([mockedPatient]);
     httpMock.expectNone(req => req.url.includes(testQuery));
   }));

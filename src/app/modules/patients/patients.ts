@@ -15,13 +15,12 @@ import { PhonePipe } from '../../../@shared/pipes/CustomPhone';
 })
 export class Patients implements OnInit {
   public patients;
-  public isLoading;
+  public isLoading = signal(false);
 
   public page = 1;
 
   constructor(private service: PatientService) {
     this.patients = this.service.patientList;
-    this.isLoading = this.service.isLoading;
   }
 
   ngOnInit() {

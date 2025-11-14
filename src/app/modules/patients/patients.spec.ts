@@ -23,4 +23,8 @@ describe('Patients', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should redirect to patients list after creating a new patient', () => {
+      
+  })
 });

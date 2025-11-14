@@ -3,7 +3,7 @@ import { Record } from "./Record";
 
 export interface Patient {
     // Personal Information
-    id: string;
+    id?: string;
     registration: string;
     fullName: string;
     socialName?: string;
