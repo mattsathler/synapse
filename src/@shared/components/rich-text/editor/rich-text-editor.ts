@@ -21,7 +21,7 @@ export class RichTextEditor {
       [{ 'header': 1 }, { 'header': 2 }],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'align': [] }],
-      ['link', 'image'],
+      ['link'],
       ['clean']
     ]
   };

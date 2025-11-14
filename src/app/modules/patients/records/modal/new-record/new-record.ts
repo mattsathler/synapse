@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Record } from '../../../../../../@shared/types/Record';
 import { RichTextEditor } from '../../../../../../@shared/components/rich-text/editor/rich-text-editor';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,8 +14,10 @@ export class NewRecord {
   @Input()
   public selectedRecord?: Record;
 
-  public recordForm!: FormGroup;
+  @Output()
+  public saveRecord = new EventEmitter<Record>();
 
+  public recordForm!: FormGroup;
   public attachments: string[] = [];
 
   get content() {
@@ -24,11 +26,13 @@ export class NewRecord {
 
   constructor(private fb: FormBuilder) {
     this.recordForm = this.fb.group({
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      date: ['', Validators.required],
+      time: ['', Validators.required]
     })
   }
 
-  public createNewRecord(): void {
-
+  public emitRecord(): void {
+    this.saveRecord.emit(this.recordForm.value! as Record);
   }
 }

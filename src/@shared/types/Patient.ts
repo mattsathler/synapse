@@ -12,10 +12,7 @@ export interface Patient {
     identification?: string;
     age: number;
     image?: string;
-    records: {
-        date: Date,
-        records: Record[]
-    }[];
+    records: Record[];
     totalRecords?: number;
 
     // Address

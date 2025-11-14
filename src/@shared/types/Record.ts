@@ -1,7 +1,10 @@
+import { Employee } from "./Employee";
+
 export interface Record {
     id?: string;
-    date: Date;
-    author: string;
+    date: string;
+    time: string;
+    author: Employee;
     content: string;
     attachments?: Attachment[];
     images?: Image;

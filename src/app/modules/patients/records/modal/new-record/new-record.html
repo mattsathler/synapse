@@ -1,12 +1,21 @@
 <form [formGroup]="recordForm">
     <div class="d-flex flex-col gap">
+
         <div class="d-flex flex-col gap-8">
-            <h3>Conteúdo</h3>
+            <h4>Data e hora do prontuário</h4>
+            <div class="d-flex gap">
+                <input formControlName="date" class="bg-background" type="date" placeholder="Digite a data">
+                <input formControlName="time" class="bg-background" type="time" placeholder="Digite a data">
+            </div>
+        </div>
+
+        <div class="d-flex flex-col gap-8">
+            <h4>Conteúdo</h4>
             <rich-text-editor [formController]="content"></rich-text-editor>
         </div>
 
         <div class="d-flex flex-col gap-8">
-            <h3>Anexos</h3>
+            <h4>Anexos</h4>
             <div class="card background flat">
                 <span class="text-placeholder">
                     Arraste um arquivo aqui
@@ -14,8 +23,10 @@
             </div>
         </div>
 
+        <hr />
         <div class="d-flex w-full justify-end">
-            <button class="secondary h-full">Salvar</button>
+            <button class="secondary h-full" [disabled]="recordForm.invalid" (click)="emitRecord()">Salvar</button>
         </div>
+
     </div>
 </form>

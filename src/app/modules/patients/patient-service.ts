@@ -4,6 +4,7 @@ import { finalize, firstValueFrom } from 'rxjs';
 import { HttpService } from '../../../@shared/services/http-service';
 import { SnackbarService } from '../../../@shared/components/snackbar/snackbar-service';
 import { removeEmptyFields } from '../../../@shared/validators/removeEmptyFields';
+import { Record } from '../../../@shared/types/Record';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,24 @@ export class PatientService {
       await firstValueFrom(this.httpService.post('/patients', data))
     }
     this.getPatientList('', true);
+  }
+
+  public async createNewRecord(patientId: string, record: Record) {
+    const data = removeEmptyFields(record);
+    const newRecord = await firstValueFrom(
+      this.httpService.post<Record>(`/patients/${patientId}/records`, data)
+    );
+
+    const cached = this.patientCache.get(patientId);
+
+    if (cached?.records) {
+      const updated = { ...cached, records: [newRecord, ...cached.records] };
+      this.patientCache.set(patientId, updated);
+      if (this._patient()?.registration === patientId) {
+        this._patient.set(updated);
+      }
+    }
+
+    return;
   }
 }

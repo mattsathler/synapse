@@ -5,6 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { environment } from '../../../../environments/environment';
 import { Patient } from '../../../@shared/types/Patient';
+import { Record } from '../../../@shared/types/Record';
 
 describe('PatientService', () => {
   let service: PatientService;
@@ -26,6 +27,13 @@ describe('PatientService', () => {
     registration: "1",
     age: 20
   };
+
+  const mockRecord: Record = {
+    id: '1',
+    author: 'Matheus',
+    content: '',
+    date: new Date(),
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -89,4 +97,21 @@ describe('PatientService', () => {
     expect(service.patientList()).toEqual([mockedPatient]);
     httpMock.expectNone(req => req.url.includes(testQuery));
   }));
+
+  it('should create new record', async () => {
+    const patientPromise = service.getPatientById('1');
+    const patientReq = httpMock.expectOne(`${environment.API_URL}/patients/1`);
+    patientReq.flush(mockedPatient);
+
+    await patientPromise;
+
+    const recordPromise = service.createNewRecord(mockedPatient.registration, mockRecord)
+    const req = httpMock.expectOne(`${environment.API_URL}/patients/1/records`);
+    req.flush(mockRecord);
+
+    await recordPromise;
+
+    expect(service.patientCache.get('1')?.records).toBeTruthy();
+    expect(service.patientCache.get('1')?.records.length).toBeGreaterThan(0);
+  })
 });
