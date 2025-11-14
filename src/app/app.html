@@ -1,7 +1,10 @@
-<div class="d-flex flex-row w-screen">
+<div class="d-flex flex-row pos-relative">
     <sidebar *ngIf="isLoggedIn"></sidebar>
     <div class="flex-1-1" animate.leave="slide-vertical-out">
-        <router-outlet #outlet="outlet" animate.leave="slide-vertical-out"/>
+        <router-outlet #outlet="outlet" animate.leave="slide-vertical-out" />
     </div>
+    @if (this.showSnackbar()) {
+    <snackbar class="pos-absolute" animate.enter="fade-in" animate.leave="fade-out">
+    </snackbar>
+    }
 </div>
-<!-- <bottom-bar></bottom-bar> -->

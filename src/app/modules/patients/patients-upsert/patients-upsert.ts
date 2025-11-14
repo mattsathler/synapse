@@ -7,10 +7,11 @@ import { PatientService } from '../patient-service';
 import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PatientsUpsertService } from './patients-upsert-service';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-patients-upsert',
-  imports: [CommonModule, Header, SkeletonDirective, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, Header, SkeletonDirective, FormsModule, ReactiveFormsModule, NgxMaskDirective],
   templateUrl: './patients-upsert.html',
   styleUrl: './patients-upsert.scss'
 })
@@ -34,7 +35,7 @@ export class PatientsUpsert implements OnInit {
 
       effect(() => {
         const patientData = this.patient();
-        if (patientData) {
+        if (patientData && patientData.registration === this.patientId) {
           this.injectDataIntoForm();
         }
       });
@@ -45,7 +46,36 @@ export class PatientsUpsert implements OnInit {
 
   ngOnInit() { }
 
+  public submitForm(): void {
+    const raw = this.patientForm.value;
+    const patient = { ...raw } as Patient & Record<string, any>;
+
+    patient.address = {
+      street: raw.street,
+      number: raw.number,
+      complement: raw.complement,
+      neighborhood: raw.neighborhood,
+      city: raw.city,
+      state: raw.state,
+      postalCode: raw.postalCode
+    };
+
+    ['street', 'number', 'complement', 'neighborhood', 'city', 'state', 'postalCode']
+      .forEach(k => delete (patient as any)[k]);
+
+    if (!this.patient()) {
+      this.service.createNewPatient(patient);
+      return;
+    }
+
+    if (this.patientId) {
+      this.service.updatePatient(this.patientId, patient);
+      return;
+    }
+  }
+  
   private injectDataIntoForm() {
     this.patientForm.patchValue(this.patient()!);
+    this.patientForm.patchValue(this.patient()?.address!);
   }
 }

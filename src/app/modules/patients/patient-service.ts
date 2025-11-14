@@ -1,7 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Patient } from '../../../@shared/types/Patient';
-import { BehaviorSubject, catchError, delay, finalize, map, Observable, of, shareReplay, startWith, Subject, tap } from 'rxjs';
-import { patientList, singlePatient } from '../../../@shared/mockups/Patients';
+import { finalize } from 'rxjs';
 import { HttpService } from '../../../@shared/services/http-service';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class PatientService {
 
   // --- signals ---
   private _patient = signal<Patient | null>(null);
-  private _isLoading = signal<boolean>(true);
+  private _isLoading = signal<boolean>(false);
   private _patientList = signal<Patient[]>([]);
 
   // --- cache ---
@@ -42,9 +41,9 @@ export class PatientService {
       });
   }
 
-  public getPatientList(query: string): void {
+  public getPatientList(query: string, forceUpdate?: boolean): void {
     const cache = this.patientListCache.get(query);
-    if (cache) {
+    if (cache && !forceUpdate) {
       this._patientList.set(cache);
       return;
     }

@@ -4,6 +4,7 @@ import { Home } from './home';
 import { CommonModule } from '@angular/common';
 import { provideRouter, RouterModule, RouterOutlet } from '@angular/router';
 import { Sidebar } from '../../../@shared/components/sidebar/sidebar';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('Home', () => {
   let component: Home;
@@ -12,7 +13,7 @@ describe('Home', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Home, CommonModule, RouterModule, RouterOutlet, Sidebar],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), provideHttpClient()]
     })
       .compileComponents();
 

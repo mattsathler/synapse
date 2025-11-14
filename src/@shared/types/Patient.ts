@@ -22,9 +22,9 @@ export interface Patient {
     address: Address;
 
     // Contact
-    phone?: string;
+    mainPhone?: string;
     secondaryPhone?: string;
-    cellphone?: string;
+    mainCellphone?: string;
     secondaryCellphone?: string;
     email?: string;
 

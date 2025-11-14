@@ -40,6 +40,7 @@
               "src/@shared/styles/_colors.scss",
               "src/@shared/styles/_components.scss",
               "src/@shared/styles/animations/slide.scss",
+              "src/@shared/styles/animations/fade.scss",
               "node_modules/quill/dist/quill.snow.css"
             ]
           },

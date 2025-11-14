@@ -32,6 +32,6 @@ describe('Records', () => {
     const harness = await RouterTestingHarness.create();
     const fixture = await harness.navigateByUrl('/pacientes/2', Records);
 
-    expect(fixture.patientId).toBe('2');
+    expect(fixture.patientRegistration).toBe('2');
   })
 });

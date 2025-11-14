@@ -30,7 +30,8 @@
                         </p>
                     </div>
                     <div class="d-flex flex-row gap-8 justify-end">
-                        <button data-tooltip="Editar" class="circle surface w-40 h-40" [routerLink]="`/pacientes/editar/${patient.registration}/`">
+                        <button data-tooltip="Editar" class="circle surface w-40 h-40"
+                            [routerLink]="`/pacientes/editar/${patient.registration}/`">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
@@ -58,12 +59,13 @@
                         </span>
                         <span class="text-bold">
                             Endereço: <span class="text-placeholder text-normal">
-                                {{patient.address.street}}, nº {{patient.address.number}} - {{patient.address.city}},
-                                {{patient.address.state}}
+                                {{patient?.address?.street}}, nº {{patient?.address?.number}} -
+                                {{patient?.address?.city}},
+                                {{patient?.address?.state}}
                             </span>
                         </span>
                         <span class="text-bold">
-                            Telefone: <span class="text-placeholder text-normal">{{patient.phone}}</span>
+                            Telefone: <span class="text-placeholder text-normal">{{patient.mainPhone | phone}}</span>
                         </span>
                         <span class="text-bold">
                             Email: <span class="text-placeholder text-normal">{{patient.email}}</span>

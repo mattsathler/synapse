@@ -18,7 +18,6 @@ export function getMockedAgenda(): Task[] {
                 age: 25,
                 address: {
                     complement: "",
-                    region: "",
                     city: "Nova Iguaçu",
                     neighborhood: "Centro",
                     number: '3',
@@ -34,7 +33,6 @@ export function getMockedAgenda(): Task[] {
                 tasks: [],
                 address: {
                     complement: "",
-                    region: "",
                     city: "Nova Iguaçu",
                     neighborhood: "Centro",
                     number: '3',
@@ -61,7 +59,6 @@ export function getMockedEmployees(): Employee[] {
             tasks: getMockedAgenda(),
             address: {
                 complement: "",
-                region: "",
                 city: "Nova Iguaçu",
                 neighborhood: "Centro",
                 number: '3',
@@ -82,7 +79,6 @@ export function getMockedEmployees(): Employee[] {
             tasks: getMockedAgenda(),
             address: {
                 complement: "",
-                region: "",
                 city: "Nova Iguaçu",
                 neighborhood: "Centro",
                 number: '3',
@@ -102,7 +98,6 @@ export function getMockedEmployees(): Employee[] {
             photo: 'https://randomuser.me/api/portraits/women/3.jpg',
             tasks: getMockedAgenda(), address: {
                 complement: "",
-                region: "",
                 city: "Nova Iguaçu",
                 neighborhood: "Centro",
                 number: '3',
@@ -121,7 +116,6 @@ export function getMockedEmployees(): Employee[] {
             name: 'João Pereira',
             tasks: getMockedAgenda(), address: {
                 complement: "",
-                region: "",
                 city: "Nova Iguaçu",
                 neighborhood: "Centro",
                 number: '3',
@@ -141,7 +135,6 @@ export function getMockedEmployees(): Employee[] {
             photo: 'https://randomuser.me/api/portraits/women/5.jpg',
             tasks: getMockedAgenda(), address: {
                 complement: "",
-                region: "",
                 city: "Nova Iguaçu",
                 neighborhood: "Centro",
                 number: '3',

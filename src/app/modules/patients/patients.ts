@@ -5,10 +5,11 @@ import { Avatar } from '../../../@shared/components/avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { PatientService } from './patient-service';
 import { SkeletonDirective } from '../../../@shared/directives/skeleton';
+import { PhonePipe } from '../../../@shared/pipes/CustomPhone';
 
 @Component({
   selector: 'app-patients',
-  imports: [CommonModule, Header, Avatar, RouterModule, SkeletonDirective],
+  imports: [CommonModule, Header, Avatar, RouterModule, SkeletonDirective, PhonePipe],
   templateUrl: './patients.html',
   styleUrl: './patients.scss'
 })

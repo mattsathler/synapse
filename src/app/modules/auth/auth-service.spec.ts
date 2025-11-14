@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthService } from './auth-service';
 import { Router } from '@angular/router';
 import { Login } from '../login/login';
+import { provideHttpClient } from '@angular/common/http';
 
 
 describe('AuthService', () => {
@@ -16,7 +17,8 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthService,
-        { provide: Router, useValue: routerSpy }
+        { provide: Router, useValue: routerSpy },
+        provideHttpClient()
       ]
     });
     service = TestBed.inject(AuthService);
