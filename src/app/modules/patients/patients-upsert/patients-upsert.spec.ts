@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PatientsUpsert } from './patients-upsert';
 import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { provideNgxMask } from 'ngx-mask';
 
 describe('PatientsUpsert', () => {
   let component: PatientsUpsert;
@@ -10,9 +12,9 @@ describe('PatientsUpsert', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PatientsUpsert],
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideRouter([]), provideNgxMask()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PatientsUpsert);
     component = fixture.componentInstance;

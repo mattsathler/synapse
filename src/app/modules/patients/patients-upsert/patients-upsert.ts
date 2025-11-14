@@ -14,7 +14,8 @@ import { removeEmptyFields } from '../../../../@shared/validators/removeEmptyFie
   selector: 'app-patients-upsert',
   imports: [CommonModule, Header, SkeletonDirective, FormsModule, ReactiveFormsModule, NgxMaskDirective],
   templateUrl: './patients-upsert.html',
-  styleUrl: './patients-upsert.scss'
+  styleUrl: './patients-upsert.scss',
+  standalone: true,
 })
 export class PatientsUpsert implements OnInit {
   public patient: Signal<Patient | null> | (() => null) = () => null;
@@ -24,7 +25,7 @@ export class PatientsUpsert implements OnInit {
 
   public patientForm: FormGroup;
 
-  constructor(private service: PatientsUpsertService, private patientService: PatientService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private service: PatientsUpsertService, private patientService: PatientService, private activatedRoute: ActivatedRoute) {
     this.patientId = this.activatedRoute.snapshot.params['id'] as string | null;
     this.isLoading = this.patientService.isLoading;
 
@@ -50,7 +51,7 @@ export class PatientsUpsert implements OnInit {
   public submitForm(): void {
     let raw = this.patientForm.value;
     raw = removeEmptyFields(raw);
-    
+
     let patient = { ...raw } as Patient;
 
     patient.address = {
@@ -67,12 +68,12 @@ export class PatientsUpsert implements OnInit {
       .forEach(k => delete (patient as any)[k]);
 
     if (!this.patient()) {
-      this.service.createNewPatient(patient);
+      this.patientService.createNewPatient(patient);
       return;
     }
 
     if (this.patientId) {
-      this.service.updatePatient(this.patientId, patient);
+      this.patientService.updatePatient(this.patientId, patient);
       return;
     }
   }

@@ -1,13 +1,15 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Patient } from '../../../@shared/types/Patient';
-import { finalize } from 'rxjs';
+import { finalize, firstValueFrom } from 'rxjs';
 import { HttpService } from '../../../@shared/services/http-service';
+import { SnackbarService } from '../../../@shared/components/snackbar/snackbar-service';
+import { removeEmptyFields } from '../../../@shared/validators/removeEmptyFields';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private snackbarService: SnackbarService) { }
 
   // --- signals ---
   private _patient = signal<Patient | null>(null);
@@ -15,8 +17,8 @@ export class PatientService {
   private _patientList = signal<Patient[]>([]);
 
   // --- cache ---
-  private patientCache = new Map<string, Patient | null>();
-  private patientListCache = new Map<string, Patient[] | null>
+  public patientCache = new Map<string, Patient | null>();
+  public patientListCache = new Map<string, Patient[] | null>
 
   // --- sinais derivados (readonly) ---
   public patient = computed(() => this._patient());
@@ -59,5 +61,31 @@ export class PatientService {
         this.patientListCache.set(query, patient.data)
         this._isLoading.set(false);
       });
+  }
+
+
+  public async createNewPatient(patient: Patient): Promise<void> {
+    this._isLoading.set(true);
+
+    try {
+      await firstValueFrom(this.httpService.post('/patients', patient))
+      this.snackbarService.showNessage('Paciente criado com sucesso!');
+      this.getPatientList('', true);
+    } catch (error: any) {
+      this.snackbarService.showNessage(error?.message, 'error');
+    }
+  }
+
+  public async updatePatient(id: string, patient: Patient): Promise<void> {
+    this._isLoading.set(true);
+    const data = removeEmptyFields(patient);
+
+    try {
+      await firstValueFrom(this.httpService.patch(`/patients/${id}`, data))
+      this.snackbarService.showNessage('Paciente atualizado com sucesso!');
+      this.getPatientList('', true);
+    } catch (error: any) {
+      this.snackbarService.showNessage(error?.message, 'error');
+    }
   }
 }
