@@ -8,17 +8,24 @@
     }
 }
 
+rich-text-viewer p,
+rich-text-viewer span,
+rich-text-viewer * {
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    color: var(--text);
+}
 
 quill-editor,
 rich-text-viewer {
+    .ql-align-center {
+        text-align: center;
+    }
     .ql-container.ql-snow {
         border: none !important;
         border-radius: 8px 8px 0 8px;
         padding: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
         border-bottom: 1px solid var(--placeholder);
         margin: 0;
 
@@ -26,7 +33,7 @@ rich-text-viewer {
             font-size: 16px;
             padding: 0 !important;
             width: 100%;
-
+            overflow: hidden;
             &.ql-blank {
                 padding: 0;
 
@@ -86,6 +93,14 @@ rich-text-viewer {
     .ql-snow a {
         color: var(--primary);
     }
-}
 
-// @include rich-text-base();
+    .ql-wrapper {
+        display: flex;
+
+        * {
+            display: flex;
+            min-width: 0;
+            max-width: 100%;
+        }
+    }
+}

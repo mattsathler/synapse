@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PatientService } from './patient-service';
 import { SkeletonDirective } from '../../../@shared/directives/skeleton';
 import { PhonePipe } from '../../../@shared/pipes/CustomPhone';
+import { SnackbarService } from '../../../@shared/components/snackbar/snackbar-service';
 
 @Component({
   selector: 'app-patients',
@@ -19,7 +20,7 @@ export class Patients implements OnInit {
 
   public page = 1;
 
-  constructor(private service: PatientService) {
+  constructor(private service: PatientService, private snackbar: SnackbarService) {
     this.patients = this.service.patientList;
   }
 
@@ -27,10 +28,16 @@ export class Patients implements OnInit {
     this.fetchPatients(1);
   }
 
-  public fetchPatients(page: number, query?: string): void {
+  public async fetchPatients(page: number, query?: string): Promise<void> {
     let queryString = `page=${page}`;
     queryString += query ? `&search=${query}` : '';
 
-    this.service.getPatientList(queryString);
+    this.isLoading.set(true);
+    try {
+      await this.service.getPatientList(queryString);
+      this.isLoading.set(false);
+    } catch (error: any) {
+      this.snackbar.showMessage(error?.message ?? 'Não foi possível carregar a lista de pacientes', 'error');
+    }
   }
 }

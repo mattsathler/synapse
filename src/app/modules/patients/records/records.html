@@ -10,7 +10,7 @@
         <div class="d-flex gap items-center justify-between flex-wrap">
             <div class="d-flex flex-col gap-4">
                 <h3 animate.enter="slide-vertical-in" class="text-text text-size-40"
-                    *skeleton="isLoading(); className: ['w-128', 'h-64']">{{patient()?.fullName}}</h3>
+                    *skeleton="isLoading(); className: ['w-240', 'h-64']">{{patient()?.fullName}}</h3>
 
                 <p class="text-placeholder" *skeleton="isLoading(); className: ['w-40-p', 'h-24']">{{patient()?.age}}
                     anos, {{patient()?.address?.city}} -
@@ -46,13 +46,12 @@
                         <hr />
                     </div>
                     <div *ngFor="let r of record.records; let j = index"
-                        class="w-full d-flex flex-col gap-8 items-center" [animate.enter]="'slide-vertical-in'">
-                        <div class="record-content card p-0 w-full min-h-128 flat">
-                            <rich-text-viewer [content]="r.content" class="surface"></rich-text-viewer>
-                        </div>
+                        class="w-full d-flex flex-col gap-8 items-center container"
+                        [animate.enter]="'slide-vertical-in'">
+                        <rich-text-viewer [content]="r.content" class="surface d-flex w-full"></rich-text-viewer>
                         <div class="d-flex justify-between w-full px-16 gap">
                             <span class="text-size-12 text-placeholder">{{r.time}}</span>
-                            <span class="text-size-18 text-placeholder">
+                            <span class="text-size-18 text-placeholder text-right">
                                 - {{r.author.name}}
                             </span>
                         </div>
