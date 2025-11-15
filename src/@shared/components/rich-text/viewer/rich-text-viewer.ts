@@ -1,10 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'rich-text-viewer',
-  imports: [QuillEditorComponent],
+  imports: [],
   templateUrl: './rich-text-viewer.html',
   encapsulation: ViewEncapsulation.None,
 

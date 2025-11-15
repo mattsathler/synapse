@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 export class Avatar {
   @Input() image?: string;
   @Input() name: string = '';
-  @Input() alt: string = 'User Avatar';
+  @Input() alt: string = 'Employee Avatar';
 
   @Input() size: "small" | "medium" | "large" = "medium";
 }

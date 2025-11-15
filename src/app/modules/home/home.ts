@@ -12,9 +12,9 @@ import { AuthService } from '../auth/auth-service';
 })
 export class Home {
   public displayedName: string;
-  public user;
+  public employee;
   constructor(private authService: AuthService) {
-    this.user = this.authService.user();
-    this.displayedName = this.user?.name.split(' ')[0] || 'Usuário';
+    this.employee = this.authService.employee();
+    this.displayedName = this.employee?.name.split(' ')[0] || 'Usuário';
   }
 }

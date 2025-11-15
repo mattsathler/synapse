@@ -15,6 +15,10 @@ export class SnackbarService {
   public type = computed(() => this._type());
 
   public showMessage(text: string, type: string = 'success'): void {
+    if (typeof (text) !== "string" || (type === 'error' && text === '')) {
+      text = 'Ocorreu um erro inesperado!';
+    }
+    
     this._message.set(text);
     this._type.set(type);
     this._show.set(true);

@@ -11,12 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 import { SnackbarService } from '../../../../@shared/components/snackbar/snackbar-service';
 import { CustomDate } from '../../../../@shared/pipes/CustomDate';
-import { RichTextEditor } from '../../../../@shared/components/rich-text/editor/rich-text-editor';
 import { RecordsService } from './records-service';
 
 @Component({
   selector: 'app-records',
-  imports: [FormsModule, Header, CommonModule, NewRecord, Modal, RichTextViewer, RichTextEditor, SkeletonDirective, CustomDate],
+  imports: [FormsModule, Header, CommonModule, NewRecord, Modal, RichTextViewer, SkeletonDirective, CustomDate],
   templateUrl: './records.html',
   styleUrl: './records.scss'
 })

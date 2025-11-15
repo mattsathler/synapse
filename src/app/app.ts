@@ -23,7 +23,7 @@ export class App {
   public showSnackbar;
 
   constructor(private themeService: ThemeService, private authService: AuthService, private snackbarService: SnackbarService) {
-    this.isLoggedIn = !!this.authService.user();
+    this.isLoggedIn = !!this.authService.employee();
 
     this.showSnackbar = this.snackbarService.show;
   }

@@ -24,7 +24,7 @@ describe('Login', () => {
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     router.navigate.calls.reset();
 
-    localStorage.setItem('user', JSON.stringify({
+    localStorage.setItem('employee', JSON.stringify({
       name: 'Rafael Monteiro',
       email: 'rafael.monteiro@auroraclinic.com',
       role: 'doctor',

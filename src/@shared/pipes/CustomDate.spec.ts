@@ -16,6 +16,6 @@ describe('CustomDate', () => {
     });
 
     it('should transform date type', () => {
-        expect(pipe.transform(new Date('2025-10-17T08:30:00'))).toBe('17 de outubro de 2025');
+        expect(pipe.transform('2025-10-17')).toBe('17 de outubro de 2025');
     })
 })

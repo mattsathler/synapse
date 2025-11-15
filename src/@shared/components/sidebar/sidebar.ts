@@ -39,7 +39,7 @@ export class Sidebar {
   }
 
   public logout(): void {
-    localStorage.removeItem('user');
+    localStorage.removeItem('employee');
     localStorage.removeItem('token');
     window.location.href = '/login';
   }

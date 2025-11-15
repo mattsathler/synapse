@@ -30,9 +30,19 @@ describe('PatientService', () => {
 
   const mockRecord: Record = {
     id: '1',
-    author: 'Matheus',
+    author: {
+      name: "Administrador",
+      email: "adm@synapse.com",
+      id: "1",
+      identification: "1231241342",
+      isMedic: false,
+      mainPhone: "21993242340",
+      position: "Gestor",
+      tasks: []
+    },
     content: '',
-    date: new Date(),
+    date: "2025-11-15",
+    time: "15:30"
   }
 
   beforeEach(() => {

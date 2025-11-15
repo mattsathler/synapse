@@ -22,7 +22,7 @@ describe('Avatar Component', () => {
 
   it('should have default input values', () => {
     expect(component.name).toBe('');
-    expect(component.alt).toBe('User Avatar');
+    expect(component.alt).toBe('Employee Avatar');
     expect(component.size).toBe('medium');
   });
 
