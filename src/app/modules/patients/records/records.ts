@@ -12,6 +12,7 @@ import { SkeletonDirective } from '../../../../@shared/directives/skeleton';
 import { SnackbarService } from '../../../../@shared/components/snackbar/snackbar-service';
 import { CustomDate } from '../../../../@shared/pipes/CustomDate';
 import { RichTextEditor } from '../../../../@shared/components/rich-text/editor/rich-text-editor';
+import { RecordsService } from './records-service';
 
 @Component({
   selector: 'app-records',
@@ -30,24 +31,23 @@ export class Records {
 
   public orderedRecords?: { date: string; records: IRecord[] }[];
 
-  constructor(private service: PatientService, private route: ActivatedRoute, private snackbarService: SnackbarService, private router: Router) {
+  constructor(private patientsService: PatientService, private route: ActivatedRoute, private snackbarService: SnackbarService, private router: Router, private service: RecordsService) {
     this.patientRegistration = this.route.snapshot.paramMap.get('id');
-    this.patient = this.service.patient;
+    this.patient = this.patientsService.patient;
   }
 
   ngOnInit() {
     if (this.patientRegistration) {
       this.fetchPatient(this.patientRegistration);
     }
-
     return;
   }
 
   private async fetchPatient(id: string) {
     this.isLoading.set(true);
     try {
-      await this.service.getPatientById(this.patientRegistration ?? '0');
-      this.orderedRecords = this.groupRecordsByDay(this.patient()?.records!);
+      await this.patientsService.getPatientById(this.patientRegistration ?? '0');
+      this.orderedRecords = this.service.groupRecordsByDay(this.patient()?.records!);
       this.isLoading.set(false);
     }
     catch (error: any) {
@@ -67,33 +67,16 @@ export class Records {
     if (!patient?.registration) return;
 
     try {
-      await this.service.createNewRecord(patient.registration, record)
-      this.snackbarService.showMessage('Prontuário incluído com sucesso');
-      this.orderedRecords = this.groupRecordsByDay(this.patient()?.records!);
+      await this.patientsService.createNewRecord(patient.registration, record)
+      this.snackbarService.showMessage('Prontuário criado com sucesso');
+      this.orderedRecords = this.service.groupRecordsByDay(this.patient()?.records!);
 
     } catch (error: any) {
-      this.snackbarService.showMessage(error?.message);
+      this.snackbarService.showMessage(error?.message, 'error');
     }
   }
 
-  public groupRecordsByDay(records: IRecord[]): { date: string; records: IRecord[] }[] {
-    const sorted = [...records].sort((a, b) => {
-      const dateA = new Date(`${a.date}T${a.time ?? "00:00"}:00`).getTime();
-      const dateB = new Date(`${b.date}T${b.time ?? "00:00"}:00`).getTime();
-      return dateB - dateA;
-    });
 
-    const map = new Map<string, IRecord[]>();
-
-    sorted.forEach(record => {
-      if (!map.has(record.date)) {
-        map.set(record.date, []);
-      }
-      map.get(record.date)!.push(record);
-    });
-
-    return Array.from(map, ([date, records]) => ({ date, records }));
-  }
 
 
 

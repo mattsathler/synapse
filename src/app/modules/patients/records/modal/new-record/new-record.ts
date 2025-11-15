@@ -20,6 +20,14 @@ export class NewRecord {
   public recordForm!: FormGroup;
   public attachments: string[] = [];
 
+  public today = new Date().toISOString().split('T')[0];
+  public now = (() => {
+    const d = new Date();
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return `${hh}:${mm}`;
+  })();
+
   get content() {
     return this.recordForm.get('content') as FormControl;
   }

@@ -5,12 +5,12 @@
             <h4>Data e hora do prontuário</h4>
             <div class="d-flex gap flex-wrap w-full">
                 <div class="flex-1-1">
-                    <input formControlName="date" class="bg-background" type="date"
-                        placeholder="Digite a data">
+                    <input formControlName="date" class="bg-background" type="date" placeholder="Digite a data"
+                        [(ngModel)]="today">
                 </div>
                 <div class="flex-1-1">
-                    <input formControlName="time" class="bg-background" type="time"
-                        placeholder="Digite a data">
+                    <input formControlName="time" class="bg-background" type="time" placeholder="Digite a data"
+                        [(ngModel)]="now">
                 </div>
             </div>
         </div>

@@ -40,9 +40,9 @@
                     class="d-flex flex-col gap-40 items-center justify-center w-full"
                     [animate.enter]="'slide-vertical-in'">
                     <div class="d-flex flex-col gap-8 w-full items-center">
-                        <span class="text-size-24 text-bold text-placeholder">
+                        <h4 class="text-bold text-placeholder">
                             {{record.date | CustomDate}}
-                        </span>
+                        </h4>
                         <hr />
                     </div>
                     <div *ngFor="let r of record.records; let j = index"
