@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsClinic } from './settings-clinic';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SettingsClinic', () => {
   let component: SettingsClinic;
@@ -8,7 +9,8 @@ describe('SettingsClinic', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingsClinic]
+      imports: [SettingsClinic],
+      providers: [provideHttpClient()]
     })
     .compileComponents();
 

@@ -3,10 +3,12 @@
 
     <tabs class="d-flex flex-row gap flex-wrap">
         <tab title="Gerais" icon="settings">
-            <settings-clinic-general></settings-clinic-general>
+            <settings-clinic-general [clinic]="clinic()"
+                (updateClinic)="updateClinic($event)"></settings-clinic-general>
         </tab>
         <tab title="Contato" icon="phone">
-            <settings-clinic-contact></settings-clinic-contact>
+            <settings-clinic-contact [clinic]="clinic()"
+                (updateClinic)="updateClinic($event)"></settings-clinic-contact>
         </tab>
     </tabs>
 </div>

@@ -1,3 +1,10 @@
-<quill-editor [formControl]="formController" class="w-full p-0 text-text text-size-32" [modules]="editorModules"
-    placeholder="Digite o prontuário" theme="snow">
-</quill-editor>
+<div class="d-flex flex-col gap-8">
+    <quill-editor [formControl]="formController" class="w-full p-0 text-text text-size-32" [modules]="editorModules"
+        placeholder="Digite o prontuário" theme="snow">
+    </quill-editor>
+    @if (formController.invalid) {
+    <span class="text-error" animate.enter="slide-vertical-in-reverse">
+        Conteúdo inválido
+    </span>
+    }
+</div>

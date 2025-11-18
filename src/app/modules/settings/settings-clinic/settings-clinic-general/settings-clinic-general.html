@@ -9,7 +9,8 @@
                 <div class="d-flex flex-col gap flex-1-1 min-w-80">
                     <div class="d-flex flex-col gap-8 w-full">
                         <h4>Nome <span class="text-error">*</span></h4>
-                        <input formControlName="name" type="text" placeholder="Digite o nome da clínica">
+                        <input formControlName="name" type="text" placeholder="Digite o nome da clínica"
+                            *skeleton="clinic; className: ['w-full', 'h-40']; size: 1" animate.enter="slide-vertical-in">
                         @if (generalForm.get('name')?.invalid && generalForm.get('name')?.touched) {
                         <span class="text-error" animate.enter="slide-vertical-in-reverse">
                             Nome da clínica inválido
@@ -17,17 +18,9 @@
                         }
                     </div>
                     <div class="d-flex flex-col gap-8 w-full">
-                        <h4>Email <span class="text-error">*</span></h4>
-                        <input formControlName="email" type="text" placeholder="Digite o email da clínica">
-                        @if (generalForm.get('email')?.invalid && generalForm.get('email')?.touched) {
-                        <span class="text-error" animate.enter="slide-vertical-in-reverse">
-                            Email inválido
-                        </span>
-                        }
-                    </div>
-                    <div class="d-flex flex-col gap-8 w-full">
                         <h4>Endereço <span class="text-error">*</span></h4>
-                        <input formControlName="address" type="text" placeholder="Digite o endereço da clínica">
+                        <input formControlName="address" type="text" placeholder="Digite o endereço da clínica"
+                            *skeleton="clinic; className: ['w-full', 'h-40']; size: 1" animate.enter="slide-vertical-in">
                         @if (generalForm.get('address')?.invalid && generalForm.get('address')?.touched) {
                         <span class="text-error" animate.enter="slide-vertical-in-reverse">
                             Endereço inválido
@@ -35,7 +28,8 @@
                         }
                     </div>
                 </div>
-                <div class="d-flex flex-col gap-8 flex-1-1">
+                <div class="d-flex flex-col gap-8 flex-1-1"
+                    *skeleton="clinic; className: ['d-none']; size: 1">
                     <h4>Logo da clínica <span class="text-error">*</span></h4>
                     <div class="card background flat min-h-240 h-full"></div>
                 </div>
@@ -43,7 +37,8 @@
             <div class="d-flex flex-col gap">
                 <hr />
                 <div class="d-flex w-full justify-end">
-                    <button class="secondary h-full" [disabled]="generalForm.invalid">Salvar</button>
+                    <button class="secondary h-full" [disabled]="generalForm.invalid"
+                        (click)="emitUpdateClinic()">Salvar</button>
                 </div>
             </div>
         </div>
