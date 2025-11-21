@@ -18,12 +18,12 @@ import { ThemeService } from './theme-service';
 })
 export class App {
   protected readonly title = signal('synapse');
-  public isLoggedIn: boolean = true;
+  public isLoggedIn;
 
   public showSnackbar;
 
   constructor(private themeService: ThemeService, private authService: AuthService, private snackbarService: SnackbarService) {
-    this.isLoggedIn = !!this.authService.employee();
+    this.isLoggedIn = this.authService.employee;
 
     this.showSnackbar = this.snackbarService.show;
   }

@@ -34,17 +34,13 @@ export class AuthService {
     window.location.href = '/home';
 
     return;
-    // .pipe(
-    //   finalize(() => {
-    //     this._isLoading.set(false);
-    //   })
-    // )
-    // .subscribe({
-    //   next: (response) => {
-    //   },
-    //   error: (err) => {
-    //     this._error.set(err.message);
-    //   }
-    // });
+  }
+
+  public logout(): void {
+    localStorage.removeItem('employee');
+    localStorage.removeItem('token');
+    this._employee.set(null);
+
+    return;
   }
 }
