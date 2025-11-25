@@ -12,3 +12,7 @@ input[type="date"] {
 [type="date"]::-webkit-inner-spin-button {
     display: none;
 }
+
+input[type='date'], input[type='time'] {
+    -webkit-appearance: none!important;
+}
