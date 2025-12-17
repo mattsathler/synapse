@@ -31,10 +31,8 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((error) => {
             if (error?.status === 401) {
                 const message = error?.error?.message || error?.message;
-                if (message === 'Invalid token' || message === 'Missing Authorization header') {
-                    authService.logout();
-                    router.navigate(['/login']);
-                }
+                authService.logout();
+                router.navigate(['/login']);
             }
             return throwError(() => error);
         })

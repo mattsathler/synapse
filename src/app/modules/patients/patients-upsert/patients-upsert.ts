@@ -26,6 +26,7 @@ export class PatientsUpsert implements OnInit {
   public hasCompanion: boolean = false;
 
   public patientForm: FormGroup;
+  public today = new Date().toISOString().split('T')[0];
 
   constructor(private snackbarService: SnackbarService, private service: PatientsUpsertService, private patientService: PatientService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.patientId = this.activatedRoute.snapshot.params['id'] as string | null;
