@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth-service';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../theme-service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class Login implements OnInit {
 
   public employee;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public themeService: ThemeService) {
     this.employee = this.authService.employee;
 
     this.loginForm = this.fb.group({

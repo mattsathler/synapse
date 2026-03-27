@@ -25,9 +25,9 @@ export class NavigationService {
         ]
       },
       {
-        title: 'Ajustes',
+        title: 'Ajustes da clínica',
         children: [
-          { icon: 'health_metrics', route: '/ajustes/clinica', label: 'Clínica' },
+          { icon: 'health_metrics', route: '/ajustes/clinica', label: 'Geral' },
           { icon: 'badge', route: '/ajustes/funcionarios', label: 'Funcionários' },
           { icon: 'event', route: '/ajustes/agendamentos', label: 'Agendamentos' },
           { icon: 'slide_library', route: '/ajustes/app', label: 'Aplicativo' },

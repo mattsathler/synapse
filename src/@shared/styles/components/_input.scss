@@ -1,7 +1,8 @@
 @use '../colors' as *;
 @use "sass:color";
 
-input, quill-editor {
+input,
+quill-editor {
     background-color: var-color(background);
     color: var-color(text);
     padding: 12px;
@@ -11,6 +12,8 @@ input, quill-editor {
     text-indent: 8px;
     outline: none;
     transition: all 0.2s ease;
+    border: 1px solid transparent;
+
 
     &::placeholder {
         color: var-color(placeholder);
@@ -19,6 +22,7 @@ input, quill-editor {
 
     &:focus {
         outline: none;
+        border: 1px solid var-color(placeholder);
     }
 
     &.surface {
@@ -27,8 +31,8 @@ input, quill-editor {
 
 }
 
-input.ng-touched.ng-invalid,
-select.ng-touched.ng-invalid,
-textarea.ng-touched.ng-invalid {
+input.ng-touched.ng-invalid:not(:focus),
+select.ng-touched.ng-invalid:not(:focus),
+textarea.ng-touched.ng-invalid:not(:focus) {
     border: 1px solid var-color(error);
 }

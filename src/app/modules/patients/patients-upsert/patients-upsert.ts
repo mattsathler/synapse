@@ -33,6 +33,7 @@ export class PatientsUpsert implements OnInit {
     this.patientForm = this.service.getPatientFormBuilder();
 
     if (this.patientId) {
+      this.isLoading = signal(true);
       this.patient = this.patientService.patient;
       this.patientService.getPatientById(this.patientId || '');
 
@@ -89,5 +90,6 @@ export class PatientsUpsert implements OnInit {
   private injectDataIntoForm() {
     this.patientForm.patchValue(this.patient()!);
     this.patientForm.patchValue(this.patient()?.address!);
+    this.isLoading = signal(false);
   }
 }
