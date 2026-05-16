@@ -13,6 +13,10 @@
     box-shadow: none;
 }
 
+@mixin card-outlined {
+    border: 1px solid var(--text);
+}
+
 @mixin card-variant($color) {
     background-color: var(--#{$color}) !important;
 }
