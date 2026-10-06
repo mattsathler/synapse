@@ -135,6 +135,22 @@ export class Agenda implements OnInit, AfterViewInit {
     container.scrollTo({ top: scrollPosition > 0 ? scrollPosition : 0, behavior: 'smooth' });
   }
 
+  public scrollAgenda(direction: number): void {
+    const container = this.agendaContainerRef?.nativeElement as HTMLElement | undefined;
+    if (!container) return;
+    container.scrollBy({ left: direction * container.clientWidth * 0.8, behavior: 'smooth' });
+  }
+
+  public scrollAgendaWithWheel(event: WheelEvent): void {
+    if (!event.shiftKey || event.deltaX || !event.deltaY) return;
+    const container = this.agendaContainerRef?.nativeElement as HTMLElement | undefined;
+    if (!container || container.scrollWidth <= container.clientWidth) return;
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientWidth : 1);
+    const previousLeft = container.scrollLeft;
+    container.scrollLeft += delta;
+    if (container.scrollLeft !== previousLeft) event.preventDefault();
+  }
+
   public toggleEmployee(employee?: Employee): void {
     if (employee) {
       const index = this.selectedEmployees.findIndex(emp => emp.id === employee.id);

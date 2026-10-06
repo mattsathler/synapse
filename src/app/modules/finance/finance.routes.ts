@@ -2,7 +2,7 @@ import { Route } from "@angular/router";
 import { FinanceDashboard } from "./finance-dashboard/finance-dashboard";
 import { FinanceAccounts } from "./finance-accounts/finance-accounts";
 import { FinanceAccountsStatement } from "./finance-accounts/finance-accounts-statement/finance-accounts-statement";
-import { authGuard } from "../auth/authGuard";
+import { authGuard } from "../../../@shared/auth/authGuard";
 
 export const financeRoutes: Route =
 {

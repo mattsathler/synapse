@@ -25,13 +25,17 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/synapse'),
       subdir: '.',
+      check: {
+        global: { statements: 95, branches: 90, functions: 95, lines: 95 }
+      },
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' }
+        { type: 'text-summary' },
+        { type: 'json' },
+        { type: 'lcovonly' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['Chrome'],
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessWSL: {

@@ -22,6 +22,8 @@ Quill permite formatação, títulos, listas, alinhamento e links. Viewer injeta
 
 `Agenda` pede lista simulada de funcionários. Cria 24 slots horários e permite escolher colunas por funcionário. `adjustTasks` calcula top/height pela duração e `resolveOverlaps` divide largura por grupos de sobreposição. Cliques abrem modal de edição; botão superior abre form novo.
 
+Nomes e colunas compartilham um canvas com largura mínima de 240px por funcionário, espaçamento de 8px e faixa de horários de 56px. Um único viewport permite scroll horizontal e vertical, com cabeçalhos fixos no topo durante o scroll vertical. O conteúdo do shell usa `min-width: 0` para que a agenda role dentro da tela, mesmo ao lado da sidebar.
+
 O indicador de hora atual é posicionado após renderização e centralizado com scroll. Um `setInterval` de 1 ms atualiza a posição sem teardown. A primeira medição assume que `slotRefs.first` existe. O datepicker tem somente `[value]`, sem mudança ligada a fetch/filtro; os agendamentos não são filtrados pelo dia selecionado.
 
 `NewTask` inclui funcionários, paciente opcional, tipo, título, descrição, início/fim e status. Busca paciente na API e gera título pelo tipo/paciente. `minTimeValidator` permite fim igual ao início; o validator é atualizado só no primeiro `valueChanges` de início por `take(1)`. Não há submit, emissão de save ou chamada de persistência no botão Agendar/Salvar. Ao remover paciente pelo template, somente `selectedPatient` é limpo; o form pode manter o paciente anterior.

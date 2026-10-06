@@ -10,7 +10,7 @@ import { SettingsClinic } from './modules/settings/settings-clinic/settings-clin
 import { Employees } from './modules/employees/employees';
 import { SettingsApp } from './modules/settings/settings-app/settings-app';
 import { financeRoutes } from './modules/finance/finance.routes';
-import { authGuard } from './modules/auth/authGuard';
+import { authGuard } from '../@shared/auth/authGuard';
 import { PatientsUpsert } from './modules/patients/patients-upsert/patients-upsert';
 
 export const routes: Routes = [

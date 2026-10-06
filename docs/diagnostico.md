@@ -6,7 +6,7 @@ Achados de leitura em 2026-10-05, sem correções de aplicação nesta tarefa. P
 
 | Achado | Evidência | Implicação / direção sugerida |
 | --- | --- | --- |
-| Sessão só em memória com reload após login | `AuthService.auth`, `document.location.href` | Reload perde employee/token; definir navegação e restauração de sessão com contrato backend |
+| Sessão só em memória | `AuthService` | Login já usa Router e preserva sessão; refresh manual ainda exige novo login. Definir restauração com contrato backend se necessária |
 | HTML de prontuário confiado sem sanitização Angular | `RichTextViewer.content` | Revisar origem e sanitização do HTML antes de confiar conteúdo armazenado |
 | Caches sobrevivem a logout | `AuthService.logout` e serviços root | Prevenir apresentação de dados de sessão anterior ao trocar usuário/clínica |
 | Falha de atualização de clínica pode exibir sucesso | Serviço captura erro; pai sempre mostra sucesso após await | Definir propagação/resultado explícito e teste de integração componente-serviço |
@@ -20,7 +20,6 @@ O backend não foi lido: sanitização no servidor, permissões, isolamento entr
 | Save dispara refresh sem await e preserva caches de outras queries | `PatientService.savePatient` | Definir invalidação, ordem e tratamento de refresh |
 | Loading público de pacientes nunca muda | `PatientService` | Alinhar contrato com consumidores, especialmente busca na agenda |
 | Loading permanece true em erro da listagem | `Patients.fetchPatients` | Encerrar estado em sucesso/falha |
-| Loading/erro de auth incompletos | `AuthService` | Finalização e erro consistentes |
 | Edição de paciente não trata rejeição do fetch | `PatientsUpsert` constructor | Fallback/feedback sem spinner indefinido |
 | Query de busca concatenada | Pacientes e NewTask | Usar parâmetros codificados |
 | Intervalo de agenda de 1ms sem limpeza | `Agenda.ngAfterViewInit` | Atualizar em frequência proporcional ao indicador e limpar ao destruir |

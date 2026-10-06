@@ -36,23 +36,35 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## Running tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Run Jasmine tests interactively with Karma:
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Run the suite once in headless Chrome, or generate coverage reports:
+
+```bash
+npm run test:ci
+npm run test:coverage
+```
+
+Chrome or Chromium must be installed. If Karma cannot locate it, set `CHROME_BIN`
+to the browser executable. The headless launcher supports Linux/WSL and containers.
+
+Coverage reports are generated in `coverage/synapse/`: `index.html` for browsing,
+`coverage-final.json` for tooling, and `lcov.info` for CI integrations. Coverage runs
+fail below 95% statements, 90% branches, 95% functions, or 95% lines.
+
+The suite covers components, services, forms, validators, pipes, directives,
+interceptors, authentication, protected routes, caches, and success/error flows.
+HTTP requests and navigation redirects are isolated from real APIs and page reloads;
+delays are controlled by fake clocks. Coverage measures imported application code,
+not TypeScript interfaces or the browser bootstrap in `main.ts`.
+
+No end-to-end test runner is configured in this repository.
 
 ## Additional Resources
 

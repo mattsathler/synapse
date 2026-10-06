@@ -27,9 +27,9 @@ O interceptor vê a resposta antes dessa normalização. Com token, clona a requ
 
 ## Sessão
 
-`AuthService` mantém funcionário/token em signals, inicialmente null. Login define loading, chama a API, armazena a resposta e atribui `document.location.href = '/home'`. Não há persistência/restauração de sessão. Essa navegação recarrega a aplicação e perde os signals, de modo que o guard pode redirecionar novamente para login. O comportamento resulta da leitura do código; não foi realizado login real.
+`AuthService` mantém funcionário/token em signals, inicialmente null. Login define loading, chama a API, armazena a resposta e navega com `Router.navigate(['/home'])`, preservando a instância da aplicação e a sessão ao passar pelo guard. A navegação anterior com `document.location.href` foi corrigida porque o reload apagava os signals e devolvia o usuário ao login. Não há persistência/restauração de sessão: um refresh manual ainda perde a autenticação.
 
-`authGuard` permite acesso quando existe funcionário, sem validar expiração do token ou permissões. Logout limpa os signals. A sidebar adiciona recarregamento para `/login`. `AuthService.isLoading` não retorna a false após login/erro e `error` não é preenchido; `Login` usa loading/erro próprios e finaliza seu loading em `finally`.
+`authGuard` permite acesso quando existe funcionário, sem validar expiração do token ou permissões. Logout limpa os signals. A sidebar adiciona recarregamento para `/login`. `AuthService` finaliza loading em `finally`, registra o erro e relança a falha; `Login` também usa loading/erro próprios.
 
 ## Caches
 

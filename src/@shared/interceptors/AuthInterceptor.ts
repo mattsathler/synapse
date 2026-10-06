@@ -2,12 +2,13 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { AuthService } from '../../app/modules/auth/auth-service';
+import { AuthService } from '../auth/auth-service';
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
-    const token = localStorage.getItem('token');
     const router = inject(Router);
     const authService = inject(AuthService);
+
+    const token = authService.token();
 
     if (!token) {
         return next(req).pipe(

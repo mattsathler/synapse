@@ -1,26 +1,30 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-
 import { ThemeService } from './theme-service';
 
 describe('ThemeService', () => {
-  let service: ThemeService;
-
+  let oldTheme: string | null;
+  let oldAttribute: string | null;
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ThemeService);
+    oldTheme = localStorage.getItem('theme');
+    oldAttribute = document.documentElement.getAttribute('data-theme');
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  afterEach(() => {
+    if (oldTheme === null) localStorage.removeItem('theme'); else localStorage.setItem('theme', oldTheme);
+    if (oldAttribute === null) document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', oldAttribute);
   });
-
-  it('should get theme and set theme', fakeAsync(() => {
-    service.setTheme('dark');
+  it('defaults to light and persists the theme', () => {
+    localStorage.removeItem('theme');
+    const service = new ThemeService();
+    expect(service.theme()).toBe('light');
+    expect(localStorage.getItem('theme')).toBe('light');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+  });
+  it('restores saved theme and updates signal, storage and DOM', () => {
+    localStorage.setItem('theme', 'dark');
+    const service = new ThemeService();
     expect(service.theme()).toBe('dark');
-    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
-    tick(2000);
     service.setTheme('light');
     expect(service.theme()).toBe('light');
+    expect(localStorage.getItem('theme')).toBe('light');
     expect(document.documentElement.getAttribute('data-theme')).toBe('light');
-  }));
+  });
 });

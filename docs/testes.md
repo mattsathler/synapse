@@ -47,6 +47,14 @@ Logs desta execução: `/tmp/synapse-docs-tests.log` e `/tmp/synapse-docs-produc
 
 Apesar do resultado aprovado, o log contém mensagens `NG0101: ApplicationRef.tick is called recursively`. Elas não reprovaram specs nessa execução; a origem não foi isolada na tarefa documental. Investigar a interação de change detection e fixtures antes de considerar o log totalmente limpo.
 
+## Correção de scroll da agenda
+
+Em 2026-10-05, a correção de layout passou no build development e nos 8 testes existentes da agenda. Uma verificação no Chrome headless, sobre o build local e usando sessão de teste em memória e funcionários simulados, mediu telas de 1280px e 390px com 0, 1 e 5 funcionários. Com cinco selecionados, o canvas tinha 1288px; o scroll chegou à última coluna em ambas as telas, com cabeçalhos alinhados, colunas de 240px e sem ampliar a largura do documento. O scroll vertical também foi verificado. Não foi necessário login real ou acesso à API.
+
+## Correção de navegação após login
+
+Em 2026-10-05, AuthService passou a navegar pelo Router, mantendo employee/token em memória. O build development e 26 testes de auth, guard, login e rotas passaram. O teste de regressão usa AuthService real, resposta HTTP simulada e RouterTestingHarness com as rotas da aplicação: submete credenciais pela tela Login e verifica chegada a Home, sessão preservada e loading finalizado. Também verifica falha de autenticação sem navegação. Não houve login contra a API real; refresh manual continua encerrando a sessão em memória.
+
 ## Escolha de validação em futuras tarefas
 
 Para serviços HTTP, use cliente de teste e confira método, URL, payload, erro e efeitos de cache. Para estado/form, cubra comportamento observável e evite testes que repetem a implementação. Para templates, valide interação real quando o comportamento depende de binding. `fakeAsync` é útil para mocks com delay e snackbar; descarte timers periódicos nos testes de agenda. Depois de checks adequados à mudança passarem, amplie apenas se houver nova falha ou risco concreto. Mudanças só de documentação pedem links, coerência e validação das skills.

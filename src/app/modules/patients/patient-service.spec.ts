@@ -55,6 +55,7 @@ describe('PatientService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+    expect(service.isLoading()).toBeFalse();
   });
 
   it('should get a single patient by his Id', fakeAsync(() => {
@@ -124,4 +125,91 @@ describe('PatientService', () => {
     expect(service.patientCache.get('1')?.records).toBeTruthy();
     expect(service.patientCache.get('1')?.records.length).toBeGreaterThan(0);
   })
+
+  afterEach(() => httpMock.verify());
+  it('uses a cached patient, including cached null', async () => {
+    service.patientCache.set('1', mockedPatient);
+    await service.getPatientById('1');
+    expect(service.patient()).toBe(mockedPatient);
+    service.patientCache.set('missing', null);
+    await service.getPatientById('missing');
+    expect(service.patient()).toBeNull();
+    httpMock.expectNone(() => true);
+  });
+  it('refreshes a cached patient when requested', async () => {
+    service.patientCache.set('1', mockedPatient);
+    const pending = service.getPatientById('1', true);
+    const updated = { ...mockedPatient, fullName: 'Updated' };
+    httpMock.expectOne(`${environment.API_URL}/patients/1`).flush(updated);
+    await pending;
+    expect(service.patient()).toEqual(updated);
+    expect(service.patientCache.get('1')).toEqual(updated);
+  });
+  it('refreshes a cached list and caches empty results', async () => {
+    service.patientListCache.set('', [mockedPatient]);
+    const pending = service.getPatientList('', true);
+    httpMock.expectOne(`${environment.API_URL}/patients/?`).flush({ data: [] });
+    await pending;
+    expect(service.patientList()).toEqual([]);
+    await service.getPatientList('');
+    httpMock.expectNone(() => true);
+  });
+  it('creates patients with empty fields removed and refreshes the list', fakeAsync(() => {
+    const patient = { ...mockedPatient, registration: '', socialName: '' };
+    service.savePatient(patient);
+    const req = httpMock.expectOne(`${environment.API_URL}/patients`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body.registration).toBeUndefined();
+    expect(req.request.body.socialName).toBeUndefined();
+    req.flush({}); tick();
+    httpMock.expectOne(`${environment.API_URL}/patients/?`).flush({ data: [mockedPatient] }); tick();
+    expect(service.patientList()).toEqual([mockedPatient]);
+    expect(patient.socialName).toBe('');
+  }));
+  it('updates registered patients and refreshes patient and list caches', fakeAsync(() => {
+    service.savePatient(mockedPatient);
+    const req = httpMock.expectOne(`${environment.API_URL}/patients/1`);
+    expect(req.request.method).toBe('PATCH');
+    req.flush({}); tick();
+    httpMock.expectOne(`${environment.API_URL}/patients/1`).flush(mockedPatient);
+    httpMock.expectOne(`${environment.API_URL}/patients/?`).flush({ data: [mockedPatient] }); tick();
+    expect(service.patient()).toEqual(mockedPatient);
+  }));
+  it('propagates save failures without refreshing caches', async () => {
+    const pending = service.savePatient(mockedPatient);
+    const assertion = expectAsync(pending).toBeRejectedWith({ message: 'Failed' });
+    httpMock.expectOne(`${environment.API_URL}/patients/1`).flush({ message: 'Failed' }, { status: 500, statusText: 'Error' });
+    await assertion;
+    httpMock.expectNone(() => true);
+  });
+  it('prepends records to the active patient without mutating old records', async () => {
+    const old = { ...mockedPatient, records: [mockRecord] };
+    service.patientCache.set('1', old);
+    await service.getPatientById('1');
+    const added = { ...mockRecord, id: '2' };
+    const pending = service.createNewRecord('1', added);
+    httpMock.expectOne(`${environment.API_URL}/patients/1/records`).flush(added);
+    await pending;
+    expect(service.patient()?.records).toEqual([added, mockRecord]);
+    expect(old.records).toEqual([mockRecord]);
+  });
+  it('does not replace another active patient when adding a record', async () => {
+    service.patientCache.set('1', mockedPatient);
+    const other = { ...mockedPatient, registration: '2' };
+    service.patientCache.set('2', other);
+    await service.getPatientById('2');
+    const pending = service.createNewRecord('1', mockRecord);
+    httpMock.expectOne(`${environment.API_URL}/patients/1/records`).flush(mockRecord);
+    await pending;
+    expect(service.patient()).toBe(other);
+    expect(service.patientCache.get('1')?.records).toEqual([mockRecord]);
+  });
+  it('creates records even when the patient is not cached', async () => {
+    const pending = service.createNewRecord('missing', mockRecord);
+    httpMock.expectOne(`${environment.API_URL}/patients/missing/records`).flush(mockRecord);
+    await pending;
+    expect(service.patientCache.has('missing')).toBeFalse();
+    expect(service.patient()).toBeNull();
+  });
+
 });

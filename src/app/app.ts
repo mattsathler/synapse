@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from '../@shared/components/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
-import { AuthService } from './modules/auth/auth-service';
+import { AuthService } from '../@shared/auth/auth-service';
 import { Snackbar } from '../@shared/components/snackbar/snackbar';
 import { SnackbarService } from '../@shared/components/snackbar/snackbar-service';
 import { provideNgxMask } from 'ngx-mask';

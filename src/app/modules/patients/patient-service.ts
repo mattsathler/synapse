@@ -22,9 +22,9 @@ export class PatientService {
   public patientListCache = new Map<string, Patient[] | null>
 
   // --- sinais derivados (readonly) ---
-  public patient = computed(() => this._patient());
-  public patientList = computed(() => this._patientList());
-  public isLoading = computed(() => this._isLoading());
+  public readonly patient = computed(() => this._patient());
+  public readonly patientList = computed(() => this._patientList());
+  public readonly isLoading = computed(() => this._isLoading());
 
   public async getPatientById(id: string, forceUpdate?: boolean): Promise<void> {
     if (this.patientCache.has(id) && !forceUpdate) {

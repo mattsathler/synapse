@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../auth/auth-service';
+import { AuthService } from '../../../@shared/auth/auth-service';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../theme-service';
 
@@ -19,7 +19,7 @@ export class Login implements OnInit {
   public employee;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public themeService: ThemeService) {
-    this.employee = this.authService.employee;
+    this.employee = this.authService.employee();
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,7 +28,7 @@ export class Login implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.employee()) {
+    if (this.employee) {
       this.router.navigate(['/home']);
     }
   }

@@ -1,9 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { Avatar } from '../avatar/avatar';
 import { RouterModule } from '@angular/router';
 import { NavigationItem } from '../../types/NavigationItem';
 import { NavigationService } from '../../services/navigation-service';
+import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'sidebar',
@@ -17,11 +18,11 @@ export class Sidebar {
   public sidebarItems: NavigationItem[] = [];
   public currentTheme: string;
 
-  constructor(private service: NavigationService) {
+  constructor(private service: NavigationService, private authService: AuthService, @Inject(DOCUMENT) private document: Document) {
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize());
 
-    this.currentTheme = document.body.getAttribute('data-theme') ?? 'light';
+    this.currentTheme = this.document.body.getAttribute('data-theme') ?? 'light';
     this.sidebarItems = this.service.getNavigation();
   }
 
@@ -39,8 +40,7 @@ export class Sidebar {
   }
 
   public logout(): void {
-    localStorage.removeItem('employee');
-    localStorage.removeItem('token');
-    window.location.href = '/login';
+   this.authService.logout();
+    this.document.location.href = '/login';
   }
 }
